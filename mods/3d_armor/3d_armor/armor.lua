@@ -26,7 +26,7 @@ if ARMOR_FIRE_PROTECT == true then
 		{"fire:basic_flame",		3,	4},
 		{"ethereal:crystal_spike",	2,	1},
 		{"bakedclay:safe_fire",		2,	1},
-		{"default:torch",			1,	1},
+		-- {"default:torch",			1,	1},
 	}
 	minetest.after(2, function()
 		for _, row in ipairs(ARMOR_FIRE_NODES) do
