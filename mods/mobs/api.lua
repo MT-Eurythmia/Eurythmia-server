@@ -2201,6 +2201,10 @@ function mobs:spawn_specific(name, nodes, neighbors, min_light, max_light,
 		chance = chance,
 
 		action = function(pos, node, _, active_object_count_wider)
+			-- do not spawn if we are in a protected area
+			if minetest.is_protected(pos, "") then
+				return
+			end
 
 			-- do not spawn if too many active entities in area
 			if active_object_count_wider > active_object_count
