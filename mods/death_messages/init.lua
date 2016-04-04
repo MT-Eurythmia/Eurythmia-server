@@ -24,7 +24,6 @@ messages.lava = {
 	"%s destroyed Sauron's ring. / %s a detruit l'anneau de Sauron.",
 	"%s melted into a ball of fire. / %s est devenu une boule de feu",
 	"%s couldn't resist that warm glow of lava. / %s n'a pas pu se retenir face a cette chaude lueur de lave.",
-	"%s dug straight down. / %s a creusé a la verticale.",
 }
 
 -- Drowning death messages
