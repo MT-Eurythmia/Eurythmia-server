@@ -65,6 +65,7 @@ minetest.register_node("farming_plus:potato", {
 minetest.register_craftitem("farming_plus:potato_item", {
 	description = S("Potato"),
 	inventory_image = "farming_potato.png",
+	on_use = minetest.item_eat(1),
 })
 
 farming.add_plant("farming_plus:potato", {"farming_plus:potato_1", "farming_plus:potato_2"}, 50, 20)
