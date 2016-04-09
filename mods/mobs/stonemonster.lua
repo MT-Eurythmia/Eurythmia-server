@@ -52,6 +52,6 @@ mobs:register_mob("mobs:stone_monster", {
 	},
 })
 
-mobs:register_spawn("mobs:stone_monster", {"default:stone", "default:desert_stone"}, 7, 0, 3500, 2, 0)
+mobs:register_spawn("mobs:stone_monster", {"default:stone", "default:desert_stone"}, 7, 0, 14000, 2, 0)
 
 mobs:register_egg("mobs:stone_monster", "Stone Monster", "default_stone.png", 1)
