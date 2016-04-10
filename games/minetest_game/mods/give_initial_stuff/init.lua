@@ -10,6 +10,7 @@ minetest.register_on_newplayer(function(player)
 		player:get_inventory():add_item('main', 'default:cobble 40')
 		player:get_inventory():add_item('main', 'default:wood 99')
 		player:get_inventory():add_item('main', 'default:apple 99')
+                player:get_inventory():add_item('main', 'default:chest_locked 2')
 	end
 end)
 
