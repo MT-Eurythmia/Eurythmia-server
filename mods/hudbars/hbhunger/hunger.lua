@@ -26,11 +26,7 @@ function hbhunger.item_eat(hunger_change, replace_with_item, poisen, heal)
 			local name = user:get_player_name()
 			local h = tonumber(hbhunger.hunger[name])
 			local hp = user:get_hp()
-			minetest.sound_play("hbhunger_eat_generic", {
-				object = user,
-				max_hear_distance = 10,
-				gain = 1.0
-			})
+			minetest.sound_play({name = "hbhunger_eat_generic", gain = 1}, {pos=user:getpos(), max_hear_distance = 16})
 
 			-- Saturation
 			if h < 30 and hunger_change then
@@ -51,21 +47,8 @@ function hbhunger.item_eat(hunger_change, replace_with_item, poisen, heal)
 				poisenp(1.0, poisen, 0, user)
 			end
 
-			if replace_with_item then
-				if itemstack:is_empty() then
-					itemstack:add_item(replace_with_item)
-				else
-					local inv = user:get_inventory()
-					if inv:room_for_item("main", {name = replace_with_item}) then
-						inv:add_item("main", replace_with_item)
-					else
-						local pos = user:getpos()
-						pos.y = math.floor(pos.y + 0.5)
-						core.add_item(pos, replace_with_item)
-					end
-				end
-			end
-
+			--sound:eat
+			itemstack:add_item(replace_with_item)
 		end
 		return itemstack
 	end
@@ -83,10 +66,6 @@ if minetest.get_modpath("default") ~= nil then
 end
 if minetest.get_modpath("farming") ~= nil then
 	overwrite("farming:bread", 4)
-end
-if minetest.get_modpath("flowers") ~= nil then
-	overwrite("flowers:mushroom_brown", 2)
-	overwrite("flowers:mushroom_red", 0, "", 6)
 end
 
 if minetest.get_modpath("mobs") ~= nil then
@@ -169,13 +148,13 @@ end
 if minetest.get_modpath("bushes_classic") then
 	-- bushes_classic mod, as found in the plantlife modpack
 	local berries = {
-		"strawberry",
+	    "strawberry",
 		"blackberry",
 		"blueberry",
 		"raspberry",
 		"gooseberry",
 		"mixed_berry"}
-	for _, berry in pairs(berries) do
+	for _, berry in ipairs(berries) do
 		if berry ~= "mixed_berry" then
 			overwrite("bushes:"..berry, 1)
 		end
@@ -284,61 +263,59 @@ if minetest.get_modpath("creatures") ~= nil then
 end
 
 if minetest.get_modpath("ethereal") then
-	overwrite("ethereal:strawberry", 1)
-	overwrite("ethereal:banana", 4)
-	overwrite("ethereal:pine_nuts", 1)
-	overwrite("ethereal:bamboo_sprout", 0, "", 3)
-	overwrite("ethereal:fern_tubers", 1)
-	overwrite("ethereal:banana_bread", 7)
-	overwrite("ethereal:mushroom_plant", 2)
-	overwrite("ethereal:coconut_slice", 2)
-	overwrite("ethereal:golden_apple", 4, "", nil, 10)
-	overwrite("ethereal:wild_onion_plant", 2)
-	overwrite("ethereal:mushroom_soup", 5, "ethereal:bowl")
---	overwrite("ethereal:mushroom_soup_cooked", 6, "ethereal:bowl")
-	overwrite("ethereal:hearty_stew", 10, "ethereal:bowl")
---	overwrite("ethereal:hearty_stew_cooked", 10, "ethereal:bowl")
-	if minetest.get_modpath("bucket") then
-		overwrite("ethereal:bucket_cactus", 2, "bucket:bucket_empty")
-	end
-	overwrite("ethereal:fish_raw", 2)
-	overwrite("ethereal:fish_cooked", 5)
-	overwrite("ethereal:seaweed", 1)
-	overwrite("ethereal:yellowleaves", 1, "", nil, 1)
-	overwrite("ethereal:sashimi", 4)
-	overwrite("ethereal:orange", 2)
+   overwrite("ethereal:strawberry", 1)
+   overwrite("ethereal:banana", 4)
+   overwrite("ethereal:pine_nuts", 1)
+   overwrite("ethereal:bamboo_sprout", 0, "", 3)
+   overwrite("ethereal:fern_tubers", 1)
+   overwrite("ethereal:banana_bread", 7)
+   overwrite("ethereal:mushroom_plant", 2)
+   overwrite("ethereal:coconut_slice", 2)
+   overwrite("ethereal:golden_apple", 4, "", nil, 10)
+   overwrite("ethereal:wild_onion_plant", 2)
+   overwrite("ethereal:mushroom_soup", 4, "ethereal:bowl")
+   overwrite("ethereal:mushroom_soup_cooked", 6, "ethereal:bowl")
+   overwrite("ethereal:hearty_stew", 6, "ethereal:bowl", 3)
+   overwrite("ethereal:hearty_stew_cooked", 10, "ethereal:bowl")
+   if minetest.get_modpath("bucket") then
+  	overwrite("ethereal:bucket_cactus", 2, "bucket:bucket_empty")
+   end
+   overwrite("ethereal:fish_raw", 2)
+   overwrite("ethereal:fish_cooked", 5)
+   overwrite("ethereal:seaweed", 1)
+   overwrite("ethereal:yellowleaves", 1, "", nil, 1)
+   overwrite("ethereal:sashimi", 4)
+   overwrite("ethereal:orange", 2)
 end
 
 if minetest.get_modpath("farming") and farming.mod == "redo" then
-	overwrite("farming:bread", 6)
-	overwrite("farming:potato", 1)
-	overwrite("farming:baked_potato", 6)
-	overwrite("farming:cucumber", 4)
-	overwrite("farming:tomato", 4)
-	overwrite("farming:carrot", 3)
-	overwrite("farming:carrot_gold", 6, "", nil, 8)
-	overwrite("farming:corn", 3)
-	overwrite("farming:corn_cob", 5)
-	overwrite("farming:melon_slice", 2)
-	overwrite("farming:pumpkin_slice", 1)
-	overwrite("farming:pumpkin_bread", 9)
-	overwrite("farming:coffee_cup", 2, "farming:drinking_cup")
-	overwrite("farming:coffee_cup_hot", 3, "farming:drinking_cup", nil, 2)
-	overwrite("farming:cookie", 2)
-	overwrite("farming:chocolate_dark", 3)
-	overwrite("farming:donut", 4)
-	overwrite("farming:donut_chocolate", 6)
-	overwrite("farming:donut_apple", 6)
-	overwrite("farming:raspberries", 1)
-	overwrite("farming:blueberries", 1)
-	overwrite("farming:muffin_blueberry", 4)
-	if minetest.get_modpath("vessels") then
-		overwrite("farming:smoothie_raspberry", 2, "vessels:drinking_glass")
-	end
-	overwrite("farming:rhubarb", 1)
-	overwrite("farming:rhubarb_pie", 6)
-	overwrite("farming:beans", 1)
-	overwrite("farming:grapes", 2)
+   overwrite("farming:bread", 6)
+   overwrite("farming:potato", 1)
+   overwrite("farming:baked_potato", 6)
+   overwrite("farming:cucumber", 4)
+   overwrite("farming:tomato", 4)
+   overwrite("farming:carrot", 3)
+   overwrite("farming:carrot_gold", 6, "", nil, 8)
+   overwrite("farming:corn", 3)
+   overwrite("farming:corn_cob", 5)
+   overwrite("farming:melon_slice", 2)
+   overwrite("farming:pumpkin_slice", 1)
+   overwrite("farming:pumpkin_bread", 9)
+   overwrite("farming:coffee_cup", 2, "farming:drinking_cup")
+   overwrite("farming:coffee_cup_hot", 3, "farming:drinking_cup", nil, 2)
+   overwrite("farming:cookie", 2)
+   overwrite("farming:chocolate_dark", 3)
+   overwrite("farming:donut", 4)
+   overwrite("farming:donut_chocolate", 6)
+   overwrite("farming:donut_apple", 6)
+   overwrite("farming:raspberries", 1)
+   overwrite("farming:blueberries", 1)
+   overwrite("farming:muffin_blueberry", 4)
+   if minetest.get_modpath("vessels") then
+	overwrite("farming:smoothie_raspberry", 2, "vessels:drinking_glass")
+   end
+   overwrite("farming:rhubarb", 1)
+   overwrite("farming:rhubarb_pie", 6)
 end
 
 if minetest.get_modpath("kpgmobs") ~= nil then
@@ -346,8 +323,8 @@ if minetest.get_modpath("kpgmobs") ~= nil then
 	overwrite("kpgmobs:meat", 6)
 	overwrite("kpgmobs:rat_cooked", 5)
 	overwrite("kpgmobs:med_cooked", 4)
-	if minetest.get_modpath("bucket") then
-		overwrite("kpgmobs:bucket_milk", 4, "bucket:bucket_empty")
+  	if minetest.get_modpath("bucket") then
+	   overwrite("kpgmobs:bucket_milk", 4, "bucket:bucket_empty")
 	end
 end
 
@@ -385,36 +362,6 @@ if minetest.get_modpath("ferns") ~= nil then
 	overwrite("ferns:fiddlehead_roasted", 3)
 	overwrite("ferns:ferntuber_roasted", 3)
 	overwrite("ferns:horsetail_01", 1)
-end
-
--- Xanadu server only
-if minetest.get_modpath("xanadu") then
-	overwrite("xanadu:cinnamon_roll", 4)
-	overwrite("xanadu:pumpkin_pie", 10)
-	overwrite("xanadu:french_toast", 2)
-	overwrite("xanadu:icecream_strawberry", 3)
-	overwrite("xanadu:icecream_melon", 4)
-	overwrite("xanadu:milkshake_strawberry", 3, "vessels:drinking_glass")
-	overwrite("xanadu:milkshake_banana", 4, "vessels:drinking_glass")
-	overwrite("xanadu:iced_coffee", 3, "vessels:drinking_glass")
-	overwrite("xanadu:pizza_slice", 3)
-	overwrite("xanadu:cupcake", 4)
-	overwrite("xanadu:juice_apple", 4, "vessels:drinking_glass")
-	overwrite("xanadu:juice_coconut", 4, "vessels:drinking_glass")
-	overwrite("xanadu:juice_orange", 4, "vessels:drinking_glass")
-	overwrite("xanadu:juice_cactus", 2, "vessels:drinking_glass")
-	overwrite("xanadu:hotchocolate", 6, "bucket:bucket_empty")
-	overwrite("xanadu:milk_chocolate", 3)
-	overwrite("xanadu:chocolate_donut", 3)
-	overwrite("xanadu:bacon", 4)
-	overwrite("xanadu:burger", 7)
-	overwrite("xanadu:fries", 6)
-	overwrite("xanadu:glass_wine", 2)
-	overwrite("xanadu:potato_salad", 8, "ethereal:bowl", nil, 2)
-	overwrite("xanadu:gingerbread_man", 2)
-	overwrite("xanadu:taco", 4)
-	overwrite("mobs:clownfish_raw", 2)
-	overwrite("mobs:bluefish_raw", 2)
 end
 
 -- player-action based hunger changes

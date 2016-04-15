@@ -9,32 +9,30 @@ hbarmor.player_active = {}
 -- HUD item ids
 local armor_hud = {}
 
-hbarmor.tick = 1 -- 0.1
+hbarmor.tick = 0.1
 
 -- If true, the armor bar is hidden when the player does not wear any armor
 hbarmor.autohide = true
 
-local enable_damage = minetest.setting_getbool("enable_damage")
-
---[[load custom settings
+--load custom settings
 local set = io.open(minetest.get_modpath("hbarmor").."/hbarmor.conf", "r")
 if set then 
 	dofile(minetest.get_modpath("hbarmor").."/hbarmor.conf")
 	set:close()
-end--]]
+end
 
 local must_hide = function(playername, arm)
 	return ((not armor.def[playername].count or armor.def[playername].count == 0) and arm == 0)
 end
 
 local arm_printable = function(arm)
-	return math.ceil(math.floor(arm + 0.5))
+	return math.ceil(math.floor(arm+0.5))
 end
 
 local function custom_hud(player)
 	local name = player:get_player_name()
 
-	if enable_damage then
+	if minetest.setting_getbool("enable_damage") then
 		local ret = hbarmor.get_armor(player)
 		if ret == false then
 			minetest.log("error", "[hbarmor] Call to hbarmor.get_armor in custom_hud returned with false!")
@@ -52,51 +50,10 @@ local function custom_hud(player)
 end
 
 --register and define armor HUD bar
-hb.register_hudbar("armor", 0xFFFFFF, "Armor",
-	{ icon = "hbarmor_icon.png", bar = "hbarmor_bar.png" }, 0, 100, hbarmor.autohide, "%s: %d%%")
+hb.register_hudbar("armor", 0xFFFFFF, "Armor", { icon = "hbarmor_icon.png", bgicon = "hbarmor_bgicon.png", bar = "hbarmor_bar.png" }, 0, 100, hbarmor.autohide, "%s: %d%%")
 
---dofile(minetest.get_modpath("hbarmor").."/armor.lua")
--- START armor.lua file
+dofile(minetest.get_modpath("hbarmor").."/armor.lua")
 
-minetest.after(0, function()
-	if not armor.def then
-		minetest.after(2,minetest.chat_send_all,
-			"#Better HUD: Please update your version of 3darmor")
-		HUD_SHOW_ARMOR = false
-	end
-end)
-
-function hbarmor.get_armor(player)
-	if not player or not armor.def then
-		return false
-	end
-	local name = player:get_player_name()
-	local def = armor.def[name] or nil
-	if def and def.state and def.count then
-		hbarmor.set_armor(name, def.state, def.count)
-	else
-		return false
-	end
-	return true
-end
-
-function hbarmor.set_armor(player_name, ges_state, items)
-	local max_items = 4
-	if items == 5 then 
-		max_items = items
-	end
-	local max = max_items * 65535
-	local lvl = max - ges_state
-	lvl = lvl / max
-	if ges_state == 0 and items == 0 then
-		lvl = 0
-	end
-
-	hbarmor.armor[player_name] = lvl * (items * (100 / max_items))
-
-end
-
--- END armor.lua
 
 -- update hud elemtens if value has changed
 local function update_hud(player)
@@ -132,14 +89,14 @@ minetest.register_on_leaveplayer(function(player)
 end)
 
 local main_timer = 0
---local timer = 0
+local timer = 0
 minetest.register_globalstep(function(dtime)
 	main_timer = main_timer + dtime
---	timer = timer + dtime
-	if main_timer > hbarmor.tick then -- or timer > 4 then
-		if enable_damage then
+	timer = timer + dtime
+	if main_timer > hbarmor.tick or timer > 4 then
+		if minetest.setting_getbool("enable_damage") then
 			if main_timer > hbarmor.tick then main_timer = 0 end
-			for _,player in pairs(minetest.get_connected_players()) do
+			for _,player in ipairs(minetest.get_connected_players()) do
 				local name = player:get_player_name()
 				if hbarmor.player_active[name] == true then
 					local ret = hbarmor.get_armor(player)
@@ -152,5 +109,5 @@ minetest.register_globalstep(function(dtime)
 			end
 		end
 	end
---	if timer > 4 then timer = 0 end
+	if timer > 4 then timer = 0 end
 end)
