@@ -17,42 +17,35 @@ local logfile = minetest.get_worldpath() .. "/death_logs.txt"
 -- Lava death messages
 messages.lava = {
 	"%s thought lava was cool. / %s pensait que la lave etait cool.",
-	"%s felt an urgent need to touch lava. / %s s'est senti oblige de toucher la lave.",
-	"%s fell in lava. / %s  est tombe dans la lave.",
-	"%s died in lava. / %s  est mort(e) dans de la lave.",
-	"%s didn't know lava was very hot. / %s ne savait pas que la lave etait vraiment chaude.",
-	"%s destroyed Sauron's ring. / %s a detruit l'anneau de Sauron.",
-	"%s melted into a ball of fire. / %s est devenu une boule de feu",
-	"%s couldn't resist that warm glow of lava. / %s n'a pas pu se retenir face a cette chaude lueur de lave.",
+	"%s felt an urgent need to touch lava. / %s s'est senti obligé(e) de toucher la lave.",
+	"%s died in lava. / %s est mort(e) dans de la lave.",
+	"%s didn't know lava was very hot. / %s ne savait pas que la lave était vraiment chaude.",
+	"%s melted into a ball of fire. / %s est devenu(e) une boule de feu.",
+	"%s couldn't resist to the warm glow of lava. / %s n'a pas pu se retenir face à la chaude lueur de la lave.",
 }
 
 -- Drowning death messages
 messages.water = {
-	"%s lacked oxygen. / %s a manque d'air.",
+	"%s lacked oxygen. / %s a manqué d'air.",
 	"%s ran out of air. / %s n'avait plus d'air.",
-	"%s tried to impersonate an anchor. / %s a essaye d'usurper l'identite d'une ancre.",
-	"%s forgot they were not a fish. / %s a oublie qu'il/elle n'etait pas un poisson.",
-	"%s forgot they needed to breath underwater. / %s a oublie qu'il lui fallait respirer sous l'eau.",
-	"%s isn't good at swimming. / %s n'est pas bon(ne) en natation.",
-	"%s looked for the secret of the Unicorn. / %s a cherche le secret de la licorne.",
-	"%s forgot their scaphander. / %s a oublie son scaphandre.",
-	"%s failed at swimming lessons. / %s a rate ses cours de natation.",
-	"%s blew one too many bubbles. / %s a expiré une bulle de trop.",
+	"%s tried to impersonate an anchor. / %s a essayé d'usurper l'identité d'une ancre.",
+	"%s forgot he/she was not a fish. / %s a oublié qu'il/elle n'était pas un poisson.",
+	"%s forgot he needed to breath underwater. / %s a oublié qu'il lui fallait respirer sous l'eau.",
+	"%s is not good at swimming. / %s n'est pas bon(ne) en natation.",
+	"%s forgot his/her scaphander. / %s a oublié son scaphandre.",
+	"%s failed his/her swimming lessons. / %s a raté ses cours de natation."
 }
 
 -- Burning death messages
 messages.fire = {
 	"%s was a bit too hot. / %s a eu un peu trop chaud.",
-	"%s was too close to the fire. / %s a ete trop pres du feu.",
+	"%s was too close to the fire. / %s a été trop près du feu.",
 	"%s just got roasted. / %s vient de se faire rotir.",
-	"%s got burnt. / %s a ete carbonise.",
-	"%s thought they were the human torch. / %s s'est prit pour la torche.",
-	"%s started a fire. / %s a allume le feu.",
-	"%s burned to a crisp. / %s a brulé comme une chips.",
+	"%s got burnt. / %s a été carbonisé(e).",
+	"%s thought he/she was a torch. / %s a pensé qu'il/elle était une torche.",
 	"%s got a little too warm. / %s a eu un peu trop chaud.",
-	"%s got too close to the camp fire. / %s s'est approche(e) trop pres du feu de camp.",
-	"%s just got roasted, hotdog style. / %s vient de se faire rotir facon hotdog.",
-	"%s was set aflame. More light that way. / %s s'est embrase(e). Ca fait plus de lumiere.",
+	"%s just got roasted, hotdog style. / %s vient de se faire rôtir façon hotdog.",
+	"%s was set aflame. More light that way. / %s s'est embrasé(e). Ça fait plus de lumière.",
 }
 
 -- Quicksands death messages
@@ -60,12 +53,11 @@ messages.sand = {
 	"%s learnt that sand is less fluid than water. / %s a appris que le sable est moins fluide que l'eau.",
 	"%s joined the mummies. / %s a rejoint les momies.",
 	"%s got themselves buried. / %s s'est fait(e) ensevelir.",
-	"%s chose to become a fossil. / %s a choisi la voie de la fossilisation."
 }
 
 -- Other death messages
 messages.other = {
-	"%s did something fatal to them. / %s a fait quelque chose qui lui a ete fatal.",
+	"%s did something fatal to him. / %s a fait quelque chose qui lui a ete fatal.",
 	"%s died. / %s est mort(e).",
 	"%s left this world. / %s n'est plus de ce monde.",
 	"%s reached miner's heaven. / %s a rejoint le paradis des mineurs.",
@@ -73,24 +65,26 @@ messages.other = {
 	"%s saw the light. / %s a vu la lumiere.",
 	"%s fell from a bit too high. / %s est tombe d'un peu trop haut.",
 	"%s slipped on a banana skin. / %s a glisse sur une peau de banane.",
-	"%s wanted to test their super powers. / %s a voulu tester ses super pouvoirs.",
-	"%s gave up on life. / %s a decide de mourir.",
+	"%s wanted to test his super powers. / %s a voulu tester ses super pouvoirs.",
+	"%s gave up on life. / %s a décidé de mourir.",
 	"%s is somewhat dead now. / %s est plus ou moins mort(e) maintenant.",
-	"%s passed out -permanently. / %s s'est evanoui(e) -pour toujours.",
+	"%s passed out - permanently. / %s s'est évanoui(e) - pour toujours.",
 }
 
 -- Whacking death messages
 messages.whacking = {
-	"%s got whacked by %s. / %s s'est pris une raclee de la part de %s.",
-	"%s's grave was dug by %s. / La tombe de %s a ete creusee par %s.",
+	"%s has been killed by %s. / %s a été tué par %s.",
+	"%s got whacked by %s. / %s s'est pris une raclée de la part de %s.",
+	"%s's grave was dug by %s. / La tombe de %s a été creusée par %s.",
 	"%s got recycled by %s. / %s s'est fait recycler par %s.",
-	"%s surely annoyed %s. / %s embetait surement %s."
+	"%s surely annoyed %s. / %s embêtait sûrement %s."
 	-- Need to fill
 }
 
 messages.monsters_whacking = {
-	"%s got whacked by a %s. / %s s'est pris une raclee de la part d'un %s.",
-	"Darwin said : %s was less adapted than a %s. / Darwin a dit : %s etait moins adapte qu'un %s.",
+	"%s has been killed by a %s. / %s a été tué par un %s.",
+	"%s got whacked by a %s. / %s s'est pris une raclée de la part d'un %s.",
+	"Darwin said : %s was less adapted than a %s. / Darwin a dit : %s était moins adapté qu'un %s.",
 	"%s was transformed into a doormat by a %s. / %s s'est fait transformer en paillasson par un %s.",
 	-- Need to fill
 }
