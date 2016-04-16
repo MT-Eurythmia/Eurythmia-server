@@ -6,38 +6,28 @@ Introduction
 This mod is just a glue between IRC and Minetest. It provides two-way
  communication between the in-game chat, and an arbitrary IRC channel.
 
-The forum topic is at https://forum.minetest.net/viewtopic.php?f=11&t=3905
+The forum topic is at http://minetest.net/forum/viewtopic.php?id=3905
 
-
+ 
 Installing
 ----------
 
-Quick one line install for Linux:
+Quick one line install for linux:
 
-	cd <Mods directory> && git clone --recursive https://github.com/kaeza/minetest-irc.git irc
+	cd <Mod directory> && git clone https://github.com/kaeza/minetest-irc.git irc && cd irc && git submodule update --init
 
-Please change `<Mods directory>` to fit your installation of Minetest.
+Please change `<Mod directory>` to fit your installation of minetest.
 For more information, see [the wiki](http://wiki.minetest.net/Installing_mods).
 
-The IRC mod's git repository uses submodules, therefore you will have to run
-`git submodule init` when first installing the mod (unless you used
-`--recursive` as above), and `git submodule update` every time that a submodule
-is updated.  These steps can be combined into `git submodule update --init`.
+The Minetest IRC mod uses submodules, therefore you will have to run
+`git submodule init` when first installing the mod, and `git submodule update`
+every time that a submodule is updated.  These steps can be combined as
+`git submodule update --init`.
 
-You'll need to install LuaSocket.  You can do so with your package manager on
-many distributions, for example:
+The Minetest IRC mod also requires LuaSocket.  This can be installed using your
+package manager on many distributions, for example on Arch Linux:
 
-	# # On Arch Linux:
 	# pacman -S lua51-socket
-	# # On Debian/Ubuntu:
-	# # Debian/Ubuntu's LuaSocket packages are broken, so use LuaRocks.
-	# apt-get install luarocks
-	# luarocks install luasocket
-
-You will also need to add IRC to your trusted mods if you haven't disabled mod
-security.  Here's an example configuration line:
-
-	secure.trusted_mods = irc
 
 
 Settings
@@ -45,10 +35,10 @@ Settings
 All settings are changed in `minetest.conf`. If any of these settings
 are not set, the default value is used.
 
-  * `irc.server` (string)
-	The address of the IRC server to connect to.
+  * `irc.server` (string, default "irc.freenode.net")
+	This is the IRC server the mod connects to.
 
-  * `irc.channel` (string)
+  * `irc.channel` (string, default "##mt-irc-mod")
 	The IRC channel to join.
 
   * `irc.interval` (number, default 2.0)
@@ -56,14 +46,15 @@ are not set, the default value is used.
 	least 2.0 but can be higher. After four messages this much
 	time must pass between folowing messages.
 
-  * `irc.nick` (string)
-	Nickname the server uses when it connects to IRC.
+  * `irc.nick` (string, default "MT-FFFFFF")
+	Nickname used as "proxy" for the in-game chat. 
+	'F' stands for a random base-16 number.
 
-  * `irc.password` (string, default nil)
+  * `irc.password` (string, default "")
 	Password to use when connecting to the server.
 
   * `irc.NSPass` (string, default nil)
-	NickServ password.  Don't set this if you use SASL authentication.
+	NickServ password. Don't use this if you use SASL authentication.
 
   * `irc.sasl.pass` (string, default nil)
 	SASL password, same as nickserv password.
@@ -71,7 +62,7 @@ are not set, the default value is used.
 	if the server supports it.
 
   * `irc.sasl.user` (string, default `irc.nick`)
-	The SASL username.  This should normaly be set to your NickServ account name.
+	The SASL username. This should normaly be set to your main NickServ account name.
 
   * `irc.debug` (boolean, default false)
 	Whether to output debug information.
@@ -93,11 +84,13 @@ are not set, the default value is used.
 Usage
 -----
 
-Once the game is connected to the IRC channel, chatting in-game will send
-messages to the channel, and will be visible by anyone.  Also, messages sent
-to the channel will be visible in-game.
+Once the game is connected to the IRC channel, chatting using the 'T' or
+F10 hotkeys will send the messages to the channel, and will be visible
+by anyone. Also, when someone sends a message to the channel, that text
+will be visible in-game.
 
-Messages that begin with `[off]` from in-game or IRC are not sent to the other side.
+Messages that begin with `[off]` from in-game or IRC are not sent to the
+other side.
 
 This mod also adds a few chat commands:
 
@@ -122,7 +115,7 @@ This mod also adds a few chat commands:
 
 You can also send private messages from IRC to in-game players.
 
-To do so, you must send a private message to the bot (set with
+To do it, you must send a private message to the bot (set with
 the `irc.nick` option above), in the following format:
 
 	@playername message
@@ -158,7 +151,7 @@ forum topic. Thanks to you all!
 License
 -------
 
-Copyright © 2012-2013 Diego Martínez <kaeza@users.sf.net>
+(C) 2012-2013 Diego Martínez <kaeza@users.sf.net>
 
 See LICENSE.txt for licensing information.
 

@@ -1,47 +1,36 @@
-local socket = require("socket")
-local util = require("irc.util")
-local handlers = require("irc.handlers")
-local msgs = require("irc.messages")
-local Message = msgs.Message
+local socket = require "socket"
+
+-- Module table
+local irc = {}
 
 local meta = {}
 meta.__index = meta
-
-
-for k, v in pairs(require("irc.asyncoperations")) do
-	meta[k] = v
-end
+irc.meta = meta
 
 local meta_preconnect = {}
 function meta_preconnect.__index(o, k)
 	local v = rawget(meta_preconnect, k)
 
-	if v == nil and meta[k] ~= nil then
+	if not v and meta[k] then
 		error(("field '%s' is not accessible before connecting"):format(k), 2)
 	end
 	return v
 end
 
-meta.connected = true
-meta_preconnect.connected = false
-
-function new(data)
+function irc.new(data)
 	local o = {
 		nick = assert(data.nick, "Field 'nick' is required");
 		username = data.username or "lua";
 		realname = data.realname or "Lua owns";
-		nickGenerator = data.nickGenerator or util.defaultNickGenerator;
+		nickGenerator = data.nickGenerator or irc.defaultNickGenerator;
 		hooks = {};
 		track_users = true;
 		supports = {};
 		messageQueue = {};
 		lastThought = 0;
 		recentMessages = 0;
-		availableCapabilities = {};
-		wantedCapabilities = {};
-		capabilities = {};
 	}
-	assert(util.checkNick(o.nick), "Erroneous nickname passed to irc.new")
+	assert(irc.checkNick(o.nick), "Erroneous nickname passed to irc.new")
 	return setmetatable(o, meta_preconnect)
 end
 
@@ -68,9 +57,8 @@ function meta:invoke(name, ...)
 	local hooks = self.hooks[name]
 	if hooks then
 		for id, f in pairs(hooks) do
-			local ret = f(...)
-			if ret then
-				return ret
+			if f(...) then
+				return true
 			end
 		end
 	end
@@ -121,14 +109,17 @@ function meta_preconnect:connect(_host, _port)
 	self.socket = s
 	setmetatable(self, meta)
 
+	self:queue(irc.Message({command="CAP", args={"REQ", "multi-prefix"}}))
+
 	self:invoke("PreRegister", self)
+	self:queue(irc.Message({command="CAP", args={"END"}}))
 
 	if password then
-		self:queue(Message({command="PASS", args={password}}))
+		self:queue(irc.Message({command="PASS", args={password}}))
 	end
 
-	self:queue(msgs.nick(self.nick))
-	self:queue(Message({command="USER", args={self.username, "0", "*", self.realname}}))
+	self:queue(irc.msgs.nick(self.nick))
+	self:queue(irc.Message({command="USER", args={self.username, "0", "*", self.realname}}))
 
 	self.channels = {}
 
@@ -144,14 +135,14 @@ function meta:disconnect(message)
 	message = message or "Bye!"
 
 	self:invoke("OnDisconnect", message, false)
-	self:send(msgs.quit(message))
+	self:send(irc.msgs.quit(message))
 
 	self:shutdown()
 end
 
 function meta:shutdown()
 	self.socket:close()
-	setmetatable(self, meta_preconnect)
+	setmetatable(self, nil)
 end
 
 local function getline(self, errlevel)
@@ -171,7 +162,7 @@ function meta:think()
 		local line = getline(self, 3)
 		if line and #line > 0 then
 			if not self:invoke("OnRaw", line) then
-				self:handle(Message({raw=line}))
+				self:handle(irc.Message({raw=line}))
 			end
 		else
 			break
@@ -194,12 +185,14 @@ function meta:think()
 	self.lastThought = socket.gettime()
 end
 
+local handlers = handlers
+
 function meta:handle(msg)
-	local handler = handlers[msg.command]
+	local handler = irc.handlers[msg.command]
 	if handler then
 		handler(self, msg)
 	end
-	self:invoke("Do" .. util.capitalize(msg.command), msg)
+	self:invoke("Do" .. irc.capitalize(msg.command), msg)
 end
 
 local whoisHandlers = {
@@ -211,14 +204,14 @@ local whoisHandlers = {
 }
 
 function meta:whois(nick)
-	self:send(msgs.whois(nick))
+	self:send(irc.msgs.whois(nick))
 
 	local result = {}
 
 	while true do
 		local line = getline(self, 3)
 		if line then
-			local msg = Message({raw=line})
+			local msg = irc.Message({raw=line})
 
 			local handler = whoisHandlers[msg.command]
 			if handler then
@@ -241,17 +234,8 @@ function meta:whois(nick)
 end
 
 function meta:topic(channel)
-	self:queue(msgs.topic(channel))
+	self:queue(irc.msgs.topic(channel))
 end
 
-return {
-	new = new;
-
-	Message = Message;
-	msgs = msgs;
-
-	color = util.color;
-	bold = util.bold;
-	underline = util.underline;
-}
+return irc
 

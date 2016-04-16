@@ -1,10 +1,8 @@
 -- This file is licensed under the terms of the BSD 2-clause license.
 -- See LICENSE.txt for details.
 
-local ie = ...
-
 -- MIME is part of LuaSocket
-local b64e = ie.require("mime").b64
+local b64e = require("mime").b64
 
 irc.hooks = {}
 irc.registered_hooks = {}
@@ -240,7 +238,7 @@ function irc.hooks.preregister(conn)
 	conn:send("CAP REQ sasl")
 	conn:send("AUTHENTICATE PLAIN")
 	conn:send("AUTHENTICATE "..authString)
-	conn:send("CAP END")
+	--LuaIRC will send CAP END
 end
 
 

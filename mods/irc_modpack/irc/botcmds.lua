@@ -1,4 +1,5 @@
-
+irc.whereis_timer = {}
+irc.whereis_timer_max_limit = 120
 irc.bot_commands = {}
 
 function irc:check_botcmd(msg)
@@ -45,13 +46,13 @@ function irc:bot_command(msg, text)
 		cmd = text
 		args = ""
 	end
- 
+
 	if not self.bot_commands[cmd] then
 		self:reply("Unknown command '"..cmd.."'. Try 'list'."
 			.." Or use @playername <message> to send a private message")
 		return
 	end
- 
+
 	local success, message = self.bot_commands[cmd].func(msg.user, args)
 	if message then
 		self:reply(message)
@@ -116,8 +117,18 @@ irc:register_bot_command("whereis", {
 		if not player then
 			return false, "There is no player named '"..args.."'"
 		end
+		if irc.whereis_timer[user.nick] ~= nil then
+			local timer_player = os.difftime(os.time(),irc.whereis_timer[user.nick])
+			if timer_player < irc.whereis_timer_max_limit then
+				local answer = "Command used too often, retry in %d seconds."
+				return false,answer:format(irc.whereis_timer_max_limit - timer_player)
+			end
+		end
 		local fmt = "Player %s is at (%.2f,%.2f,%.2f)"
 		local pos = player:getpos()
+		irc.whereis_timer[user.nick] = os.time()
+		minetest.log("action","IRC user ".. user.nick.."!"..user.username.."@"..user.host.." asked for position of player "..player:get_player_name())
+		minetest.chat_send_player(player:get_player_name(),"IRC user ".. user.nick.."!"..user.username.."@"..user.host.." asked for your position")
 		return true, fmt:format(args, pos.x, pos.y, pos.z)
 	end
 })
