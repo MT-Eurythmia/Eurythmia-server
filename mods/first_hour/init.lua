@@ -21,13 +21,15 @@ end)
 minetest.register_on_punchplayer(function(player, hitter, time, tool_caps, dir, damage)
 	for i = 1, #players do
 		if players[i] == player:get_player_name() then
-			player:set_hp(player:get_hp() + damage)
 			minetest.chat_send_player(player:get_player_name(), "You have been punched but you are invicible because it's your first hour.")
+			minetest.log("action", "Player "..player:get_player_name().." has been punched during his first hour.")
+			return true
 		end
 		if hitter:is_player() then
 			if players[i] == hitter:get_player_name() then
-				player:set_hp(player:get_hp() + damage)
 				minetest.chat_send_player(hitter:get_player_name(), "You can't punch a player during your first hour.")
+				minetest.log("action", "Player "..hitter:get_player_name().." has punched "..player:get_player_name().." during his first hour.
+				return true
 			end
 		end
 	end

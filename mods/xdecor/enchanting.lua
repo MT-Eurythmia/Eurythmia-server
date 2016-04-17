@@ -249,7 +249,8 @@ function enchanting:register_tools(mod, def)
 			minetest.register_tool(":"..mod..":enchanted_"..tool.."_"..material.."_"..enchant, {
 				description = "Enchanted "..cap(material).." "..cap(tool).." ("..cap(enchant)..")",
 				inventory_image = original_tool.inventory_image,
-				texture = "3d_armor_"..tool.."_"..material,
+				--texture = "3d_armor_"..tool.."_"..material,
+				texture = original_tool.texture,
 				wield_image = original_tool.wield_image,
 				groups = armorcaps,
 				wear = 0
