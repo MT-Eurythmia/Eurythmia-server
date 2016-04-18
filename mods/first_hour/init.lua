@@ -28,7 +28,7 @@ minetest.register_on_punchplayer(function(player, hitter, time, tool_caps, dir, 
 		if hitter:is_player() then
 			if players[i] == hitter:get_player_name() then
 				minetest.chat_send_player(hitter:get_player_name(), "You can't punch a player during your first hour.")
-				minetest.log("action", "Player "..hitter:get_player_name().." has punched "..player:get_player_name().." during his first hour.
+				minetest.log("action", "Player "..hitter:get_player_name().." has punched "..player:get_player_name().." during his first hour.")
 				return true
 			end
 		end
