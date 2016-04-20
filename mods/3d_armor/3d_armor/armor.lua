@@ -506,6 +506,7 @@ if ARMOR_DROP == true or ARMOR_DESTROY == true then
 			local drop = {}
 			local player_inv = player:get_inventory()
 			local armor_inv = minetest.get_inventory({type="detached", name=name.."_armor"})
+			if not armor_inv then return end -- This should not happen, however it does...
 			for i=1, player_inv:get_size("armor") do
 				local stack = armor_inv:get_stack("armor", i)
 				if stack:get_count() > 0 then
