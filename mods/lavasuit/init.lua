@@ -51,7 +51,7 @@ minetest.register_globalstep(function ( dtime )
                 local pos = t.player:getpos();
                 local nodey0 = minetest.env:get_node(pos).name;
                 local nodey1 = minetest.env:get_node({ x=pos.x, y=pos.y+1, z=pos.z }).name;
-                if ((nodey0 == "default:lava_source") or (nodey1 == "default:lava_source")) then
+                if ((nodey0 == "default:lava_source") or (nodey1 == "default:lava_source") or (nodey0 == "default:lava_flowing") or (nodey1 == "default:lava_flowing")) then
                     local inv = t.player:get_inventory();
                     local stk = ItemStack("lavasuit:energy 1");
                     local stksuit = ItemStack("lavasuit:lavasuit 1");
