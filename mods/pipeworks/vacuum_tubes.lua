@@ -92,7 +92,7 @@ local function vacuum(pos, radius)
 		local lua_entity = object:get_luaentity()
 		if not object:is_player() and lua_entity and lua_entity.name == "__builtin:item" then
 			max_items = max_items + 1
-			if max_items > 50 then
+			if max_items > 25 then
 				object:remove()
 			else
 				local obj_pos = object:getpos()
