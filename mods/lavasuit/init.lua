@@ -33,8 +33,8 @@ local players = { };
 
 local INTERVAL_LAVA = 0.5;
 local INTERVAL_WATER = 4;
-local WEAR_LAVA = 400; -- wear per hp
-local WEAR_WATER = 400; -- wear per breath
+local WEAR_LAVA = 200; -- wear per hp
+local WEAR_WATER = 300; -- wear per breath
 
 local dtime_count_lava = 0;
 local dtime_count_water = 0;
