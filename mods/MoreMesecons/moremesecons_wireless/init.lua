@@ -46,6 +46,19 @@ local function wireless_deactivate(pos)
 	end
 end
 
+local function on_digiline_receive(pos, node, channel, msg)
+	local setchan = minetest.get_meta(pos):get_string("channel") -- Note : the digiline channel is the same as the wireless channel. TODO: Making two different channels and a more complex formspec ?
+	if channel ~= setchan or is_jammed(pos) then
+		return
+	end
+	for i = 1, #wireless do
+		if not vector.equals(wireless[i], pos)
+		and minetest.get_meta(wireless[i]):get_string("channel") == channel then
+			digiline:receptor_send(wireless[i], digiline.rules.default, channel, msg)
+		end
+	end
+end
+
 minetest.register_node("moremesecons_wireless:wireless", {
 	tiles = {"moremesecons_wireless.png"},
 	paramtype = "light",
@@ -57,6 +70,12 @@ minetest.register_node("moremesecons_wireless:wireless", {
 		action_on = wireless_activate,
 		action_off = wireless_deactivate
 	}},
+	digiline = {
+		receptor = {},
+		effector = {
+			action = on_digiline_receive
+		},
+	},
 	sounds = default.node_sound_stone_defaults(),
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
@@ -134,6 +153,7 @@ mesecon.register_node("moremesecons_wireless:jammer", {
 	},
 	groups = {dig_immediate=2},
 	mesecons = {effector = {
+		rules = mesecon.rules.flat,
 		action_on = function(pos)
 			add_jammer(pos)
 			minetest.swap_node(pos, {name="moremesecons_wireless:jammer_on"})
@@ -160,6 +180,7 @@ mesecon.register_node("moremesecons_wireless:jammer", {
 	},
 	groups = {dig_immediate=2, not_in_creative_inventory=1},
 	mesecons = {effector = {
+		rules = mesecon.rules.flat,
 		action_off = function(pos)
 			remove_jammer(pos)
 			minetest.swap_node(pos, {name="moremesecons_wireless:jammer_off"})
@@ -185,6 +206,7 @@ minetest.register_craft({
 	}
 })
 
+--[[
 minetest.register_lbm({
 	name = "moremesecons_wireless:add_jammer",
 	nodenames = {"moremesecons_wireless:jammer_on"},
@@ -194,5 +216,22 @@ minetest.register_lbm({
 minetest.register_lbm({
 	name = "moremesecons_wireless:add_wireless",
 	nodenames = {"moremesecons_wireless:wireless"},
+	action = register_RID
+})
+]]
+
+minetest.register_abm({
+	nodenames = {"moremesecons_wireless:jammer_on"},
+	interval = 5,
+	chance = 1,
+	catch_up = false,
+	action = add_jammer
+})
+
+minetest.register_abm({
+	nodenames = {"moremesecons_wireless:wireless"},
+	interval = 5,
+	chance = 1,
+	catch_up = false,
 	action = register_RID
 })
