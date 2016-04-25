@@ -137,10 +137,14 @@ xdecor.register("chair", {
 		{11, 0,  3,   2,  6, 2}, {3,  6,  3, 10, 2, 8}
 	}),
 	can_dig = xdecor.sit_dig,
+	
+	-- When player sit on a chair, they're able to "fly".
+	--[[
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		pos.y = pos.y + 0  -- Sitting position.
 		xdecor.sit(pos, node, clicker, pointed_thing)
 	end
+	]]
 })
 
 xdecor.register("cobweb", {
