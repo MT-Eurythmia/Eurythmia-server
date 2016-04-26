@@ -1,5 +1,5 @@
 local kill_nearest_player = function(pos)
-	local MAX_DISTANCE = 8 -- Use this number to set maximal distance to kill
+	local MAX_DISTANCE = 4 -- Use this number to set maximal distance to kill
 
 	-- Search the nearest player
 	local nearest
@@ -34,7 +34,7 @@ end
 
 minetest.register_craft({
 	output = "moremesecons_playerkiller:playerkiller",
-	recipe = {	{"","default:apple",""},
+	recipe = {	{"","default:mese",""},
 			{"default:apple","mesecons_detector:object_detector_off","default:apple"},
 			{"","default:apple",""}}
 })
