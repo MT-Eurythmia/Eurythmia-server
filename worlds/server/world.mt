@@ -93,3 +93,4 @@ load_mod_automappercolors = true
 load_mod_irc_commands = true
 load_mod_first_hour = true
 load_mod_lavasuit = true
+load_mod_jumping = true
