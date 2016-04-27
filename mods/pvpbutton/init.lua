@@ -17,7 +17,7 @@ local function pvp_toggle(player)
 			pvpenabled = player:hud_add({
 				hud_elem_type = "text",
 				position = {x = 1, y = 0},
-				offset = {x=-100, y = 20},
+				offset = {x=-125, y = 20},
 				scale = {x = 100, y = 100},
 				text = "PvP is enabled for you!",
 				number = 0xFF0000 -- Red
@@ -25,7 +25,7 @@ local function pvp_toggle(player)
 			pvppic = player:hud_add({
 				hud_elem_type = "image",
 				position = {x = 1, y = 0},
-				offset = {x=-185, y = 20},
+				offset = {x=-210, y = 20},
 				scale = {x = 1, y = 1},
 				text = "pvp.png"
 			})
@@ -45,7 +45,7 @@ local function pvp_toggle(player)
 			pvpdisabled = player:hud_add({
 				hud_elem_type = "text",
 				position = {x = 1, y = 0},
-				offset = {x=-100, y = 20},
+				offset = {x=-125, y = 20},
 				scale = {x = 100, y = 100},
 				text = "PvP is disabled for you!",
 				number = 0x7DC435
@@ -53,7 +53,7 @@ local function pvp_toggle(player)
 			nopvppic = player:hud_add({
 				hud_elem_type = "image",
 				position = {x = 1, y = 0},
-				offset = {x = -185, y = 20},
+				offset = {x = -210, y = 20},
 				scale = {x = 1, y = 1},
 				text = "nopvp.png"
 			})
@@ -72,7 +72,7 @@ minetest.register_on_joinplayer(function(player)
 	nopvppic = player:hud_add({
 		hud_elem_type = "image",
 		position = {x = 1, y = 0},
-		offset = {x = -185, y = 20},
+		offset = {x = -210, y = 20},
 		scale = {x = 1, y = 1},
 		text = "nopvp.png"
 	})
@@ -80,7 +80,7 @@ minetest.register_on_joinplayer(function(player)
 	pvpdisabled = player:hud_add({
 		hud_elem_type = "text",
 		position = {x = 1, y = 0},
-		offset = {x=-100, y = 20},
+		offset = {x=-125, y = 20},
 		scale = {x = 100, y = 100},
 		text = "PvP is disabled for you!",
 		number = 0x7DC435
