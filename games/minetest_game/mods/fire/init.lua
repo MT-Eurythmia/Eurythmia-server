@@ -81,9 +81,9 @@ minetest.register_tool("fire:flint_and_steel", {
 			itemstack:add_wear(1000)
 			local node_under = minetest.get_node(pt.under).name
 
-			if minetest.get_node_group(node_under, "flammable") >= 1 then
+			if minetest.get_item_group(node_under, "flammable") >= 1 then
 				if not minetest.is_protected(pt.above, player_name) then
-					minetest.set_node(pt.above, {name = "fire:permanent_flame"})
+					minetest.set_node(pt.above, {name = "fire:basic_flame"})
 				else
 					minetest.chat_send_player(player_name, "This area is protected")
 				end
@@ -263,7 +263,7 @@ else
 				minetest.remove_node(p0)
 				return
 			end
-			if math.random(1, 4) == 1 then
+			if math.random(1, 3) == 1 then
 				-- remove flammable nodes around flame
 				local node = minetest.get_node(p)
 				local def = minetest.registered_nodes[node.name]

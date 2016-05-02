@@ -934,66 +934,6 @@ function default.register_mgv6_decorations()
 		y_max = 30,
 		decoration = "default:dry_shrub",
 	})
-
-	-- Mynetest: Add all the default trees on mapgen
-
-	-- Aspen tree: everywhere
-	minetest.register_decoration({
-		deco_type = "schematic",
-		place_on = "default:dirt_with_grass",
-		sidelen = 16,
-		noise_params = {
-			offset = 0,
-			scale = 0.003,	-- Tree Density
-			spread = {x=100, y=100, z=100},
-			seed = 25694,
-			octaves = 3,
-			persist = 0.5
-		},
-		y_min = 1,
-		y_max = 31000,
-		schematic = minetest.get_modpath("default").."/schematics/aspen_tree_from_sapling.mts",
-		flags = "place_center_x, place_center_z",
-	})
-
-	-- Acacia tree: lower heights
-	minetest.register_decoration({
-		deco_type = "schematic",
-		place_on = "default:dirt_with_grass",
-		sidelen = 16,
-		noise_params = {
-			offset = 0,
-			scale = 0.002,
-			spread = {x=100, y=100, z=100},
-			seed = 61089,
-			octaves = 3,
-			persist = 0.5
-		},
-		y_min = 1,
-		y_max = 12,
-		schematic = minetest.get_modpath("default").."/schematics/acacia_tree_from_sapling.mts",
-		flags = "place_center_x, place_center_z",
-	})
-
-	-- Pine tree: higher heights
-	minetest.register_decoration({
-		deco_type = "schematic",
-		place_on = "default:dirt_with_grass",
-		sidelen = 16,
-		noise_params = {
-			offset = 0,
-			scale = 0.002,
-			spread = {x=100, y=100, z=100},
-			seed = 24073,
-			octaves = 3,
-			persist = 0.5
-		},
-		y_min = 12,
-		y_max = 31000,
-		schematic = minetest.get_modpath("default").."/schematics/pine_tree_from_sapling.mts",
-		flags = "place_center_x, place_center_z",
-	})
-
 end
 
 -- All mapgens except mgv6 and singlenode
@@ -1104,7 +1044,7 @@ function default.register_decorations()
 		deco_type = "schematic",
 		place_on = {"default:dirt_with_grass", "default:dirt"},
 		sidelen = 80,
-		fill_ratio = 0.09,
+		fill_ratio = 0.1,
 		biomes = {"rainforest", "rainforest_swamp"},
 		y_min = 0,
 		y_max = 31000,
@@ -1117,7 +1057,7 @@ function default.register_decorations()
 		deco_type = "schematic",
 		place_on = {"default:dirt_with_grass", "default:dirt"},
 		sidelen = 80,
-		fill_ratio = 0.01,
+		fill_ratio = 0.005,
 		biomes = {"rainforest", "rainforest_swamp"},
 		y_min = 1,
 		y_max = 31000,

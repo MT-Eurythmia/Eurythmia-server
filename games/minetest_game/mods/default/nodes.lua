@@ -353,10 +353,7 @@ minetest.register_node("default:gravel", {
 	description = "Gravel",
 	tiles = {"default_gravel.png"},
 	groups = {crumbly = 2, falling_node = 1},
-	sounds = default.node_sound_dirt_defaults({
-		footstep = {name = "default_gravel_footstep", gain = 0.5},
-		dug = {name = "default_gravel_footstep", gain = 1.0},
-	}),
+	sounds = default.node_sound_gravel_defaults(),
 	drop = {
 		max_items = 1,
 		items = {
@@ -382,6 +379,7 @@ minetest.register_node("default:snow", {
 	wield_image = "default_snowball.png",
 	paramtype = "light",
 	buildable_to = true,
+	floodable = true,
 	drawtype = "nodebox",
 	node_box = {
 		type = "fixed",
@@ -475,7 +473,7 @@ minetest.register_node("default:leaves", {
 	special_tiles = {"default_leaves_simple.png"},
 	paramtype = "light",
 	is_ground_content = false,
-	groups = {snappy = 3, leafdecay = 3, leafdecay_drop = 1, flammable = 2, leaves = 1},
+	groups = {snappy = 3, leafdecay = 3, flammable = 2, leaves = 1},
 	drop = {
 		max_items = 1,
 		items = {
@@ -552,7 +550,7 @@ minetest.register_node("default:jungleleaves", {
 	special_tiles = {"default_jungleleaves_simple.png"},
 	paramtype = "light",
 	is_ground_content = false,
-	groups = {snappy = 3, leafdecay = 3, leafdecay_drop = 1, flammable = 2, leaves = 1},
+	groups = {snappy = 3, leafdecay = 3, flammable = 2, leaves = 1},
 	drop = {
 		max_items = 1,
 		items = {
@@ -613,7 +611,7 @@ minetest.register_node("default:pine_needles",{
 	waving = 1,
 	paramtype = "light",
 	is_ground_content = false,
-	groups = {snappy = 3, leafdecay = 3, leafdecay_drop = 1, flammable = 2, leaves = 1},
+	groups = {snappy = 3, leafdecay = 3, flammable = 2, leaves = 1},
 	drop = {
 		max_items = 1,
 		items = {
@@ -674,7 +672,7 @@ minetest.register_node("default:acacia_leaves", {
 	waving = 1,
 	paramtype = "light",
 	is_ground_content = false,
-	groups = {snappy = 3, leafdecay = 3, leafdecay_drop = 1, flammable = 2, leaves = 1},
+	groups = {snappy = 3, leafdecay = 3, flammable = 2, leaves = 1},
 	drop = {
 		max_items = 1,
 		items = {
@@ -734,7 +732,7 @@ minetest.register_node("default:aspen_leaves", {
 	waving = 1,
 	paramtype = "light",
 	is_ground_content = false,
-	groups = {snappy = 3, leafdecay = 3, leafdecay_drop = 1, flammable = 2, leaves = 1},
+	groups = {snappy = 3, leafdecay = 3, flammable = 2, leaves = 1},
 	drop = {
 		max_items = 1,
 		items = {
@@ -946,7 +944,7 @@ minetest.register_node("default:junglegrass", {
 	sunlight_propagates = true,
 	walkable = false,
 	buildable_to = true,
-	groups = {snappy = 3, flora = 1, attached_node = 1},
+	groups = {snappy = 3, flora = 1, attached_node = 1, grass = 1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -967,7 +965,7 @@ minetest.register_node("default:grass_1", {
 	sunlight_propagates = true,
 	walkable = false,
 	buildable_to = true,
-	groups = {snappy = 3, flora = 1, attached_node = 1},
+	groups = {snappy = 3, flora = 1, attached_node = 1, grass = 1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -997,7 +995,7 @@ for i = 2, 5 do
 		buildable_to = true,
 		drop = "default:grass_1",
 		groups = {snappy = 3, flora = 1, attached_node = 1,
-			not_in_creative_inventory = 1},
+			not_in_creative_inventory = 1, grass = 1},
 		sounds = default.node_sound_leaves_defaults(),
 		selection_box = {
 			type = "fixed",
@@ -1018,7 +1016,8 @@ minetest.register_node("default:dry_grass_1", {
 	sunlight_propagates = true,
 	walkable = false,
 	buildable_to = true,
-	groups = {snappy = 3, flammable = 3, flora = 1, attached_node = 1},
+	groups = {snappy = 3, flammable = 3, flora = 1,
+		attached_node = 1, dry_grass = 1},
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
@@ -1046,8 +1045,8 @@ for i = 2, 5 do
 		sunlight_propagates = true,
 		walkable = false,
 		buildable_to = true,
-		groups = {snappy = 3, flammable = 3, flora = 1,
-			attached_node = 1, not_in_creative_inventory=1},
+		groups = {snappy = 3, flammable = 3, flora = 1, attached_node = 1,
+			not_in_creative_inventory=1, dry_grass = 1},
 		drop = "default:dry_grass_1",
 		sounds = default.node_sound_leaves_defaults(),
 		selection_box = {
@@ -1472,6 +1471,13 @@ minetest.register_node("default:chest", {
 			" takes " .. stack:get_name() ..
 			" from chest at " .. minetest.pos_to_string(pos))
 	end,
+	on_blast = function(pos)
+		local drops = {}
+		default.get_inventory_drops(pos, "main", drops)
+		drops[#drops+1] = "default:chest"
+		minetest.remove_node(pos)
+		return drops
+	end,
 })
 
 minetest.register_node("default:chest_locked", {
@@ -1574,43 +1580,16 @@ minetest.register_node("default:bookshelf", {
 		inv:set_size("books", 8 * 2)
 	end,
 	can_dig = function(pos,player)
-		local meta = minetest.get_meta(pos);
-		local inv = meta:get_inventory()
+		local inv = minetest.get_meta(pos):get_inventory()
 		return inv:is_empty("books")
 	end,
-
-	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
-		local meta = minetest.get_meta(pos)
-		local inv = meta:get_inventory()
-		local to_stack = inv:get_stack(listname, index)
-		if listname == "books" then
-			if minetest.get_item_group(stack:get_name(), "book") ~= 0
-					and to_stack:is_empty() then
-				return 1
-			else
-				return 0
-			end
+	allow_metadata_inventory_put = function(pos, listname, index, stack)
+		if minetest.get_item_group(stack:get_name(), "book") ~= 0 then
+			return stack:get_count()
 		end
+		return 0
 	end,
-
-	allow_metadata_inventory_move = function(pos, from_list, from_index,
-			to_list, to_index, count, player)
-		local meta = minetest.get_meta(pos)
-		local inv = meta:get_inventory()
-		local stack = inv:get_stack(from_list, from_index)
-		local to_stack = inv:get_stack(to_list, to_index)
-		if to_list == "books" then
-			if minetest.get_item_group(stack:get_name(), "book") ~= 0
-					and to_stack:is_empty() then
-				return 1
-			else
-				return 0
-			end
-		end
-	end,
-
-	on_metadata_inventory_move = function(pos, from_list, from_index,
-			to_list, to_index, count, player)
+	on_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
 		minetest.log("action", player:get_player_name() ..
 			" moves stuff in bookshelf at " .. minetest.pos_to_string(pos))
 	end,
@@ -1621,6 +1600,13 @@ minetest.register_node("default:bookshelf", {
 	on_metadata_inventory_take = function(pos, listname, index, stack, player)
 		minetest.log("action", player:get_player_name() ..
 			" takes stuff from bookshelf at " .. minetest.pos_to_string(pos))
+	end,
+	on_blast = function(pos)
+		local drops = {}
+		default.get_inventory_drops(pos, "books", drops)
+		drops[#drops+1] = "default:bookshelf"
+		minetest.remove_node(pos)
+		return drops
 	end,
 })
 
@@ -1783,7 +1769,7 @@ minetest.register_node("default:obsidian_glass", {
 	is_ground_content = false,
 	sunlight_propagates = true,
 	sounds = default.node_sound_glass_defaults(),
-	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	groups = {cracky = 3},
 })
 
 

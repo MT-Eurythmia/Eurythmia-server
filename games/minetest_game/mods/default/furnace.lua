@@ -251,10 +251,23 @@ minetest.register_node("default:furnace", {
 		inv:set_size('dst', 4)
 	end,
 
+	on_metadata_inventory_move = function(pos)
+		local timer = minetest.get_node_timer(pos)
+		timer:start(1.0)
+	end,
 	on_metadata_inventory_put = function(pos)
 		-- start timer function, it will sort out whether furnace can burn or not.
 		local timer = minetest.get_node_timer(pos)
 		timer:start(1.0)
+	end,
+	on_blast = function(pos)
+		local drops = {}
+		default.get_inventory_drops(pos, "src", drops)
+		default.get_inventory_drops(pos, "fuel", drops)
+		default.get_inventory_drops(pos, "dst", drops)
+		drops[#drops+1] = "default:furnace"
+		minetest.remove_node(pos)
+		return drops
 	end,
 
 	allow_metadata_inventory_put = allow_metadata_inventory_put,
