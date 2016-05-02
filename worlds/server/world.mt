@@ -8,6 +8,7 @@ load_mod_markers = true
 load_mod_sprint = true
 load_mod_death_messages = true
 load_mod_areas = true
+load_mod_drop_leaves = true
 load_mod_mesecons = true
 load_mod_mesecons_alias = true
 load_mod_mesecons_blinkyplant = true
