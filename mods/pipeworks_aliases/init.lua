@@ -39,3 +39,6 @@ for _, name_base in ipairs({"nodebreaker","deployer","dispenser"}) do
 end
 minetest.register_alias("pipeworks:pipe_compatibility_empty", "default:nyancat_rainbow")
 minetest.register_alias("pipeworks:pipe_compatibility_loaded", "default:nyancat_rainbow")
+minetest.register_alias("homedecor:oil_extract", "default:nyancat_rainbow")
+minetest.register_alias("homedecor:paraffin", "default:nyancat_rainbow")
+minetest.register_alias("homedecor:plastic_sheeting", "default:nyancat_rainbow")
