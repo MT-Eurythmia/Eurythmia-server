@@ -92,4 +92,5 @@ load_mod_pvpbutton = true
 load_mod_jumping = true
 load_mod_pipeworks_aliases = true
 load_mod_nyantools = true
+load_mod_torch = true
 server_announce = true
