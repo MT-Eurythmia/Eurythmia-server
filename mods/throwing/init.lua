@@ -101,7 +101,7 @@ minetest.register_craft({
 dofile(minetest.get_modpath("throwing").."/arrow.lua")
 dofile(minetest.get_modpath("throwing").."/fire_arrow.lua")
 dofile(minetest.get_modpath("throwing").."/teleport_arrow.lua")
-dofile(minetest.get_modpath("throwing").."/dig_arrow.lua")
+--dofile(minetest.get_modpath("throwing").."/dig_arrow.lua")
 dofile(minetest.get_modpath("throwing").."/build_arrow.lua")
 
 if minetest.setting_get("log_mods") then
