@@ -1,4 +1,4 @@
-=== THROWING-MOD for MINETEST-C55 ===
+=== THROWING-MOD for MINETEST ===
 by PilzAdam
 
 Inroduction:
