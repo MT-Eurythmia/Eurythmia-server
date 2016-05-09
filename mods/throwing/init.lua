@@ -22,7 +22,11 @@ local throwing_shoot_arrow = function(itemstack, player)
 			if obj:get_luaentity().player == "" then
 				obj:get_luaentity().player = player
 			end
-			obj:get_luaentity().node = player:get_inventory():get_stack("main", 1):get_name()
+			local item = player:get_inventory():get_stack("main", player:get_wield_index()-1)
+			obj:get_luaentity().node = item:get_name()
+			item:take_item()
+			player:get_inventory():set_stack("main", player:get_wield_index()-1, item)
+			obj:get_luaentity().player = player:get_player_name()
 			return true
 		end
 	end

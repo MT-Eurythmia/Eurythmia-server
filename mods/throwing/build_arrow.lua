@@ -29,6 +29,12 @@ minetest.register_node("throwing:arrow_build_box", {
 	groups = {not_in_creative_inventory=1},
 })
 
+local function build(pos, nodename, playername)
+	minetest.log("action", "A build arrow is used by player "..playername.." at pos (x="..tostring(pos.x)..",y="..tostring(pos.y)..",z="..tostring(pos.z)..")")
+	
+	minetest.place_node(pos, {name=nodename})
+end
+
 local THROWING_ARROW_ENTITY={
 	physical = false,
 	timer=0,
@@ -51,13 +57,13 @@ THROWING_ARROW_ENTITY.on_step = function(self, dtime)
 			if obj:get_luaentity() ~= nil then
 				if obj:get_luaentity().name ~= "throwing:arrow_build_entity" and obj:get_luaentity().name ~= "__builtin:item" then
 					if self.node ~= "" then
-						minetest.env:set_node(self.lastpos, {name=self.node})
+						build(self.lastpos, self.node, self.player)
 					end
 					self.object:remove()
 				end
 			else
 				if self.node ~= "" then
-					minetest.env:set_node(self.lastpos, {name=self.node})
+					build(self.lastpos, self.node, self.player)
 				end
 				self.object:remove()
 			end
@@ -67,7 +73,7 @@ THROWING_ARROW_ENTITY.on_step = function(self, dtime)
 	if self.lastpos.x~=nil then
 		if node.name ~= "air" then
 			if self.node ~= "" then
-				minetest.env:set_node(self.lastpos, {name=self.node})
+				build(self.lastpos, self.node, self.player)
 			end
 			self.object:remove()
 		end
