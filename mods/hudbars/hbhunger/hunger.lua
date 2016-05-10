@@ -364,6 +364,12 @@ if minetest.get_modpath("ferns") ~= nil then
 	overwrite("ferns:horsetail_01", 1)
 end
 
+-- xdecor
+if minetest.get_modpath("xdecor") ~= nil then
+	overwrite("xdecor:honey", 2)
+	overwrite("xdecor:bowl_soup", 20, "xdecor:bowl")
+end
+
 -- player-action based hunger changes
 function hbhunger.handle_node_actions(pos, oldnode, player, ext)
 	if not player or not player:is_player() then
