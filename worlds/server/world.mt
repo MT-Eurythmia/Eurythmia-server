@@ -65,6 +65,7 @@ load_mod_worldedit_infinity = true
 load_mod_worldedit_limited = true
 load_mod_worldedit_shortcommands = true
 load_mod_3d_armor = true
+load_mod_3d_armor_stand = true
 load_mod_moreores = true
 load_mod_shields = true
 load_mod_u_skins = true
