@@ -51,7 +51,7 @@ local function eject_drops(drops, pos, radius)
 		local count = item:get_count()
 		while count > 0 do
 			local take = math.max(1,math.min(radius * radius,
-					item:get_count(),
+					count,
 					item:get_stack_max()))
 			rand_pos(pos, drop_pos, radius)
 			local dropitem = ItemStack(item)
@@ -110,6 +110,11 @@ end
 
 
 local function calc_velocity(pos1, pos2, old_vel, power)
+	-- Avoid errors caused by a vector of zero length
+	if vector.equals(pos1, pos2) then
+		return old_vel
+	end
+
 	local vel = vector.direction(pos1, pos2)
 	vel = vector.normalize(vel)
 	vel = vector.multiply(vel, power)
