@@ -94,4 +94,5 @@ load_mod_jumping = true
 load_mod_pipeworks_aliases = true
 load_mod_nyantools = true
 load_mod_torch = true
+load_mod_misc = true
 server_announce = true
