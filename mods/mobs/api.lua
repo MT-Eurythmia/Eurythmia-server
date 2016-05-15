@@ -966,8 +966,7 @@ minetest.register_entity(name, {
 		local yaw = self.object:getyaw() or 0
 
 		-- when lifetimer expires remove mob (except npc and tamed)
-		if self.type ~= "npc"
-		and not self.tamed
+		if not self.tamed
 		and self.state ~= "attack" then
 
 			self.lifetimer = self.lifetimer - dtime
