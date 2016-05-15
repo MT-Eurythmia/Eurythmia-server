@@ -30,7 +30,7 @@ minetest.override_item("fire:flint_and_steel", {
 Mapgen: add all mt_game tress to the mapgen
 ]]
 
-local function old_register_mgv6_decorations = default.register_mgv6_decorations
+local old_register_mgv6_decorations = default.register_mgv6_decorations
 function default.register_mgv6_decorations()
 	old_register_mgv6_decorations()
 	
