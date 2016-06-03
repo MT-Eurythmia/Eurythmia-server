@@ -8,7 +8,12 @@ local function img_col(stack)
 	if def.inventory_image ~= "" then
 		return def.inventory_image:match("(.*)%.png")..".png"
 	end
-	return def.tiles[1]:match("(.*)%.png")..".png"
+
+	if def.tiles and def.tiles[1] then
+		return def.tiles[1]:match("(.*)%.png")..".png"
+	end
+
+	return ""
 end
 
 function mailbox:formspec(pos, owner, num)
@@ -28,7 +33,7 @@ function mailbox:formspec(pos, owner, num)
 				giver = giver.."#FFFF00,"..giver_name..","..i..",#FFFFFF,x "..stack_count..","
 				-- Hack to force using a 16px resolution for images in formspec's tablecolumn.
 				-- The engine doesn't scale them automatically yet.
-				img = img..i.."=mailbox_blank16.png^"..img_col(stack_name)..","
+				img = img..i.."="..img_col(stack_name).."^\\[resize:16x16,"
 			end
 		end
 
@@ -94,7 +99,7 @@ function mailbox.put(pos, listname, _, stack, player)
 		if inv:room_for_item("mailbox", stack) then
 			return -1
 		else
-			minetest.chat_send_player(player:get_player_name(), "[!] The mailbox is full")
+			minetest.chat_send_player(player:get_player_name(), "The mailbox is full")
 		end
 	end
 	return 0

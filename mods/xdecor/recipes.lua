@@ -111,6 +111,14 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = "xdecor:cushion_block",
+	recipe = {
+		{"xdecor:cushion"},
+		{"xdecor:cushion"}
+	}
+})
+
+minetest.register_craft({
 	output = "xdecor:desertstone_tile",
 	recipe = {
 		{"default:desert_cobble", "default:desert_cobble"},
@@ -314,6 +322,15 @@ minetest.register_craft({
 	recipe = {
 		{"farming:wheat", "farming:wheat", "farming:wheat"}
 	} 
+})
+
+minetest.register_craft({
+	output = "xdecor:trampoline",
+	recipe = {
+		{"farming:string", "farming:string", "farming:string"},
+		{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
+		{"default:steel_ingot", "", "default:steel_ingot"}
+	}
 })
 
 minetest.register_craft({
