@@ -50,7 +50,7 @@ minetest.register_craft({
 	output = "fishing:pole_perfect",
 	recipe = {
 		{"",                            "",                       "moreores:mithril_ingot" },
-		{"", 							"moreores:mithril_ingot", "mobs:spider_cobweb"     },
+		{"", 							"moreores:mithril_ingot", "mobs:cobweb"     },
 		{"moreores:mithril_ingot",      "",                       "mobs:spider_cobweb"     },
 	}
 })

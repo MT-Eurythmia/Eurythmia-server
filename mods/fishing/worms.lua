@@ -127,7 +127,7 @@ minetest.register_craft({
 	output = "fishing:bait_worm 8",
 	recipe = {
 		{"default:dirt"},
-		{"default:dirt"},
+		{"default:stick"},
 	}
 })
 
