@@ -51,7 +51,7 @@ minetest.register_craft({
 	recipe = {
 		{"",                            "",                       "moreores:mithril_ingot" },
 		{"", 							"moreores:mithril_ingot", "mobs:cobweb"     },
-		{"moreores:mithril_ingot",      "",                       "mobs:spider_cobweb"     },
+		{"moreores:mithril_ingot",      "",                       "mobs:cobweb"     },
 	}
 })
 end
