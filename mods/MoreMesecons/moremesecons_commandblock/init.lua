@@ -1,4 +1,4 @@
-local accepted_commands = {"tell"} -- Authorized commands. Any to accept all.
+local accepted_commands = {"tell", "spawn"} -- Authorized commands. Any to accept all.
 local NEAREST_MAX_DISTANCE = 8
 
 local function initialize_data(meta)
