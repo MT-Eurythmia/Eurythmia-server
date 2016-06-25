@@ -95,4 +95,7 @@ load_mod_nyantools = true
 load_mod_torch = true
 load_mod_misc = true
 load_mod_fishing = true
+load_mod_xban2 = true
 server_announce = true
+load_mod_hazmat_suit = false
+load_mod_technic_armor = false
