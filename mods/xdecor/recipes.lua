@@ -88,14 +88,16 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_craft({
-	output = "xdecor:cobweb",
-	recipe = {
-		{"farming:cotton", "", "farming:cotton"},
-		{"", "farming:cotton", ""},
-		{"farming:cotton", "", "farming:cotton"}
-	}
-})
+if not minetest.get_modpath("mobs") then
+	minetest.register_craft({
+		output = "xdecor:cobweb",
+		recipe = {
+			{"farming:cotton", "", "farming:cotton"},
+			{"", "farming:cotton", ""},
+			{"farming:cotton", "", "farming:cotton"}
+		}
+	})
+end
 
 minetest.register_craft({ 
 	output = "xdecor:crafting_guide",
