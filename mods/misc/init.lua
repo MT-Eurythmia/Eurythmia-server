@@ -91,3 +91,24 @@ function default.register_mgv6_decorations()
 		flags = "place_center_x, place_center_z",
 	})
 end
+
+--[[
+Admin chatcommand: players IPs
+]]
+
+minetest.register_chatcommand("ip", {
+	description = "Get player IP",
+	params = "<player>",
+	privs = { kick=true },
+	func = function(name, params)
+		local player = params:match("%S+")
+		if not player then
+			return false, "Invalid usage"
+		end
+		local ip = minetest.get_player_ip(player)
+		if not ip then
+			return false, "Player does not exit"
+		end
+		return true, ip
+	end,
+})
