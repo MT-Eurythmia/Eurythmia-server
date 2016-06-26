@@ -107,7 +107,7 @@ minetest.register_chatcommand("ip", {
 		end
 		local ip = minetest.get_player_ip(player)
 		if not ip then
-			return false, "Player does not exit"
+			return false, "Player does not exist or is not in game"
 		end
 		return true, ip
 	end,
