@@ -45,12 +45,17 @@ THROWING_arrow_gold_ENTITY.on_step = function(self, dtime)
 	local node = minetest.get_node(pos)
 
 	if self.timer > 0.2 then
+		local hitter = self.player
+		if not hitter then
+			return
+		end
+		
 		local objs = minetest.get_objects_inside_radius({x = pos.x, y = pos.y, z = pos.z}, 1)
 		for k, obj in pairs(objs) do
 			if obj:get_luaentity() ~= nil then
 				if obj:get_luaentity().name ~= "throwing:arrow_gold_entity" and obj:get_luaentity().name ~= "__builtin:item" then
 					local damage = 5
-					obj:punch(self.object, 1.0, {
+					obj:punch(hitter, 1.0, {
 						full_punch_interval = 1.0,
 						damage_groups= {fleshy = damage},
 					}, nil)
@@ -59,7 +64,7 @@ THROWING_arrow_gold_ENTITY.on_step = function(self, dtime)
 				end
 			else
 				local damage = 5
-				obj:punch(self.object, 1.0, {
+				obj:punch(hitter, 1.0, {
 					full_punch_interval = 1.0,
 					damage_groups= {fleshy = damage},
 				}, nil)
