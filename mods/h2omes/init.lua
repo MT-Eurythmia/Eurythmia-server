@@ -138,7 +138,7 @@ function h2omes.to_spawn(name)
 		minetest.chat_send_player(name, "Teleporting to spawn...")
 		player:setpos(spawn_pos)
 		minetest.sound_play("teleport", {to_player=name, gain = 1.0})
-		minetest.log("action","Player ".. name .." respawned. Next allowed respawn in ".. h2omes.time_spawn .." seconds.")
+		minetest.log("action","Player ".. name .." respawned.")
 		return true
 	else
 		minetest.chat_send_player(name, "ERROR: No spawn point is set on this server!")
@@ -201,7 +201,6 @@ end
 function h2omes.send_pos_to_player(name, pos, to_name)
 	local player = minetest.get_player_by_name(to_name)
 	if not player or not pos then return false end
-	--if action_timers.wrapper(name, "send_pos_to_player", "from_player_" .. to_name, h2omes.time_from_player, h2omes.update_pos, {to_name, pos, name}) then
 	if h2omes.update_pos(to_name, pos, name) then
 		minetest.chat_send_player(name, "Your position has been sent to "..to_name)
 		return true
