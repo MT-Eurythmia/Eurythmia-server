@@ -5,4 +5,5 @@ stairs
 xpanes
 3d_armor?
 fire?
+mobs?
 oresplus?
