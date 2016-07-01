@@ -411,26 +411,22 @@ minetest.register_chatcommand("setpit", {
 
 if minetest.get_modpath("unified_inventory") then
 	for i, def in pairs(unified_inventory.buttons) do
-		if def.name == "home_gui_set" or def.name == "home_gui_go" then
-			table.remove(unified_inventory.buttons, i)
+		if def.name == "home_gui_set" then
+			def.type = "image"
+			def.image = "ui_gohome_icon.png"
+			def.tooltip = unified_inventory.gettext("My Homes")
+			def.action = function(player)
+				h2omes.show_formspec_home(player:get_player_name())
+			end
+		elseif def.name == "home_gui_go" then
+			def.type = "image"
+			def.image = "ui_gohome_icon.png"
+			def.tooltip = unified_inventory.gettext("Go Home")
+			def.action = function(player)
+				h2omes.to_home(player:get_player_name(), "home")
+			end
 		end
 	end
-	unified_inventory.register_button("home_gui_set", {
-		type = "image",
-		image = "ui_gohome_icon.png",
-		tooltip = unified_inventory.gettext("My Homes"),
-		action = function(player)
-			h2omes.show_formspec_home(player:get_player_name())
-		end,
-	})
-	unified_inventory.register_button("home_gui_go", {
-		type = "image",
-		image = "ui_gohome_icon.png",
-		tooltip = unified_inventory.gettext("Go Home"),
-		action = function(player)
-			h2omes.to_home(player:get_player_name(), "home")
-		end,
-	})
 end
 
 minetest.log("action","[h2omes] Loaded.")
