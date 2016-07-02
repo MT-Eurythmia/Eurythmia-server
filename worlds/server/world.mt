@@ -96,4 +96,7 @@ load_mod_misc = true
 load_mod_fishing = true
 load_mod_xban2 = true
 load_mod_h2omes = true
+load_mod_names_per_ip = true
 server_announce = true
+load_mod_hazmat_suit = false
+load_mod_technic_armor = false
