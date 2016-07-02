@@ -105,10 +105,14 @@ minetest.register_chatcommand("ip", {
 		if not player then
 			return false, "Invalid usage"
 		end
-		local ip = minetest.get_player_ip(player)
-		if not ip then
-			return false, "Player does not exist or is not in game"
+		
+		if not ipnames.data[player] then
+			minetest.chat_send_player(name, "The player '"..player.."' did not join yet.")
+			return
 		end
+		
+		local ip = ipnames.data[player][1]
+		
 		return true, ip
 	end,
 })
