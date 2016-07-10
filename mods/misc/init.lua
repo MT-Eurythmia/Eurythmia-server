@@ -121,5 +121,5 @@ minetest.register_chatcommand("ip", {
 XDecor chair: avoid "flying" usebug
 ]]
 minetest.override_item("xdecor:chair", {
-	on_rightclick = nil
+	on_rightclick = function() end
 })
