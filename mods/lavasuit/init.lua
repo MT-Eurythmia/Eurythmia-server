@@ -31,13 +31,18 @@ minetest.register_craft({
 
 local players = { };
 
-local INTERVAL_LAVA = 0.5;
-local INTERVAL_WATER = 4;
 local WEAR_LAVA = 200; -- wear per hp
 local WEAR_WATER = 300; -- wear per breath
 
-local dtime_count_lava = 0;
-local dtime_count_water = 0;
+local dtime_count = 0;
+
+local damage_lava = minetest.registered_nodes["default:lava_source"].damage_per_second;
+minetest.override_item("default:lava_source", {
+	damage_per_second = 0,
+})
+minetest.override_item("default:lava_flowing", {
+	damage_per_second = 0,
+})
 
 local function set_wear(player, suit, wear)
     local inv = player:get_inventory();
@@ -61,30 +66,21 @@ local function set_wear(player, suit, wear)
 end
 
 minetest.register_globalstep(function ( dtime )
-    dtime_count_lava = dtime_count_lava + dtime;
-    dtime_count_water = dtime_count_water + dtime;
+    dtime_count = dtime_count + dtime;
     
-    if (dtime_count_lava >= INTERVAL_LAVA) then
-        dtime_count_lava = dtime_count_lava - INTERVAL_LAVA;
+    if (dtime_count >= 1) then
+        dtime_count = dtime_count - 1;
+        
         for name, t in pairs(players) do
-            local damage = t.hp - t.player:get_hp();
-            if (damage > 0) then
-                local pos = t.player:getpos();
-                local nodey0 = minetest.env:get_node(pos).name;
-                local nodey1 = minetest.env:get_node({ x=pos.x, y=pos.y+1, z=pos.z }).name;
-                if ((nodey0 == "default:lava_source") or (nodey1 == "default:lava_source") or (nodey0 == "default:lava_flowing") or (nodey1 == "default:lava_flowing")) then
-                    if (set_wear(t.player, "lavasuit:lavasuit", WEAR_LAVA*damage)) then
-                        t.player:set_hp(t.hp);
-                    end
+            local pos = t.player:getpos();
+            local nodey0 = minetest.env:get_node(pos).name;
+            local nodey1 = minetest.env:get_node({ x=pos.x, y=pos.y+1, z=pos.z }).name;
+            if ((nodey0 == "default:lava_source") or (nodey1 == "default:lava_source") or (nodey0 == "default:lava_flowing") or (nodey1 == "default:lava_flowing")) then
+                if not set_wear(t.player, "lavasuit:lavasuit", WEAR_LAVA*damage_lava) then
+                    t.player:set_hp(t.player:get_hp() - damage_lava);
                 end
             end
-            t.hp = t.player:get_hp();
-        end
-    end
-    
-    if (dtime_count_water >= INTERVAL_WATER) then
-        dtime_count_water = dtime_count_water - INTERVAL_WATER;
-        for name, t in pairs(players) do
+            
             local breathlessness = t.breath - t.player:get_breath();
             if (breathlessness > 0) then
                 local pos = t.player:getpos();
