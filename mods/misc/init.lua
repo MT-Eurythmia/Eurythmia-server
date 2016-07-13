@@ -123,3 +123,6 @@ XDecor chair: avoid "flying" usebug
 minetest.override_item("xdecor:chair", {
 	on_rightclick = function() end
 })
+minetest.override_item("xdecor:cushion", {
+	on_rightclick = function() end
+})
