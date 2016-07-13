@@ -52,7 +52,9 @@ THROWING_ARROW_ENTITY.on_step = function(self, dtime)
 				if obj:get_luaentity().name ~= "throwing:arrow_teleport_entity" and obj:get_luaentity().name ~= "__builtin:item" then
 					if self.player ~= "" then
 						self.player:setpos(pos)
-						self.player:get_inventory():add_item("main", ItemStack("throwing:arrow_teleport"))
+						minetest.after(0.2, function()
+							self.player:get_inventory():add_item("main", ItemStack("throwing:arrow_teleport"))
+						end)
 						minetest.sound_play("throwing_teleport_arrow", {pos = self.lastpos})
 					end
 					self.object:remove()
@@ -60,7 +62,9 @@ THROWING_ARROW_ENTITY.on_step = function(self, dtime)
 			else
 				if self.player ~= "" then
 					self.player:setpos(pos)
-					self.player:get_inventory():add_item("main", ItemStack("throwing:arrow_teleport"))
+					minetest.after(0.2, function()
+						self.player:get_inventory():add_item("main", ItemStack("throwing:arrow_teleport"))
+					end)
 					minetest.sound_play("throwing_teleport_arrow", {pos = self.lastpos})
 				end
 				self.object:remove()
