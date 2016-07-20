@@ -1,0 +1,3 @@
+[submodule "mods/MoreMesecons"]
+	path = mods/MoreMesecons
+	url = https://github.com/minetest-mods/MoreMesecons.git
