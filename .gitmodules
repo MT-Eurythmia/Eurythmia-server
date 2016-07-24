@@ -1,6 +1,3 @@
 [submodule "mods/MoreMesecons"]
 	path = mods/MoreMesecons
 	url = https://github.com/minetest-mods/MoreMesecons.git
-[submodule "mods/hudbars"]
-	path = mods/hudbars
-	url = https://github.com/tenplus1/hudbars.git
