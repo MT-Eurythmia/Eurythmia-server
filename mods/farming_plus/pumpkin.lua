@@ -58,7 +58,7 @@ minetest.register_node(":farming:pumpkin", {
 	description = S("Pumpkin"),
 	paramtype2 = "facedir",
 	tiles = {"farming_pumpkin_top.png", "farming_pumpkin_top.png", "farming_pumpkin_side.png", "farming_pumpkin_side.png", "farming_pumpkin_side.png", "farming_pumpkin_side.png"},
-	groups = {choppy=2, oddly_breakable_by_hand=2, flammable=2, plant=1},
+	groups = {choppy=2, oddly_breakable_by_hand=2, flammable=2, plant=1, pumpkin=1},
 	sounds = default.node_sound_wood_defaults(),
 	
 	on_punch = function(pos, node, puncher)
@@ -80,7 +80,7 @@ minetest.register_node(":farming:pumpkin_face", {
 	description = S("Pumpkin Face"),
 	paramtype2 = "facedir",
 	tiles = {"farming_pumpkin_top.png", "farming_pumpkin_top.png", "farming_pumpkin_side.png", "farming_pumpkin_side.png", "farming_pumpkin_side.png", "farming_pumpkin_face.png"},
-	groups = {choppy=2, oddly_breakable_by_hand=2, flammable=2, plant=1},
+	groups = {choppy=2, oddly_breakable_by_hand=2, flammable=2, plant=1, pumpkin=1},
 	sounds = default.node_sound_wood_defaults(),
 })
 
@@ -412,7 +412,6 @@ minetest.register_craft({
 minetest.register_craftitem(":farming:pumpkin_bread", {
 	description = S("Pumpkin Bread"),
 	inventory_image = "farming_bread_pumpkin.png",
-	stack_max = 1,
 	on_use = minetest.item_eat(8)
 })
 
@@ -425,14 +424,15 @@ minetest.register_alias("farming:pumpkin_cake_mix", "farming:pumpkin_flour")
 minetest.register_craft({
 	output = "farming:pumpkin_flour",
 	type = "shapeless",
-	recipe = {"farming:flour", "farming:pumpkin"}
+	recipe = {"farming:flour", "group:pumpkin"}
 })
 
 minetest.register_craft({
 	type = "cooking",
 	output = "farming:pumpkin_bread",
 	recipe = "farming:pumpkin_flour",
-	cooktime = 10
+	-- Same cooktime as bread 
+	cooktime = 5
 })
 
 
