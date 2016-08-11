@@ -11,13 +11,18 @@ local function begin_game_english(name)
 	minetest.show_formspec(name, "first_hour:welcome", formspec)
 
 	minetest.after(300, function(name) -- After five minutes
+		local player = minetest.get_player_by_name(name)
+		if not player then -- If the player has disconnected
+			return
+		end
+
 		minetest.log("info", "Player "..name.." got the interact privilege.")
 
 		local privs = minetest.get_player_privs(name)
 		privs.interact = true
 		minetest.set_player_privs(name, privs)
 
-		minetest.get_player_by_name(name):setpos({x = 0, y = 18, z = 0})
+		player:setpos({x = 0, y = 18, z = 0})
 
 		minetest.chat_send_player(name, "Let's play, you got the interact privilege! If you didn't read the signs, you can still do it using /spawn :-)")
 
@@ -44,13 +49,18 @@ local function begin_game_french(name)
 	minetest.show_formspec(name, "first_hour:welcome", formspec)
 
 	minetest.after(300, function(name) -- After five minutes
+		local player = minetest.get_player_by_name(name)
+		if not player then -- If the player has disconnected
+			return
+		end
+
 		minetest.log("info", "Player "..name.." got the interact privilege.")
 
 		local privs = minetest.get_player_privs(name)
 		privs.interact = true
 		minetest.set_player_privs(name, privs)
 
-		minetest.get_player_by_name(name):setpos({x = 0, y = 18, z = 0})
+		player:setpos({x = 0, y = 18, z = 0})
 
 		minetest.chat_send_player(name, "Vous pouvez maintenant commencer à jouer, vous avez obtenu le privilège interact! Si vous n'avez pas eu le temps de lire les panneaux, vous pouvez le faire au moyen de /spawn :-)")
 
