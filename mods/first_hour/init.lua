@@ -17,7 +17,7 @@ local function begin_game_english(name)
 		privs.interact = true
 		minetest.set_player_privs(name, privs)
 
-		minetest.get_player_by_name(name):setpos({x = 0, y = 15, z = 0})
+		minetest.get_player_by_name(name):setpos({x = 0, y = 18, z = 0})
 
 		minetest.chat_send_player(name, "Let's play, you got the interact privilege! If you didn't read the signs, you can still do it using /spawn :-)")
 
@@ -50,7 +50,7 @@ local function begin_game_french(name)
 		privs.interact = true
 		minetest.set_player_privs(name, privs)
 
-		minetest.get_player_by_name(name):setpos({x = 0, y = 15, z = 0})
+		minetest.get_player_by_name(name):setpos({x = 0, y = 18, z = 0})
 
 		minetest.chat_send_player(name, "Vous pouvez maintenant commencer à jouer, vous avez obtenu le privilège interact! Si vous n'avez pas eu le temps de lire les panneaux, vous pouvez le faire au moyen de /spawn :-)")
 
