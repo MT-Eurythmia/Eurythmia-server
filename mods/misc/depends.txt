@@ -2,3 +2,4 @@ fire
 default
 names_per_ip
 xdecor
+fishing

@@ -126,3 +126,15 @@ minetest.override_item("xdecor:chair", {
 minetest.override_item("xdecor:cushion", {
 	on_rightclick = function() end
 })
+
+--[[
+Fishing baitball: change its craft
+]]
+minetest.clear_craft("fishing:baitball")
+minetest.register_craft({
+	type = "shapeless",
+	output = "fishing:baitball 20",
+	recipe = {"farming:flour", "farming:wheat", "bucket:bucket_water"},
+	replacements = {{ "bucket:bucket_water", "bucket:bucket_empty"}}
+})
+
