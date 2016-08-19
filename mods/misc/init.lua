@@ -130,7 +130,7 @@ minetest.override_item("xdecor:cushion", {
 --[[
 Fishing baitball: change its craft
 ]]
-minetest.clear_craft({output = "fishing:baitball 20"})
+minetest.clear_craft({output = "fishing:baitball"})
 minetest.register_craft({
 	type = "shapeless",
 	output = "fishing:baitball 20",

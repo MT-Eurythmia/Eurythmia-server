@@ -11,16 +11,16 @@ local function begin_game_english(name)
 	minetest.show_formspec(name, "first_hour:welcome", formspec)
 
 	minetest.after(300, function(name) -- After five minutes
+		local privs = minetest.get_player_privs(name)
+		privs.interact = true
+		minetest.set_player_privs(name, privs)
+
 		local player = minetest.get_player_by_name(name)
 		if not player then -- If the player has disconnected
 			return
 		end
 
 		minetest.log("info", "Player "..name.." got the interact privilege.")
-
-		local privs = minetest.get_player_privs(name)
-		privs.interact = true
-		minetest.set_player_privs(name, privs)
 
 		player:setpos({x = 0, y = 18, z = 0})
 
