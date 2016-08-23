@@ -21,9 +21,7 @@ local throwing_shoot_arrow = function(itemstack, player)
 			obj:setacceleration({x=dir.x*-3, y=-10, z=dir.z*-3})
 			obj:setyaw(player:get_look_yaw()+math.pi)
 			minetest.sound_play("throwing_sound", {pos=playerpos, gain = 0.5})
-			if obj:get_luaentity().player == "" then
-				obj:get_luaentity().player = player
-			end
+			obj:get_luaentity().player = player:get_player_name()
 			obj:get_luaentity().node = player:get_inventory():get_stack("main", 1):get_name()
 			return true
 		end

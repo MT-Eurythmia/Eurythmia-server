@@ -49,14 +49,14 @@ THROWING_ARROW_ENTITY.on_step = function(self, dtime)
 		for k, obj in pairs(objs) do
 			if obj:get_luaentity() ~= nil then
 				if obj:get_luaentity().name ~= "throwing:arrow_fire_entity" and obj:get_luaentity().name ~= "__builtin:item" then
-					if self.node ~= "" then
+					if self.node ~= "" and not minetest.is_protected(self.lastpos, self.player) then
 						minetest.set_node(self.lastpos, {name="default:torch"})
 						minetest.sound_play("default_place_node", {pos = self.lastpos})
 					end
 					self.object:remove()
 				end
 			else
-				if self.node ~= "" then
+				if self.node ~= "" and not minetest.is_protected(self.lastpos, self.player) then
 					minetest.set_node(self.lastpos, {name="default:torch"})
 					minetest.sound_play("default_place_node", {pos = self.lastpos})
 				end
