@@ -4,3 +4,6 @@
 [submodule "mods/mesecons"]
 	path = mods/mesecons
 	url = https://github.com/Jeija/minetest-mod-mesecons.git
+[submodule "mods/metatools"]
+	path = mods/metatools
+	url = https://github.com/LeMagnesium/minetest-mod-metatools.git

@@ -103,3 +103,4 @@ load_mod_technic_armor = false
 load_mod_broomstick = true
 load_mod_report = true
 load_mod_email = true
+load_mod_metatools = true
