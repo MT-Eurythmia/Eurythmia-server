@@ -312,14 +312,17 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			if not to_name or not pos then return end
 			h2omes.to_player(name, pos, to_name)
 		elseif fields["send_to"] then
+			if not tmp_players[name] then return end
 			local to_name = tmp_players[name]["select_player"]
 			if not to_name then return end
 			local pos = player:getpos()
 			h2omes.send_pos_to_player(name, pos, to_name)
 			tmp_players[name] = nil
 		elseif fields["refresh"] then
+			if not tmp_players[name] then return end
 			tmp_players[name].refresh = true
 		elseif fields["select_player"] then
+			if not tmp_players[name] then return end
 			for i, n in pairs(tmp_players[name].players_list) do
 				if n == fields["select_player"] then
 					tmp_players[name]["select_player"] = fields["select_player"]
