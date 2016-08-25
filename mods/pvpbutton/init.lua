@@ -105,8 +105,8 @@ if minetest.setting_getbool("enable_pvp") then
 				if pvptable[localname] == 1 and pvptable[hittername] == 1 then
 					return false
 				else
-					minetest.chat_send_player(localname,
-					"The player "..hittername.." is trying to attack you.")
+					--minetest.chat_send_player(localname,
+					--"The player "..hittername.." is trying to attack you.")
 					minetest.chat_send_player(hittername,
 					"The player "..localname.." does not have PvP activated.")
 					return true
