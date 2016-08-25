@@ -55,7 +55,7 @@ THROWING_arrow_gold_ENTITY.on_step = function(self, dtime)
 			if obj:get_luaentity() ~= nil then
 				if obj:get_luaentity().name ~= "throwing:arrow_gold_entity" and obj:get_luaentity().name ~= "__builtin:item" then
 					local damage = 5
-					obj:punch(hitter, 1.0, {
+					obj:punch(minetest.get_player_by_name(hitter), 1.0, {
 						full_punch_interval = 1.0,
 						damage_groups= {fleshy = damage},
 					}, nil)
@@ -64,7 +64,7 @@ THROWING_arrow_gold_ENTITY.on_step = function(self, dtime)
 				end
 			else
 				local damage = 5
-				obj:punch(hitter, 1.0, {
+				obj:punch(minetest.get_player_by_name(hitter), 1.0, {
 					full_punch_interval = 1.0,
 					damage_groups= {fleshy = damage},
 				}, nil)
