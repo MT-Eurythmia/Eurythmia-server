@@ -14,13 +14,12 @@ local function begin_game_english(name)
 		local privs = minetest.get_player_privs(name)
 		privs.interact = true
 		minetest.set_player_privs(name, privs)
+		minetest.log("info", "Player "..name.." got the interact privilege.")
 
 		local player = minetest.get_player_by_name(name)
 		if not player then -- If the player has disconnected
 			return
 		end
-
-		minetest.log("info", "Player "..name.." got the interact privilege.")
 
 		player:setpos({x = 0, y = 18, z = 0})
 
@@ -49,16 +48,16 @@ local function begin_game_french(name)
 	minetest.show_formspec(name, "first_hour:welcome", formspec)
 
 	minetest.after(300, function(name) -- After five minutes
+		local privs = minetest.get_player_privs(name)
+		privs.interact = true
+		minetest.set_player_privs(name, privs)
+		minetest.log("info", "Player "..name.." got the interact privilege.")
+
 		local player = minetest.get_player_by_name(name)
 		if not player then -- If the player has disconnected
 			return
 		end
 
-		minetest.log("info", "Player "..name.." got the interact privilege.")
-
-		local privs = minetest.get_player_privs(name)
-		privs.interact = true
-		minetest.set_player_privs(name, privs)
 
 		player:setpos({x = 0, y = 18, z = 0})
 
@@ -99,8 +98,13 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	
 	if fields["en"] then
 		begin_game_english(name)
-	else
+	elseif fields["fr"] then
 		begin_game_french(name)
+	else
+		local formspec = "size[5,1.5;]"..
+	                         "label[0,0;Merci de choisir votre langue.\nPlease choose your preferred language.]"..
+	                         "button[0,1;2,1;fr;Français]button[2,1;2,1;en;English]"
+		minetest.show_formspec(name, "first_hour:language_select", formspec)
 	end
 end)
 
