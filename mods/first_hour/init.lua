@@ -1,6 +1,12 @@
 local players = {}
 
 local function begin_game_english(name)
+	for _, player in ipairs(players) do
+		if player == name then
+			return
+		end
+	end
+
 	local text = "Welcome to the Mynetest server !\nYou are invincible and you cannot hit other players during a hour.\nYou will be able to play in 5 minutes.\nRead the signs to wait!"
 
 	minetest.chat_send_player(name, text)
@@ -38,6 +44,12 @@ local function begin_game_english(name)
 end
 
 local function begin_game_french(name)
+	for _, player in ipairs(players) do
+		if player == name then
+			return
+		end
+	end
+
 	local text = "Bienvenue sur le serveur Mynetest !\nVous êtes invicible et ne pouvez pas frapper les autres joueurs pendant une heure.\nVous pourrez commencer à jouer dans 5 minutes.\nLisez les panneaux en attendant!"
 
 	minetest.chat_send_player(name, text)
