@@ -138,3 +138,15 @@ minetest.register_craft({
 	replacements = {{ "bucket:bucket_water", "bucket:bucket_empty"}}
 })
 
+--[[
+Natural hive: don't allow inventory put if the area is protected (don't do this for artificial hives)
+]]
+minetest.override_item("mobs:beehive", {
+	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+		print(minetest.is_protected(pos, player:get_player_name()))
+		if minetest.is_protected(pos, player:get_player_name()) and listname == "beehive" then
+			return 0
+		end
+		return stack:get_count()
+	end
+})
