@@ -7,6 +7,9 @@ local function begin_game_english(name)
 		end
 	end
 
+	minetest.log("action", "First hour of player "..name.." begins")
+	table.insert(players, name)
+
 	local text = "Welcome to the Mynetest server !\nYou are invincible and you cannot hit other players during a hour.\nYou will be able to play in 5 minutes.\nRead the signs to wait!"
 
 	minetest.chat_send_player(name, text)
@@ -50,6 +53,9 @@ local function begin_game_french(name)
 		end
 	end
 
+	minetest.log("action", "First hour of player "..name.." begins")
+	table.insert(players, name)
+
 	local text = "Bienvenue sur le serveur Mynetest !\nVous êtes invicible et ne pouvez pas frapper les autres joueurs pendant une heure.\nVous pourrez commencer à jouer dans 5 minutes.\nLisez les panneaux en attendant!"
 
 	minetest.chat_send_player(name, text)
@@ -89,9 +95,6 @@ end
 
 minetest.register_on_newplayer(function(player)
 	local name = player:get_player_name()
-
-	minetest.log("action", "First hour of player "..name.." begins")
-	table.insert(players, name)
 
 	local formspec = "size[5,1.5;]"..
 	                 "label[0,0;Merci de choisir votre langue.\nPlease choose your preferred language.]"..
