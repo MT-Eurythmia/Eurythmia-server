@@ -157,7 +157,7 @@ Lava bucket: place only in areas protected by the placing player (not at unprote
 local old_bucket_lava_on_place = minetest.registered_items["bucket:bucket_lava"].on_place
 minetest.override_item("bucket:bucket_lava", {
 	on_place = function(itemstack, user, pointed_thing)
-		if table.getn(areas:getAreasAtPos(pointed_thing.under)) == 0 then
+		if next(areas:getAreasAtPos(pointed_thing.under)) == nil then
 			local name = user:get_player_name()
 			minetest.log("action", (name ~= "" and name or "A mod") .. " tried to place a lava bucket at an unprotected position")
 			return
