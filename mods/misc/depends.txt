@@ -4,3 +4,5 @@ names_per_ip
 xdecor
 fishing
 mobs
+bucket
+areas
