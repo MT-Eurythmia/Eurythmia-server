@@ -377,6 +377,7 @@ function hb.unhide_hudbar(player, identifier)
 	local name = player:get_player_name()
 	local hudtable = hb.get_hudtable(identifier)
 	if(not hudtable or not name) then return end
+	if(not hudtable.hudstate[name]) then return end
 	if(hudtable.hudstate[name].hidden) then
 		local name = player:get_player_name()
 		local value = hudtable.hudstate[name].value
