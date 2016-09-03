@@ -448,6 +448,7 @@ local function update_hud(player)
 		end
 		--air
 		local breath = player:get_breath()
+		if not breath then return end
 		
 		if breath == 11 and hb.settings.autohide_breath == true then
 			hb.hide_hudbar(player, "breath")
