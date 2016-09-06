@@ -165,3 +165,16 @@ minetest.override_item("bucket:bucket_lava", {
 		old_bucket_lava_on_place(itemstack, user, pointed_thing)
 	end
 })
+
+--[[
+Moderator command: /error, useful to reboot the server
+]]
+minetest.register_chatcommand("error", {
+	description = "Raise an error to make the server to crash with an error exit status, and the run.sh script to reboot it",
+	params = "",
+	privs = { ban=true },
+	func = function(name, params)
+		error("/error chatcommand")
+		return true
+	end,
+})
