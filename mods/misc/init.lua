@@ -178,3 +178,113 @@ minetest.register_chatcommand("error", {
 		return true
 	end,
 })
+
+--[[
+Unbreakable nodes: add unbreakable obsidian glass and unbreakable stonebrick slab to maptools
+]]
+
+minetest.register_node(":maptools:obsidian_glass", {
+	description = "Unbreakable Obsidian Glass",
+	drawtype = "glasslike_framed_optional",
+	tiles = {"default_obsidian_glass.png", "default_obsidian_glass_detail.png"},
+	paramtype = "light",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	sounds = default.node_sound_glass_defaults(),
+	range = 12,
+	stack_max = 10000,
+	drop = "",
+	groups = {unbreakable = 1, not_in_creative_inventory = maptools.creative},
+})
+minetest.register_node(":maptools:slab_stonebrick", {
+	description = "Unbreakable Stone Brick Slab",
+	drawtype = "nodebox",
+	tiles = {"default_stone_brick.png"},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	is_ground_content = false,
+	groups = {unbreakable = 1, not_in_creative_inventory = maptools.creative},
+	sounds = default.node_sound_stone_defaults(),
+	range = 12,
+	stack_max = 10000,
+	drop = "",
+	node_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, 0, 0.5},
+	},
+	on_place = function(itemstack, placer, pointed_thing)
+		if pointed_thing.type ~= "node" then
+			return itemstack
+		end
+
+		-- If it's being placed on an another similar one, replace it with
+		-- a full block
+		local slabpos = nil
+		local slabnode = nil
+		local p0 = pointed_thing.under
+		local p1 = pointed_thing.above
+		local n0 = minetest.get_node(p0)
+		local n1 = minetest.get_node(p1)
+		local param2 = 0
+			local n0_is_upside_down = (n0.name == "stairs:slab_stonebrick" and
+				n0.param2 >= 20)
+			if n0.name == "stairs:slab_stonebrick" and not n0_is_upside_down and
+				p0.y + 1 == p1.y then
+			slabpos = p0
+			slabnode = n0
+		elseif n1.name == "stairs:slab_stonebrick" then
+			slabpos = p1
+			slabnode = n1
+		end
+		if slabpos then
+			-- Remove the slab at slabpos
+			minetest.remove_node(slabpos)
+			-- Make a fake stack of a single item and try to place it
+			local fakestack = ItemStack(recipeitem)
+			fakestack:set_count(itemstack:get_count())
+				pointed_thing.above = slabpos
+			local success
+			fakestack, success = minetest.item_place(fakestack, placer,
+				pointed_thing)
+			-- If the item was taken from the fake stack, decrement original
+			if success then
+				itemstack:set_count(fakestack:get_count())
+			-- Else put old node back
+			else
+				minetest.set_node(slabpos, slabnode)
+			end
+			return itemstack
+		end
+		
+		-- Upside down slabs
+		if p0.y - 1 == p1.y then
+			-- Turn into full block if pointing at a existing slab
+			if n0_is_upside_down  then
+				-- Remove the slab at the position of the slab
+				minetest.remove_node(p0)
+				-- Make a fake stack of a single item and try to place it
+				local fakestack = ItemStack(recipeitem)
+				fakestack:set_count(itemstack:get_count())
+					pointed_thing.above = p0
+				local success
+				fakestack, success = minetest.item_place(fakestack, placer,
+					pointed_thing)
+				-- If the item was taken from the fake stack, decrement original
+				if success then
+					itemstack:set_count(fakestack:get_count())
+				-- Else put old node back
+				else
+					minetest.set_node(p0, n0)
+				end
+				return itemstack
+			end
+				-- Place upside down slab
+			param2 = 20
+		end
+		-- If pointing at the side of a upside down slab
+		if n0_is_upside_down and p0.y + 1 ~= p1.y then
+			param2 = 20
+		end
+		return minetest.item_place(itemstack, placer, pointed_thing, param2)
+	end,
+})

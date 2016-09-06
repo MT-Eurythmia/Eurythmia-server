@@ -125,20 +125,6 @@ minetest.register_node("maptools:glass", {
 	sounds = default.node_sound_glass_defaults(),
 })
 
-minetest.register_node("maptools:obsidian_glass", {
-	description = S("Unbreakable Obsidian Glass"),
-	drawtype = "glasslike_framed_optional",
-	tiles = {"default_obsidian_glass.png", "default_obsidian_glass_detail.png"},
-	paramtype = "light",
-	is_ground_content = false,
-	sunlight_propagates = true,
-	sounds = default.node_sound_glass_defaults(),
-	range = 12,
-	stack_max = 10000,
-	drop = "",
-	groups = {unbreakable = 1, not_in_creative_inventory = maptools.creative},
-})
-
 minetest.register_node("maptools:leaves", {
 	description = S("Unbreakable Leaves"),
 	range = 12,

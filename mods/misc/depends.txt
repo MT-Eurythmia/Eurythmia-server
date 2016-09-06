@@ -6,3 +6,4 @@ fishing
 mobs
 bucket
 areas
+maptools
