@@ -7,3 +7,22 @@
 [submodule "mods/metatools"]
 	path = mods/metatools
 	url = https://github.com/LeMagnesium/minetest-mod-metatools.git
+[submodule "mods/xban2"]
+	path = mods/xban2
+	url = https://github.com/paly2/xban2.git
+	branch = whitelist
+[submodule "mods/WorldEdit"]
+	path = mods/WorldEdit
+	url = https://github.com/Uberi/Minetest-WorldEdit.git
+[submodule "mods/areas"]
+	path = mods/areas
+	url = https://github.com/ShadowNinja/areas.git
+[submodule "mods/chesttools"]
+	path = mods/chesttools
+	url = https://github.com/Sokomine/chesttools.git
+[submodule "mods/email"]
+	path = mods/email
+	url = https://github.com/rubenwardy/email.git
+[submodule "mods/fishing"]
+	path = mods/fishing
+	url = https://github.com/MinetestForFun/fishing.git
