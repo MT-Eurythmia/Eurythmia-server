@@ -60,6 +60,25 @@ minetest.register_craft({
 	recipe = {"default:cobble", "default:dirt"}
 })
 
+-- Ice and snow
+minetest.register_craft({
+	output = "default:ice 3",
+	-- The recipe is an ice skate
+	recipe = {
+		{"default:cobble", "", ""},
+		{"", "default:cobble", "default:cobble"},
+	}
+})
+minetest.register_craft({
+	output = "default:snowblock 6",
+	-- The recipe is an ice skate on ice
+	recipe = {
+		{"default:cobble", "", ""},
+		{"", "default:cobble", "default:cobble"},
+		{"default:ice", "default:ice", "default:ice"},
+	}
+})
+
 -- saplings
 minetest.register_craft({
 	output = "default:sapling",
