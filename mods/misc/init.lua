@@ -162,7 +162,7 @@ minetest.override_item("bucket:bucket_lava", {
 			minetest.log("action", (name ~= "" and name or "A mod") .. " tried to place a lava bucket at an unprotected position")
 			return
 		end
-		old_bucket_lava_on_place(itemstack, user, pointed_thing)
+		return old_bucket_lava_on_place(itemstack, user, pointed_thing)
 	end
 })
 
