@@ -105,3 +105,4 @@ load_mod_report = true
 load_mod_email = true
 load_mod_metatools = true
 load_mod_chesttools = true
+load_mod_treecapitor = true

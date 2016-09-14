@@ -26,3 +26,6 @@
 [submodule "mods/fishing"]
 	path = mods/fishing
 	url = https://github.com/MinetestForFun/fishing.git
+[submodule "mods/treecapitator"]
+	path = mods/treecapitator
+	url = https://github.com/HybridDog/treecapitator.git
