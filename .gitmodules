@@ -29,3 +29,6 @@
 [submodule "mods/treecapitator"]
 	path = mods/treecapitator
 	url = https://github.com/HybridDog/treecapitator.git
+[submodule "mods/maptools"]
+	path = mods/maptools
+	url = https://github.com/minetest-mods/maptools.git
