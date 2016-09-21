@@ -7,3 +7,4 @@ mobs
 bucket
 areas
 maptools
+stairs
