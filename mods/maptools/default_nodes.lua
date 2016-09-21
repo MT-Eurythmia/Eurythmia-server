@@ -9,7 +9,6 @@ local S = maptools.intllib
 
 maptools.creative = maptools.config["hide_from_creative_inventory"]
 
---[[ Stone ]]--
 minetest.register_node("maptools:stone", {
 	description = S("Unbreakable Stone"),
 	range = 12,
@@ -20,15 +19,6 @@ minetest.register_node("maptools:stone", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
--- stairs:stair_stone_u  et  stairs:slab_stone_u
-stairs.register_stair_and_slab("stone_u", "default:stone",
-		{unbreakable = 1, not_in_creative_inventory = maptools.creative},
-		{"default_stone.png"},
-		"Unbreakable Stone Stair",
-		"Unbreakable Stone Slab",
-		default.node_sound_stone_defaults())
-
---[[ Stonebrick ]]--
 minetest.register_node("maptools:stonebrick", {
 	description = S("Unbreakable Stone Brick"),
 	range = 12,
@@ -38,14 +28,6 @@ minetest.register_node("maptools:stonebrick", {
 	groups = {unbreakable = 1, not_in_creative_inventory = maptools.creative},
 	sounds = default.node_sound_stone_defaults(),
 })
-
--- stairs:stair_stonebrick_u  et  stairs:slab_stonebrick_u
-stairs.register_stair_and_slab("stonebrick_u", "default:stonebrick",
-		{unbreakable = 1, not_in_creative_inventory = maptools.creative},
-		{"default_stone_brick.png"},
-		"Unbreakable Stone Brick Stair",
-		"Unbreakable Stone Brick Slab",
-		default.node_sound_stone_defaults())
 
 minetest.register_node("maptools:tree", {
 	description = S("Unbreakable Tree"),
@@ -302,14 +284,6 @@ minetest.register_node("maptools:cobble", {
 	groups = {unbreakable = 1, not_in_creative_inventory = maptools.creative},
 	sounds = default.node_sound_stone_defaults(),
 })
-
--- stairs:stair_cobble_u  et  stairs:slab_cobble_u
-stairs.register_stair_and_slab("cobble_u", "default:cobble",
-		{unbreakable = 1, not_in_creative_inventory = maptools.creative},
-		{"default_cobble.png"},
-		"Unbreakable Cobblestone Stair",
-		"Unbreakable Cobblestone Slab",
-		default.node_sound_stone_defaults())
 
 minetest.register_node("maptools:mossycobble", {
 	description = S("Unbreakable Mossy Cobblestone"),
