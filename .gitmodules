@@ -32,3 +32,6 @@
 [submodule "mods/maptools"]
 	path = mods/maptools
 	url = https://github.com/minetest-mods/maptools.git
+[submodule "games/minetest_game"]
+	path = games/minetest_game
+	url = https://github.com/minetest/minetest_game.git
