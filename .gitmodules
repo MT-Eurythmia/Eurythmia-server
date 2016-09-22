@@ -38,3 +38,6 @@
 [submodule "mods/mapfix"]
 	path = mods/mapfix
 	url = https://github.com/minetest-mods/mapfix.git
+[submodule "mods/signs_lib"]
+	path = mods/signs_lib
+	url = https://github.com/minetest-mods/signs_lib.git
