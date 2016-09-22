@@ -35,3 +35,6 @@
 [submodule "games/minetest_game"]
 	path = games/minetest_game
 	url = https://github.com/minetest/minetest_game.git
+[submodule "mods/mapfix"]
+	path = mods/mapfix
+	url = https://github.com/minetest-mods/mapfix.git
