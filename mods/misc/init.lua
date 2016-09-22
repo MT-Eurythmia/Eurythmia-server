@@ -195,7 +195,7 @@ minetest.register_node(":maptools:obsidian_glass", {
 	drop = "",
 	groups = {unbreakable = 1, not_in_creative_inventory = maptools.creative},
 })
-local function register_stair_and_slab_maptools(name, description, tiles)
+local function register_stair_and_slab_maptools(name, description, tiles, sounds)
 	minetest.register_node(":maptools:slab_"..name, {
 		description = "Unbreakable "..description.." Slab",
 		drawtype = "nodebox",
@@ -204,6 +204,7 @@ local function register_stair_and_slab_maptools(name, description, tiles)
 		paramtype2 = "facedir",
 		is_ground_content = false,
 		groups = {unbreakable = 1, not_in_creative_inventory = maptools.creative},
+		sounds = sounds,
 		range = 12,
 		stack_max = 10000,
 		drop = "",
@@ -220,6 +221,7 @@ local function register_stair_and_slab_maptools(name, description, tiles)
 		paramtype2 = "facedir",
 		is_ground_content = false,
 		groups = {unbreakable = 1, not_in_creative_inventory = maptools.creative},
+		sounds = sounds,
 		range = 12,
 		stack_max = 10000,
 		drop = "",
@@ -241,6 +243,6 @@ local function register_stair_and_slab_maptools(name, description, tiles)
 		}
 	})
 end
-register_stair_and_slab_maptools("stonebrick", "Stone Brick", "default_stone_brick.png")
-register_stair_and_slab_maptools("stone", "Stone", "default_stone.png")
-register_stair_and_slab_maptools("cobble", "Cobblestone", "default_cobble.png")
+register_stair_and_slab_maptools("stonebrick", "Stone Brick", "default_stone_brick.png", default.node_sound_stone_defaults())
+register_stair_and_slab_maptools("stone", "Stone", "default_stone.png", default.node_sound_stone_defaults())
+register_stair_and_slab_maptools("cobble", "Cobblestone", "default_cobble.png", default.node_sound_stone_defaults())
