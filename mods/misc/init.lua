@@ -246,3 +246,20 @@ end
 register_stair_and_slab_maptools("stonebrick", "Stone Brick", "default_stone_brick.png", default.node_sound_stone_defaults())
 register_stair_and_slab_maptools("stone", "Stone", "default_stone.png", default.node_sound_stone_defaults())
 register_stair_and_slab_maptools("cobble", "Cobblestone", "default_cobble.png", default.node_sound_stone_defaults())
+
+--[[
+Screwdriver: do not rotate unbreakable nodes
+]]
+local old_screwdriver_handler = screwdriver.handler
+screwdriver.handler = function(itemstack, user, pointed_thing, mode, uses)
+	if pointed_thing.type ~= "node" then
+		return
+	end
+
+	local under_node = minetest.get_node(pointed_thing.under)
+	if minetest.get_item_group(under_node.name, "unbreakable") ~= 0 then
+		return
+	end
+
+	return old_screwdriver_handler(itemstack, user, pointed_thing, mode, uses)
+end
