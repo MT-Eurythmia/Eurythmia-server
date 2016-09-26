@@ -263,3 +263,14 @@ screwdriver.handler = function(itemstack, user, pointed_thing, mode, uses)
 
 	return old_screwdriver_handler(itemstack, user, pointed_thing, mode, uses)
 end
+
+--[[
+Farming: temporary LBM to replace unknown farming_plus:cocoa_sapling by air.
+]]
+minetest.register_lbm({
+	name = "misc:cocoa_replacement",
+	nodenames = {"farming_plus:cocoa_sapling"},
+	action = function(pos, node)
+		minetest.set_node(pos, {name = "air:air"})
+	end,
+})
