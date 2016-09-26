@@ -74,7 +74,6 @@ load_mod_signs_lib = true
 load_mod_irc = true
 load_mod_throwing = true
 load_mod_farming = true
-load_mod_farming_plus = true
 load_mod_track_players = true
 load_mod_xdecor = true
 load_mod_maptools = true
