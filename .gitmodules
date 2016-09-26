@@ -49,4 +49,4 @@
 	url = https://github.com/SmallJoker/boost_cart.git
 [submodule "mods/farming"]
 	path = mods/farming
-	url = https://github.com/tenplus1/farming.git
+	url = https://github.com/paly2/farming.git
