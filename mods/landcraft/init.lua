@@ -121,3 +121,17 @@ minetest.register_craft({
 	}
 })
 
+-- Grasses
+minetest.register_craft({
+	output = "default:dry_grass_1",
+	recipe = {
+		{"default:grass_1"}
+	}
+})
+
+minetest.register_craft({
+	output = "default:dry_shrub",
+	recipe = {
+		{"default:dry_grass_1"}
+	}
+})
