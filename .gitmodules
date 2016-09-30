@@ -7,10 +7,6 @@
 [submodule "mods/metatools"]
 	path = mods/metatools
 	url = https://github.com/LeMagnesium/minetest-mod-metatools.git
-[submodule "mods/xban2"]
-	path = mods/xban2
-	url = https://github.com/paly2/xban2.git
-	branch = whitelist
 [submodule "mods/WorldEdit"]
 	path = mods/WorldEdit
 	url = https://github.com/Uberi/Minetest-WorldEdit.git
