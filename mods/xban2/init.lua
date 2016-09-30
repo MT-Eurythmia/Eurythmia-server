@@ -2,6 +2,7 @@
 xban = { MP = minetest.get_modpath(minetest.get_current_modname()) }
 
 dofile(xban.MP.."/serialize.lua")
+dofile(xban.MP.."/html_writer.lua")
 
 local db = { }
 db.whitelist = { }
@@ -110,6 +111,7 @@ function xban.ban_player(player, source, expires, reason) --> bool, err
 	for nm in pairs(e.names) do
 		minetest.kick_player(nm, msg)
 	end
+	xban.write_hos(db) -- update Hall of Shame
 	ACTION("%s bans %s until %s for reason: %s", source, player,
 	  date, reason)
 	ACTION("Banned Names/IPs: %s", table.concat(e.names, ", "))
@@ -131,6 +133,7 @@ function xban.unban_player(player, source) --> bool, err
 	e.reason = nil
 	e.expires = nil
 	e.time = nil
+	xban.write_hos(db) -- update Hall of Shame
 	ACTION("%s unbans %s", source, player)
 	ACTION("Unbanned Names/IPs: %s", table.concat(e.names, ", "))
 	return true
@@ -355,6 +358,7 @@ local function check_temp_bans()
 	end
 	for _, i in ipairs(to_rm) do
 		table.remove(tempbans, i)
+		xban.write_hos(db) -- update Hall of Shame
 	end
 end
 
@@ -407,7 +411,7 @@ minetest.register_on_shutdown(save_db)
 minetest.after(SAVE_INTERVAL, save_db)
 load_db()
 xban.db = db
-
+xban.write_hos(db)
 minetest.after(1, check_temp_bans)
 
 dofile(xban.MP.."/dbimport.lua")
