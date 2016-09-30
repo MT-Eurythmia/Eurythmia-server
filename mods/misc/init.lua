@@ -271,6 +271,6 @@ minetest.register_lbm({
 	name = "misc:cocoa_replacement",
 	nodenames = {"farming_plus:cocoa_sapling"},
 	action = function(pos, node)
-		minetest.set_node(pos, {name = "air:air"})
+		minetest.set_node(pos, {name = "air"})
 	end,
 })
