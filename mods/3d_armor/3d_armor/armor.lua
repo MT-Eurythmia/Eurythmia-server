@@ -163,7 +163,7 @@ armor.set_player_armor = function(self, player)
 		if stack:get_count() == 1 then
 			local def = stack:get_definition()
 			for k, v in pairs(elements) do
-				if v == false then
+				if v == false and items < 5 then
 					local level = def.groups["armor_"..k]
 					if level then
 						local texture = def.texture or item:gsub("%:", "_")
@@ -534,7 +534,7 @@ minetest.register_on_player_hpchange(function(player, hp_change)
 		local items = 0
 		for i=1, 6 do
 			local stack = player_inv:get_stack("armor", i)
-			if stack:get_count() > 0 then
+			if stack:get_count() > 0 and items < 5 then
 				local use = stack:get_definition().groups["armor_use"] or 0
 				local heal = stack:get_definition().groups["armor_heal"] or 0
 				local item = stack:get_name()
