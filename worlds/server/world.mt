@@ -106,4 +106,4 @@ load_mod_metatools = true
 load_mod_chesttools = true
 load_mod_treecapitator = true
 load_mod_boost_cart = true
-load_mod_mods = false
+load_mod_mesecons_wires = true
