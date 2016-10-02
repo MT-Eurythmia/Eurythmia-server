@@ -52,3 +52,6 @@
 [submodule "mods/markers"]
 	path = mods/markers
 	url = https://github.com/Sokomine/markers
+[submodule "mods/moreores"]
+	path = mods/moreores
+	url = https://github.com/minetest-mods/moreores
