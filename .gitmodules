@@ -49,3 +49,6 @@
 [submodule "mods/jumping"]
 	path = mods/jumping
 	url = https://github.com/Jeija/minetest-mod-jumping/
+[submodule "mods/markers"]
+	path = mods/markers
+	url = https://github.com/Sokomine/markers
