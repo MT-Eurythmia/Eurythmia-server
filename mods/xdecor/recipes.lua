@@ -192,9 +192,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "xdecor:iron_lightbox",
 	recipe = {
-		{"xpanes:bar", "default:torch", "xpanes:bar"},
-		{"xpanes:bar", "default:glass", "xpanes:bar"},
-		{"xpanes:bar", "default:torch", "xpanes:bar"}
+		{"xpanes:bar_flat", "default:torch", "xpanes:bar_flat"},
+		{"xpanes:bar_flat", "default:glass", "xpanes:bar_flat"},
+		{"xpanes:bar_flat", "default:torch", "xpanes:bar_flat"}
 	}
 })
 
