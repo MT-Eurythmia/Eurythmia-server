@@ -6,6 +6,6 @@ Addresse: paly2.ddns.net
 Port: 30000
 
 IRC:
-Serveur: irc.inchra.net
-Port: 6667
+Serveur: irc.daconcepts.com
+Port: 6697 (ssl)
 Canal: #mynetest
