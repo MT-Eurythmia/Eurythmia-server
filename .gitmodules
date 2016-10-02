@@ -55,3 +55,6 @@
 [submodule "mods/moreores"]
 	path = mods/moreores
 	url = https://github.com/minetest-mods/moreores
+[submodule "mods/sprint"]
+	path = mods/sprint
+	url = https://github.com/GunshipPenguin/sprint
