@@ -278,7 +278,7 @@ minetest.register_lbm({
 --[[
 Boost cart: allow power rails to work without mesecons.
 ]]
-minetest.override_item(":carts:powerrail", {
+minetest.override_item("carts:powerrail", {
 	after_place_node = function(pos, placer, itemstack)
 		minetest.get_meta(pos):set_string("cart_acceleration", "0.5")
 	end,
