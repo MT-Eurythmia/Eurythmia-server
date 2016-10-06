@@ -9,3 +9,4 @@ areas
 maptools
 stairs
 screwdriver
+boost_cart
