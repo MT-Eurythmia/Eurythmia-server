@@ -33,7 +33,7 @@ Mapgen: add all mt_game tress to the mapgen
 local old_register_mgv6_decorations = default.register_mgv6_decorations
 function default.register_mgv6_decorations()
 	old_register_mgv6_decorations()
-	
+
 	-- Aspen tree: everywhere
 	minetest.register_decoration({
 		deco_type = "schematic",
@@ -105,14 +105,14 @@ minetest.register_chatcommand("ip", {
 		if not player then
 			return false, "Invalid usage"
 		end
-		
+
 		if not ipnames.data[player] then
 			minetest.chat_send_player(name, "The player '"..player.."' did not join yet.")
 			return
 		end
-		
+
 		local ip = ipnames.data[player][1]
-		
+
 		return true, ip
 	end,
 })
@@ -243,6 +243,7 @@ local function register_stair_and_slab_maptools(name, description, tiles, sounds
 		}
 	})
 end
+register_stair_and_slab_maptools("sandstonebrick", "Sandstone Brick", "default_sandstone_brick.png", default.node_sound_stone_defaults())
 register_stair_and_slab_maptools("stonebrick", "Stone Brick", "default_stone_brick.png", default.node_sound_stone_defaults())
 register_stair_and_slab_maptools("stone", "Stone", "default_stone.png", default.node_sound_stone_defaults())
 register_stair_and_slab_maptools("cobble", "Cobblestone", "default_cobble.png", default.node_sound_stone_defaults())
