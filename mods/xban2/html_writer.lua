@@ -22,7 +22,7 @@ function xban.write_hos(db)
 	local s = head
 	for index, e in ipairs(db) do
 		if e.banned then
-			s = s .. "<li>"
+			s = s .. "        <li><strong>"
 			for name in pairs(e.names) do
 				if not name:match("^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$") then -- Do not print IPs. TODO: IPv6 regex
 					if next(e.names, name) then
@@ -34,7 +34,7 @@ function xban.write_hos(db)
 			end
 			local date = (e.expires and os.date("%c", e.expires)
 			  or "the end of time")
-			s = s .. ": banned for " .. e.reason .. " until " .. date .. ".</li>\n"
+			s = s .. "</strong>: banned for <em>" .. e.reason .. "</em> until " .. date .. ".</li>\n"
 		end
 	end
 
