@@ -266,17 +266,6 @@ screwdriver.handler = function(itemstack, user, pointed_thing, mode, uses)
 end
 
 --[[
-Farming: temporary LBM to replace unknown farming_plus:cocoa_sapling by air.
-]]
-minetest.register_lbm({
-	name = "misc:cocoa_replacement",
-	nodenames = {"farming_plus:cocoa_sapling"},
-	action = function(pos, node)
-		minetest.set_node(pos, {name = "air"})
-	end,
-})
-
---[[
 Boost cart: allow power rails to work without mesecons.
 ]]
 minetest.override_item("carts:powerrail", {
