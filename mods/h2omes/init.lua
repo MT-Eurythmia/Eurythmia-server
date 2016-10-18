@@ -6,16 +6,17 @@ minetest.mkdir(h2omes.path)
 local tmp_players = {}
 local from_players = {}
 
-h2omes.have_nether = false -- nether mod
-if (minetest.get_modpath("nether") ~= nil) then
-	h2omes.have_nether = true
-end
-
 
 function h2omes.check(name)
 	if h2omes.homes[name] == nil then
-		h2omes.homes[name] = {["home"] = {}, ["pit"] = {}}
+		h2omes.homes[name] = {}
 	end
+end
+
+
+--function check_privs
+function h2omes.check_privs(name)
+	return minetest.check_player_privs(name, {home=true})
 end
 
 
@@ -42,38 +43,14 @@ function h2omes.load_homes(name)
 		io.close(input)
 		if data and type(data) == "table" then
 			if data.home then
-				if data.home.real then
-					h2omes.homes[name].home.real = data.home.real
-				end
-				if data.home.nether then
-					h2omes.homes[name].home.nether = data.home.nether
-				end
+				h2omes.homes[name].home = data.home
 			end
 			if data.pit then
-				if data.pit.real  then
-					h2omes.homes[name].pit.real = data.pit.real
-				end
-				if data.pit.nether then
-					h2omes.homes[name].pit.nether = data.pit.nether
-				end
+				h2omes.homes[name].pit = data.pit
 			end
 		end
 	end
 end
-
--- disallowed tp real-->nether or nether-->real
-function h2omes.can_teleport(from_pos, to_pos)
-	if not h2omes.have_nether then -- not nether mod, -19600 is real
-		return true
-	end
-	if from_pos.y < -19600 and to_pos.y < -19600 then
-		return true
-	elseif from_pos.y > -19600 and to_pos.y > -19600 then
-		return true
-	end
-	return false
-end
-
 
 --function set_homes
 function h2omes.set_home(name, home_type, pos)
@@ -84,11 +61,13 @@ function h2omes.set_home(name, home_type, pos)
 		pos = player:getpos()
 	end
 	if not pos then return false end
-	if pos.y < -19600 and h2omes.have_nether then
-		h2omes.homes[name][home_type].nether = pos
-	else
-		h2omes.homes[name][home_type].real = pos
+	if minetest.is_protected(pos, name) then
+		return false
 	end
+	if not h2omes.check_privs(name) then
+		return false
+	end
+	h2omes.homes[name][home_type] = pos
 	minetest.chat_send_player(name, home_type.." set!")
 	minetest.sound_play("dingdong",{to_player=name, gain = 1.0})
 	h2omes.save_homes(name)
@@ -103,12 +82,8 @@ function h2omes.get_home(name, home_type)
 	if not player then return nil end
 	local pos = player:getpos()
 	if not pos then return nil end
-	local status = "real"
-	if pos.y < -19600 and h2omes.have_nether then
-		status = "nether"
-	end
-	if h2omes.homes[name][home_type][status] then
-		return h2omes.homes[name][home_type][status]
+	if h2omes.homes[name][home_type] then
+		return h2omes.homes[name][home_type]
 	end
 	return nil
 end
@@ -120,11 +95,7 @@ function h2omes.getspawn(name)
 	local pos = player:getpos()
 	if not pos then return nil end
 	local spawn_pos
-	if pos.y < -19600 and h2omes.have_nether then
-		spawn_pos = minetest.string_to_pos(minetest.setting_get("nether_static_spawnpoint") or "")
-	elseif minetest.setting_get_pos("static_spawnpoint") then
-		spawn_pos = minetest.setting_get_pos("static_spawnpoint")
-	end
+	spawn_pos = minetest.setting_get_pos("static_spawnpoint")
 	return spawn_pos
 end
 
@@ -133,6 +104,9 @@ end
 function h2omes.to_spawn(name)
 	local player = minetest.get_player_by_name(name)
 	if not player then return false end
+	if not h2omes.check_privs(name) then
+		return false
+	end
 	local spawn_pos = h2omes.getspawn(name)
 	if spawn_pos then
 		minetest.chat_send_player(name, "Teleporting to spawn...")
@@ -152,14 +126,13 @@ function h2omes.to_home(name, home_type)
 	h2omes.check(name)
 	local player = minetest.get_player_by_name(name)
 	if not player then return false end
+	if not h2omes.check_privs(name) then
+		return false
+	end
 	local pos = player:getpos()
 	if not pos then return false end
-	local status = "real"
-	if pos.y < -19600 and h2omes.have_nether then
-		status = "nether"
-	end
-	if h2omes.homes[name][home_type][status] then
-		player:setpos(h2omes.homes[name][home_type][status])
+	if h2omes.homes[name][home_type] then
+		player:setpos(h2omes.homes[name][home_type])
 		minetest.chat_send_player(name, "Teleported to "..home_type.."!")
 		minetest.sound_play("teleport", {to_player=name, gain = 1.0})
 		return true
@@ -172,17 +145,15 @@ end
 function h2omes.to_player(name, to_pos, to_name)
 	local player = minetest.get_player_by_name(name)
 	if not player then return false end
+	if not h2omes.check_privs(name) then
+		return false
+	end
 	local from_pos = player:getpos()
 	if to_pos then
-		if h2omes.can_teleport(from_pos, to_pos) then
-			minetest.chat_send_player(name, "Teleporting to player "..to_name)
-			player:setpos(to_pos)
-			minetest.sound_play("teleport", {to_player=name, gain = 1.0})
-			return true
-		else
-			minetest.chat_send_player(name, "Sorry, teleport between 2 worlds(real/nether) is not allowed!")
-			return false
-		end
+		minetest.chat_send_player(name, "Teleporting to player "..to_name)
+		player:setpos(to_pos)
+		minetest.sound_play("teleport", {to_player=name, gain = 1.0})
+		return true
 	else
 		minetest.chat_send_player(name, "ERROR: No position to player!")
 		return false
@@ -201,6 +172,9 @@ end
 function h2omes.send_pos_to_player(name, pos, to_name)
 	local player = minetest.get_player_by_name(to_name)
 	if not player or not pos then return false end
+	if not h2omes.check_privs(name) then
+		return false
+	end
 	if h2omes.update_pos(to_name, pos, name) then
 		minetest.chat_send_player(name, "Your position has been sent to "..to_name)
 		return true
