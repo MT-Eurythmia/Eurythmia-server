@@ -25,11 +25,7 @@ function xban.write_hos(db)
 			s = s .. "        <li><strong>"
 			for name in pairs(e.names) do
 				if not name:match("^[0-9]+%.[0-9]+%.[0-9]+%.[0-9]+$") then -- Do not print IPs. TODO: IPv6 regex
-					if next(e.names, name) then
-						s = s .. name .. "/"
-					else
-						s = s .. name
-					end
+					s = s .. name .. "/"
 				end
 			end
 			local date = (e.expires and os.date("%c", e.expires)
