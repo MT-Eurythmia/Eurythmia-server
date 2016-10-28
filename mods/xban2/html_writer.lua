@@ -24,7 +24,7 @@ function xban.write_hos(db)
 		if e.banned then
 			s = s .. "        <li><strong>"
 			for name in pairs(e.names) do
-				if not name:match("^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$") then -- Do not print IPs. TODO: IPv6 regex
+				if not name:match("^[0-9]+%.[0-9]+%.[0-9]+%.[0-9]+$") then -- Do not print IPs. TODO: IPv6 regex
 					if next(e.names, name) then
 						s = s .. name .. "/"
 					else
