@@ -1,13 +1,13 @@
 #!/bin/bash
 
 ### Running MTSatellite
-SATPATH="/home/administrateur/.minetest/mtsatellite"
+SATPATH="/home/minetest/mtsatellite"
 export GOROOT=$SATPATH/go
 export GOPATH=$SATPATH/gopath
 
-LOGFILE="/home/administrateur/.minetest/mtsatellite_log.txt"
+LOGFILE="/home/minetest/mtsatellite_log.txt"
 
-$GOPATH/bin/mtredisalize -host=localhost -interleaved=true -change-url=http://localhost:8808/update -change-duration=60s /home/administrateur/.minetest/worlds/server/map.db >> $LOGFILE 2>&1 &
+$GOPATH/bin/mtredisalize -host=localhost -interleaved=true -change-url=http://localhost:8808/update -change-duration=60s /home/minetest/.minetest/worlds/server/map.db >> $LOGFILE 2>&1 &
 
 sleep 1
 
@@ -17,8 +17,7 @@ sleep 1
 
 ### Running the server	
 while [ true ]; do
-	
-	/home/administrateur/minetest/bin/minetestserver
+	/home/minetest/minetest/bin/minetestserver
 	if [ $? = 0 ]; then # Normal quit : Maybe the admin pressed Ctrl+C. Wait before restarting.
 		exit
 	else
@@ -27,6 +26,6 @@ while [ true ]; do
 	fi
 	
 	# Run again mtredisalize (it stops automatically)
-	$GOPATH/bin/mtredisalize -host=localhost -interleaved=true -change-url=http://localhost:8808/update -change-duration=60s /home/administrateur/.minetest/worlds/server/map.db >> $LOGFILE 2>&1 &
+	$GOPATH/bin/mtredisalize -host=localhost -interleaved=true -change-url=http://localhost:8808/update -change-duration=60s /home/minetest/.minetest/worlds/server/map.db >> $LOGFILE 2>&1 &
 	sleep 1
 done
