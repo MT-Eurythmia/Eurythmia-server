@@ -12,17 +12,23 @@ minetest.register_craft({
 	}
 })
 
--- sand <-> desert_sand
+-- sand --> desert_sand --> silver_sand --> sand
 minetest.register_craft({
-	output = "default:sand",
+	output = "default:desert_sand",
+	recipe = {
+		{"default:sand"},
+	}
+})
+minetest.register_craft({
+	output = "default:silver_sand",
 	recipe = {
 		{"default:desert_sand"},
 	}
 })
 minetest.register_craft({
-	output = "default:desert_sand",
+	output = "default:sand",
 	recipe = {
-		{"default:sand"},
+		{"default:silver_sand"},
 	}
 })
 
