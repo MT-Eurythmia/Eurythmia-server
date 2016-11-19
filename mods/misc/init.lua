@@ -280,3 +280,8 @@ minetest.override_item("carts:powerrail", {
 		}
 	}
 })
+
+--[[
+Markers: increase MAX_SIZE to 64*64
+]]
+markers.MAX_SIZE = 64 * 64
