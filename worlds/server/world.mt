@@ -113,3 +113,4 @@ load_mod_MoreMesecons = false
 load_mod_WorldEdit = false
 load_mod_irc_modpack = false
 load_mod_autoshutdown = true
+load_mod_autocrafter = true
