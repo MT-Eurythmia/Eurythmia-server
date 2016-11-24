@@ -376,7 +376,7 @@ minetest.register_craft( {
 	output = "autocrafter:autocrafter 2",
 	recipe = {
 	        { "default:steel_ingot", "default:mese_crystal", "default:steel_ingot" },
-	        { "homedecor:plastic_sheeting", "default:steel_ingot", "homedecor:plastic_sheeting" },
+	        { "", "xdecor:workbench", "" },
 	        { "default:steel_ingot", "default:mese_crystal", "default:steel_ingot" }
 	},
 })
