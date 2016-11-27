@@ -48,17 +48,15 @@ minetest.register_craft({
 -- Otherwise uncraftable landscape blocks
 minetest.register_craft({
 	output = "default:dirt_with_dry_grass 6",
-	type = "shapeless",
 	recipe = {
-	  {"", "default:dry_grass_1", ""},
-	  {"default:dirt", "default:dirt", "default:dirt"},
-	  {"default:dirt", "default:dirt", "default:dirt"},
-  }
+		{"", "default:dry_grass_1", ""},
+		{"default:dirt", "default:dirt", "default:dirt"},
+		{"default:dirt", "default:dirt", "default:dirt"},
+	}
 })
 
 minetest.register_craft({
 	output = "default:dirt_with_grass 6",
-	type = "shapeless",
 	recipe = {
 		{"", "default:grass_1", ""},
 		{"default:dirt", "default:dirt", "default:dirt"},
