@@ -10,7 +10,7 @@ db.whitelist = { }
 local tempbans = { }
 
 local DEF_SAVE_INTERVAL = 300 -- 5 minutes
-local DEF_DB_FILENAME = minetest.get_worldpath().."xban.db"
+local DEF_DB_FILENAME = minetest.get_worldpath().."/xban.db"
 
 local DB_FILENAME = minetest.setting_get("xban.db_filename")
 local SAVE_INTERVAL = tonumber(
