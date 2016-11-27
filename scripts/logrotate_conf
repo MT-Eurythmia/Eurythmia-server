@@ -1,0 +1,11 @@
+/home/minetest/.minetest/debug.txt {
+	weekly
+	rotate 10
+	compress
+	delaycompress
+	missingok
+	notifempty
+	create 644 minetest minetest
+	size 100MB
+	olddir /home/minetest/.minetest/debug_old/
+}
