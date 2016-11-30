@@ -26,7 +26,7 @@ local function begin_game_english(name)
 
 	minetest.register_on_chat_message(function(name, message)
 		if message == "341C" then
-			if played_300s[name] ~ nil then
+			if played_300s[name] ~= nil then
 				local privs = minetest.get_player_privs(name)
 				privs.interact = true
 				minetest.set_player_privs(name, privs)
@@ -84,7 +84,7 @@ local function begin_game_french(name)
 
 	minetest.register_on_chat_message(function(name, message)
 		if message == "341C" then
-			if played_300s[name] ~ nil then
+			if played_300s[name] ~= nil then
 				local privs = minetest.get_player_privs(name)
 				privs.interact = true
 				minetest.set_player_privs(name, privs)
