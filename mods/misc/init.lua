@@ -114,13 +114,16 @@ minetest.register_chatcommand("ip", {
 
 --[[
 XDecor chair: avoid "flying" usebug
-]]
+
+let's give it a try again. It's cool to sit !
+
 minetest.override_item("xdecor:chair", {
 	on_rightclick = function() end
 })
 minetest.override_item("xdecor:cushion", {
 	on_rightclick = function() end
 })
+]]
 
 --[[
 Fishing baitball: change its craft
@@ -262,24 +265,28 @@ end
 
 --[[
 Boost cart: allow power rails to work without mesecons.
+We'll allow the new minetest_game/mods/carts which is basically boost_cart
+or allow the boost_cart mod. One or another has to be loaded (optional dependency)
 ]]
-minetest.override_item("carts:powerrail", {
-	after_place_node = function(pos, placer, itemstack)
-		minetest.get_meta(pos):set_string("cart_acceleration", "0.5")
-	end,
+if minetest.get_modpath("carts") or minetest.get_modpath("boost_cart") then
+	minetest.override_item("carts:powerrail", {
+		after_place_node = function(pos, placer, itemstack)
+			minetest.get_meta(pos):set_string("cart_acceleration", "0.5")
+		end,
 
-	mesecons = {
-		effector = {
-			action_on = function(pos, node)
-				return
-			end,
+		mesecons = {
+			effector = {
+				action_on = function(pos, node)
+					return
+				end,
 
-			action_off = function(pos, node)
-				return
-			end
+				action_off = function(pos, node)
+					return
+				end
+			}
 		}
-	}
-})
+	})
+end
 
 --[[
 Markers: increase MAX_SIZE to 64*64
