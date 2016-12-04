@@ -54,6 +54,22 @@ minetest.register_on_joinplayer(function(player)
 		meta:set_string("infotext", "These rules apply for all and if you accept these rules then you can play on our server. The interract privilege will only be given to you after you have read these rules and if you write "..THECODE.." in the chat and have at least played "..PLAY_ENOUGH_MINUTES.." minutes here.")
 		meta:set_string("text", "#0 These rules apply for all and if you accept these rules then you can play on our server. The interract privilege will only be given to you after you have read these rules and if you write #6"..THECODE.." #0in the chat and have at least played #6"..PLAY_ENOUGH_MINUTES.." #0minutes here.")
 	end
+
+	-- Show formspec to player if he has not interact and is not in the players table
+	local name = player:get_player_name()
+	for _, player in ipairs(players) do
+		if player == name then
+			return
+		end
+	end
+	if minetest.get_player_privs(name).interact then
+		return
+	end
+
+	local formspec = "size[5,1.5;]"..
+		         "label[0,0;Merci de choisir votre langue.\nPlease choose your preferred language.]"..
+		         "button[0,1;2,1;fr;Français]button[2,1;2,1;en;English]"
+	minetest.show_formspec(name, "first_hour:language_select", formspec)
 end)
 
 
@@ -179,20 +195,6 @@ local function begin_game_french(name)
 		minetest.log("info", "End of first hour of player "..name)
 	end, name, table.getn(players))
 end
-
---if a new player or a player without interract joins, we consider him as a new player, showing him/her the language formspec
-minetest.register_on_joinplayer(function(player)
-  local name = player:get_player_name()
-	if not minetest.get_player_privs(name).interact then
-
-		local formspec = "size[5,1.5;]"..
-		                 "label[0,0;Merci de choisir votre langue.\nPlease choose your preferred language.]"..
-		                 "button[0,1;2,1;fr;Français]button[2,1;2,1;en;English]"
-		minetest.show_formspec(name, "first_hour:language_select", formspec)
-
-		minetest.log("info", "First hour of player "..name.." begins")
-  end
-end)
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname ~= "first_hour:language_select" then
