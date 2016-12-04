@@ -150,6 +150,19 @@ minetest.override_item("mobs:beehive", {
 })
 
 --[[
+Ropes aren't protected against destruction in protected areas... let's protect them
+]]
+minetest.register_on_punchnode(function(pos, oldnode, digger)
+	if oldnode.name == "xdecor:rope" then
+		if minetest.is_protected(pos, digger:get_player_name()) then
+			return 0
+		else
+			rope:remove(pos, oldnode, digger, "xdecor:rope")
+		end
+	end
+end)
+
+--[[
 Lava bucket: place only in areas protected by the placing player (not at unprotected areas)
 ]]
 local old_bucket_lava_on_place = minetest.registered_items["bucket:bucket_lava"].on_place
