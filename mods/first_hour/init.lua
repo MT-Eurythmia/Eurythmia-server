@@ -74,11 +74,6 @@ end)
 
 
 local function begin_game_english(name)
-	for _, player in ipairs(players) do
-		if player == name then
-			return
-		end
-	end
 
 	minetest.log("action", "First hour of player "..name.." begins")
 	table.insert(players, name)
@@ -97,6 +92,10 @@ local function begin_game_english(name)
 
 	minetest.register_on_chat_message(function(name, message)
 		if message == THECODE then
+      if minetest.get_player_privs(name).interact then
+        minetest.chat_send_player(name, "You can already play. And thanks not to send the code to other players.")
+        return true
+      end
 			minetest.log("info", "Player "..name.." entered the right code.")
 			if played_enough[name] ~= nil then
 				minetest.log("info", "Player "..name.." played enough time.")
@@ -137,11 +136,6 @@ end
 
 
 local function begin_game_french(name)
-	for _, player in ipairs(players) do
-		if player == name then
-			return
-		end
-	end
 
 	minetest.log("action", "First hour of player "..name.." begins")
 	table.insert(players, name)
@@ -160,6 +154,10 @@ local function begin_game_french(name)
 
 	minetest.register_on_chat_message(function(name, message)
 		if message == THECODE then
+      if minetest.get_player_privs(name).interact then
+        minetest.chat_send_player(name, "Vous pouvez deja jouer. Et n'envoyer pas le code aux autres joueurs merci.")
+        return true
+      end
 			minetest.log("info", "Player "..name.." entered the right code.")
 			if played_enough[name] ~= nil then
 				minetest.log("info", "Player "..name.." played enough time.")
