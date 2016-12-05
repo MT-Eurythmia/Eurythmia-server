@@ -67,3 +67,6 @@
 [submodule "mods/hopper"]
 	path = mods/hopper
 	url = https://github.com/Mynetest/hopper.git
+[submodule "mods/xdecor"]
+	path = mods/xdecor
+	url = https://github.com/mynetest/xdecor.git
