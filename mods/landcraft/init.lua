@@ -67,7 +67,6 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "bucket:bucket_river_water",
 	type = "cooking",
-	cooktime = 5,
 	recipe = "bucket:bucket_water"
 })
 
@@ -151,5 +150,30 @@ minetest.register_craft({
 	output = "default:dry_shrub",
 	recipe = {
 		{"default:dry_grass_1"}
+	}
+})
+
+-- Corals
+minetest.register_craft({
+	output = "default:coral_skeleton 5",
+	recipe = {
+		{"default:cobble", "group:sapling", "default:cobble"},
+		{"default:cobble", "default:cobble", "default:cobble"},
+	}
+})
+minetest.register_craft({
+	output = "default:coral_brown 5",
+	recipe = {
+		{"", "dye:brown", ""},
+		{"default:cobble", "group:sapling", "default:cobble"},
+		{"default:cobble", "default:cobble", "default:cobble"},
+	}
+})
+minetest.register_craft({
+	output = "default:coral_orange 5",
+	recipe = {
+		{"", "dye:orange", ""},
+		{"default:cobble", "group:sapling", "default:cobble"},
+		{"default:cobble", "default:cobble", "default:cobble"},
 	}
 })
