@@ -15,24 +15,28 @@ local THECODE = '431C' --will be randomly chosen when first player joins
 
 MSG = {
 	welcome = {
-		'french' = "Bienvenue sur le serveur Mynetest !\nVous êtes invicible et ne pouvez pas frapper les autres joueurs pendant une heure.\nVous pourrez commencer à jouer dans "..PLAY_ENOUGH_MINUTES.." minutes.\nSi vous lisez les panneaux !",
-		'english' = "Welcome to the Mynetest server !\nYou are invincible and you cannot hit other players during a hour.\nYou will be able to play in "..PLAY_ENOUGH_MINUTES.." minutes.\nIf you read the signs!"
+		['french'] = "Bienvenue sur le serveur Mynetest !\nVous êtes invincible et ne pouvez pas frapper les autres joueurs pendant une heure.\nVous pourrez commencer à jouer dans "..PLAY_ENOUGH_MINUTES.." minutes.\nSi vous lisez les panneaux !",
+		['english'] = "Welcome to the Mynetest server !\nYou are invincible and you cannot hit other players during a hour.\nYou will be able to play in "..PLAY_ENOUGH_MINUTES.." minutes.\nIf you read the signs!"
 	},
 	end_first_hour = {
-		'french' = "Ce n'est plus votre première heure... Vous n'êtes plus invicible et vous pouvez frapper les autres joueurs à présent.",
-		'english' = "It is not your first hour anymore... You are now not invincible and you are able to hit other players."
+		['french'] = "Ce n'est plus votre première heure... Vous n'êtes plus invicible et vous pouvez frapper les autres joueurs à présent.",
+		['english'] = "It is not your first hour anymore... You are now not invincible and you are able to hit other players."
 	},
 	code_with_interact = {
-		'french' = "Vous pouvez deja jouer. Et n'envoyer pas le code aux autres joueurs merci.",
-		'english' = "You can already play. And thanks not to send the code to other players."
+		['french'] = "Vous pouvez deja jouer. Et n'envoyer pas le code aux autres joueurs merci.",
+		['english'] = "You can already play. And thanks not to send the code to other players."
 	},
 	interact = {
-		'french' = "Vous pouvez maintenant commencer à jouer, vous avez obtenu le privilège interact! Merci d'avoir lu les panneaux, vous pouvez revenir a cet endroit au moyen de /spawn :-)",
-		'english' = "Let's play, you got the interact privilege! Thanks for having read the signs, you can always come here using /spawn"
+		['french'] = "Vous pouvez maintenant commencer à jouer, vous avez obtenu le privilège interact! Merci d'avoir lu les panneaux, vous pouvez revenir a cet endroit au moyen de /spawn :-)",
+		['english'] = "Let's play, you got the interact privilege! Thanks for having read the signs, you can always come here using /spawn"
 	},
 	code_too_early = {
-		'english' = "You haven't been here "..PLAY_ENOUGH_MINUTES.." minutes yet. Wait a few moment and then retry it! If you didn't read all the signs, please do it",
-		'french' = "Vous n'avez pas encore joué "..PLAY_ENOUGH_MINUTES.." minutes ici. Patientez un peu et réessayez! Si vous n'avez pas lu tous les panneaux, veuillez le faire merci.")
+		['french'] = "Vous n'avez pas encore joué "..PLAY_ENOUGH_MINUTES.." minutes ici. Patientez un peu et réessayez! Si vous n'avez pas lu tous les panneaux, veuillez le faire merci.",
+		['english'] = "You haven't been here "..PLAY_ENOUGH_MINUTES.." minutes yet. Wait a few moment and then retry it! If you didn't read all the signs, please do it"
+	},
+	new_player = {
+		['french'] = ", nouveau joueur francophone a rejoint le jeu!",
+		['english'] = ', new english player joined the game !'
 	}
 }
 
@@ -113,7 +117,7 @@ minetest.register_on_chat_message(function(name, message)
 			played_enough[name] = nil
 			player:setpos({x = 0, y = 18, z = 0})
 			minetest.chat_send_player(name, MSG.interact[players[name]])
-			minetest.chat_send_all(name..", nouveau joueur anglophone, a rejoint le jeu!\nThe new English-speaker player "..name.." joined the game!")
+			minetest.chat_send_all(name..MSG.new_player[players[name]])
 			return true
 		else
 			minetest.log("info", "Player "..name.." didn't play enough time yet.")
@@ -121,7 +125,7 @@ minetest.register_on_chat_message(function(name, message)
 			return true
 		end
 	end
-end
+end)
 
 
 local function begin_game(name)
