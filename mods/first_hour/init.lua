@@ -24,7 +24,8 @@ MSG = {
 	},
 	code_with_interact = {
 		['french'] = "Vous pouvez deja jouer. Et n'envoyer pas le code aux autres joueurs merci.",
-		['english'] = "You can already play. And thanks not to send the code to other players."
+		['english'] = "You can already play. And thanks not to send the code to other players.",
+		['both'] = "You can already play! Vous pouvez deja jouer !"
 	},
 	interact = {
 		['french'] = "Vous pouvez maintenant commencer à jouer, vous avez obtenu le privilège interact! Merci d'avoir lu les panneaux, vous pouvez revenir a cet endroit au moyen de /spawn :-)",
@@ -100,7 +101,11 @@ end)
 minetest.register_on_chat_message(function(name, message)
 	if message == THECODE then
 		if minetest.get_player_privs(name).interact then
-			minetest.chat_send_player(name, MSG.code_with_interact[players[name]])
+			if players[name] ~= nil then
+				minetest.chat_send_player(name, MSG.code_with_interact[players[name]])
+			else
+				minetest.chat_send_player(name, MSG.code_with_interact['both'])
+			end
 			return true
 		end
 		minetest.log("info", "Player "..name.." entered the right code.")
