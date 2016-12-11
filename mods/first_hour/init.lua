@@ -149,7 +149,9 @@ local function begin_game(name)
 	end, name)
 
 	minetest.after(3600, function(name, pos) -- After a hour
-		minetest.chat_send_player(name, MSG.end_first_hour[players[name]])
+		if players[name] ~= nil then
+			minetest.chat_send_player(name, MSG.end_first_hour[players[name]])
+		end
 		players[name] = nil
 		minetest.log("info", "End of first hour of player "..name)
 	end, name)
