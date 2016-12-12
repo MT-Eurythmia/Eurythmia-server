@@ -67,7 +67,8 @@ THROWING_ARROW_ENTITY.on_step = function(self, dtime)
 
 	if self.lastpos.x ~= nil then
 		if minetest.registered_nodes[node.name].walkable then
-			if self.node ~= "" and not minetest.is_protected(self.lastpos, self.player) then
+			-- Mynetest: self.player = nil used to crash the server here
+			if self.node ~= "" and self.player and not minetest.is_protected(self.lastpos, self.player) then
 				minetest.set_node(self.lastpos, {name="default:torch"})
 				minetest.sound_play("default_place_node", {pos = self.lastpos})
 			end
