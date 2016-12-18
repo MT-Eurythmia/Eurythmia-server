@@ -6,6 +6,6 @@
 	missingok
 	notifempty
 	create 644 minetest minetest
-	size 100MB
+	size 100M
 	olddir /home/minetest/.minetest/debug_old/
 }
