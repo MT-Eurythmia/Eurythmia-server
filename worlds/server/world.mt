@@ -115,3 +115,4 @@ load_mod_irc_modpack = false
 load_mod_autoshutdown = true
 load_mod_autocrafter = true
 load_mod_christmas_craft = true
+load_mod_babelfish = true
