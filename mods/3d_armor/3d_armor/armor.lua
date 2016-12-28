@@ -624,7 +624,17 @@ minetest.register_chatcommand("kill", {
 	func = function(name, param)
 		local player = minetest.get_player_by_name(name)
 		if player then
-			player:set_hp(0)
+			player:set_hp(-1001)
+		end
+	end,
+})
+
+minetest.register_chatcommand("killme", {
+	description = "Kill yourself instantly",
+	func = function(name)
+		local player = minetest.get_player_by_name(name)
+		if player then
+			player:set_hp(-1001)
 		end
 	end,
 })
