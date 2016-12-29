@@ -7,5 +7,5 @@
 	notifempty
 	create 644 minetest minetest
 	size 100M
-	olddir /home/minetest/.minetest/debug_old/
+	olddir /home/minetest/.minetest/debug_old
 }
