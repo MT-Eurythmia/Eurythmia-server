@@ -73,3 +73,15 @@
 [submodule "mods/babelfish"]
 	path = mods/babelfish
 	url = https://github.com/taikedz/minetest-babelfish.git
+[submodule "mods/mobs_redo"]
+	path = mods/mobs_redo
+	url = https://github.com/Mynetest/mobs_redo
+[submodule "mods/mobs_animal"]
+	path = mods/mobs_animal
+	url = https://github.com/Mynetest/mobs_animal.git
+[submodule "mods/mobs_monster"]
+	path = mods/mobs_monster
+	url = https://github.com/Mynetest/mobs_monster.git
+[submodule "mods/mobs_npc"]
+	path = mods/mobs_npc
+	url = https://github.com/Mynetest/mobs_npc.git
