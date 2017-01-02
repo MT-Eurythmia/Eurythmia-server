@@ -99,7 +99,6 @@ server_announce = true
 load_mod_hazmat_suit = false
 load_mod_technic_armor = false
 load_mod_broomstick = true
-load_mod_report = true
 load_mod_email = true
 load_mod_metatools = true
 load_mod_chesttools = true
