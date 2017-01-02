@@ -85,3 +85,6 @@
 [submodule "mods/mobs_npc"]
 	path = mods/mobs_npc
 	url = https://github.com/Mynetest/mobs_npc.git
+[submodule "mods/3d_armor"]
+	path = mods/3d_armor
+	url = https://github.com/Mynetest/minetest-3d_armor.git
