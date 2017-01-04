@@ -138,6 +138,39 @@ minetest.register_craft({
 	}
 })
 
+-- Bushes
+minetest.register_craft({
+	output = "default:bush_stem 4",
+	recipe = {
+		{"default:sapling"},
+		{"default:tree"},
+	}
+})
+minetest.register_craft({
+	output = "default:acacia_bush_stem 4",
+	recipe = {
+		{"default:acacia_sapling"},
+		{"default:acacia_tree"},
+	}
+})
+minetest.register_craft({
+	output = "default:bush_leaves 6",
+	recipe = {
+		{"default:leaves", "default:leaves", "default:leaves"},
+		{"default:leaves", "default:leaves", "default:leaves"},
+		{"", "default:bush_stem", ""},
+	}
+})
+minetest.register_craft({
+	output = "default:acacia_bush_leaves 6",
+	recipe = {
+		{"default:acacia_leaves", "default:acacia_leaves", "default:acacia_leaves"},
+		{"default:acacia_leaves", "default:acacia_leaves", "default:acacia_leaves"},
+		{"", "default:acacia_bush_stem", ""},
+	}
+})
+
+
 -- Grasses
 minetest.register_craft({
 	output = "default:dry_grass_1",
