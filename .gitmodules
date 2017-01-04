@@ -88,3 +88,6 @@
 [submodule "mods/3d_armor"]
 	path = mods/3d_armor
 	url = https://github.com/Mynetest/minetest-3d_armor.git
+[submodule "mods/throwing"]
+	path = mods/throwing
+	url = https://github.com/Mynetest/throwing.git
