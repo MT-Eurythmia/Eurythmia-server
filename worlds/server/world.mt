@@ -117,3 +117,4 @@ load_mod_babelfish = true
 load_mod_mobs_animal = true
 load_mod_mobs_monster = true
 load_mod_mobs_npc = true
+load_mod_mob_horse = true
