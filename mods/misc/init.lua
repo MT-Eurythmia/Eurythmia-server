@@ -277,28 +277,10 @@ screwdriver.handler = function(itemstack, user, pointed_thing, mode, uses)
 end
 
 --[[
-Boost cart: allow power rails to work without mesecons.
-We'll allow the new minetest_game/mods/carts which is basically boost_cart
-or allow the boost_cart mod. One or another has to be loaded (optional dependency)
-]]
+Require carts modifications if a carts mod is loaded
+--]]
 if minetest.get_modpath("carts") or minetest.get_modpath("boost_cart") then
-	minetest.override_item("carts:powerrail", {
-		after_place_node = function(pos, placer, itemstack)
-			minetest.get_meta(pos):set_string("cart_acceleration", "0.5")
-		end,
-
-		mesecons = {
-			effector = {
-				action_on = function(pos, node)
-					return
-				end,
-
-				action_off = function(pos, node)
-					return
-				end
-			}
-		}
-	})
+	dofile(minetest.get_modpath("misc").."/rails.lua")
 end
 
 --[[
