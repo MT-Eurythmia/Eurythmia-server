@@ -19,16 +19,3 @@ minetest.override_item("carts:powerrail", {
     }
   }
 })
-
---[[
-Override the brake rail so that it stops instantly (the : are used to override its definition)
---]]
-
-carts:register_rail(":carts:brakerail", {
-	description = "Brake rail",
-	tiles = {
-		"carts_rail_straight_brk.png", "carts_rail_curved_brk.png",
-		"carts_rail_t_junction_brk.png", "carts_rail_crossing_brk.png"
-	},
-	groups = carts:get_rail_groups(),
-}, {acceleration = -10000})

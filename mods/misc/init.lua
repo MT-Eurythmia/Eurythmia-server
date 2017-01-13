@@ -280,7 +280,7 @@ end
 Require carts modifications if a carts mod is loaded
 --]]
 if minetest.get_modpath("carts") or minetest.get_modpath("boost_cart") then
-	dofile(minetest.get_modpath("misc").."/rails.lua")
+	dofile(minetest.get_modpath("misc").."/carts.lua")
 end
 
 --[[
