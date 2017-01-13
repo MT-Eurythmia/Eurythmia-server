@@ -2,7 +2,6 @@ print (" ---- mods override is Loading! ---- ")
 
 -- leaves --
 
---[[
 --minetest.register_node(":4seasons:leaves_winter", {
 --	description = "Leaves",
 --	drawtype = "allfaces_optional",
@@ -82,4 +81,3 @@ minetest.register_node(":4seasons:cactus_winter", {
 		}},
 	sounds = default.node_sound_wood_defaults(),
 })
-]]
