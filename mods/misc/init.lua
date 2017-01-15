@@ -259,6 +259,33 @@ register_stair_and_slab_maptools("stonebrick", "Stone Brick", "default_stone_bri
 register_stair_and_slab_maptools("stone", "Stone", "default_stone.png", default.node_sound_stone_defaults())
 register_stair_and_slab_maptools("cobble", "Cobblestone", "default_cobble.png", default.node_sound_stone_defaults())
 
+-- Unbreakable Public streets and Lighting (EmuRe style)
+minetest.register_node(":maptools:stone_tile", {
+	description = "Unbreakable Stone Tile",
+	tiles = {"xdecor_stone_tile.png"},
+	is_ground_content = false,
+	groups = {unbreakable = 1, not_in_creative_inventory = maptools.creative},
+	sounds = default.node_sound_stone_defaults()
+})
+default.register_fence(":maptools:fence_aspen_wood", {
+	description = "Unbreakable Aspen Fence",
+	texture = "default_fence_aspen_wood.png",
+	inventory_image = "default_fence_overlay.png^default_aspen_wood.png^default_fence_overlay.png^[makealpha:255,126,126",
+	wield_image = "default_fence_overlay.png^default_aspen_wood.png^default_fence_overlay.png^[makealpha:255,126,126",
+	material = "default:aspen_wood",
+	groups = {unbreakable = 1, not_in_creative_inventory = maptools.creative},
+	sounds = default.node_sound_wood_defaults()
+})
+minetest.register_node(":maptools:wooden_lightbox", {
+	description = "Unbreakable Wooden Light Box",
+	tiles = {"xdecor_wooden_lightbox.png"},
+	paramtype = "light",
+	is_ground_content = false,
+	groups = {unbreakable = 1, not_in_creative_inventory = maptools.creative},
+	light_source = 13,
+	sounds = default.node_sound_glass_defaults()
+})
+
 --[[
 Screwdriver: do not rotate unbreakable nodes
 ]]
