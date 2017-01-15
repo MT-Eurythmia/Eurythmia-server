@@ -314,3 +314,15 @@ end
 Markers: increase MAX_SIZE to 64*64
 ]]
 markers.MAX_SIZE = 64 * 64
+
+--[[
+Damage protection violators
+]]
+minetest.register_on_protection_violation(function(pos, name)
+	local player = minetest.get_player_by_name(name)
+	if not player then
+		return
+	end
+	minetest.chat_send_player(name, "Damaging you because you violated a protection.")
+	player:set_hp(math.max(player:get_hp() - 1, 0))
+end)
