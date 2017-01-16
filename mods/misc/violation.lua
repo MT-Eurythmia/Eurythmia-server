@@ -7,11 +7,11 @@ minetest.register_on_protection_violation(function(pos, name)
 	if not player then
 		return
 	end
-	minetest.chat_send_player(name, "Setting your look yaw you because you violated a protection. / Votre angle de vision a été modifié car vous avez violé une protection.")
+	minetest.chat_send_player(name, "Turned around because this is protected. / Votre angle de vision a été modifié car vous avez violé une protection.")
 	player:set_look_horizontal(player:get_look_horizontal() + math.pi)
 	if (players[name] or 1) >= SHOW_FORMSPEC then
 		minetest.show_formspec(name, "misc:violation", "size[8,2,true]"..
-			"label[0,0;Setting your look yaw because you violated a protection.\nVotre angle de vision a été modifié car vous avez violé une protection.]"..
+			"label[0,0;Turned around because this is protected.\nVotre angle de vision a été modifié car vous avez violé une protection.]"..
 			"button_exit[3,1;2,1;exit;OK]")
 	end
 
