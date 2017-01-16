@@ -314,3 +314,8 @@ end
 Markers: increase MAX_SIZE to 64*64
 ]]
 markers.MAX_SIZE = 64 * 64
+
+--[[
+Rotate protection violators
+]]
+dofile(minetest.get_modpath("misc").."/violation.lua")
