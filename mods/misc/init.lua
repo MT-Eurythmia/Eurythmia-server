@@ -276,6 +276,8 @@ default.register_fence(":maptools:fence_aspen_wood", {
 	groups = {unbreakable = 1, not_in_creative_inventory = maptools.creative},
 	sounds = default.node_sound_wood_defaults()
 })
+-- Side effect: clear the auto-generated recipe for this uncraftable node
+minetest.clear_craft({output = ":maptools:fence_aspen_wood"})
 minetest.register_node(":maptools:wooden_lightbox", {
 	description = "Unbreakable Wooden Light Box",
 	tiles = {"xdecor_wooden_lightbox.png"},
