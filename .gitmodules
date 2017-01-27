@@ -21,7 +21,7 @@
 	url = https://github.com/rubenwardy/email.git
 [submodule "mods/fishing"]
 	path = mods/fishing
-	url = https://github.com/MinetestForFun/fishing.git
+	url = https://github.com/Mynetest/fishing.git
 [submodule "mods/treecapitator"]
 	path = mods/treecapitator
 	url = https://github.com/HybridDog/treecapitator.git
