@@ -9,6 +9,8 @@ minetest.register_on_protection_violation(function(pos, name)
 	end
 	minetest.chat_send_player(name, "Turned around because this is protected. / Votre angle de vision a été modifié car vous avez violé une protection.")
 	player:set_look_horizontal(player:get_look_horizontal() + math.pi)
+	-- The vertical look yaw is between -pi/2 and +pi/2, whereas the horizontal look yaw is between 0 and 2pi.
+	player:set_look_vertical(-player:get_look_vertical())
 	if (players[name] or 1) >= SHOW_FORMSPEC then
 		minetest.show_formspec(name, "misc:violation", "size[8,2,true]"..
 			"label[0,0;Turned around because this is protected.\nVotre angle de vision a été modifié car vous avez violé une protection.]"..
