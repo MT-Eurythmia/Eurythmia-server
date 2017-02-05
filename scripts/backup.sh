@@ -12,7 +12,7 @@ else
 fi
 
 # Logrotate
-logrotate /home/minetest/scripts/logrotate_conf
+/usr/sbin/logrotate /home/minetest/scripts/logrotate_conf
 
 # Restart the server
 /etc/init.d/minetestserver start
