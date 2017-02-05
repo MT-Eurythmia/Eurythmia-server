@@ -34,8 +34,8 @@ predef_compiled = {}
 for k in predefined:
     predef_compiled[re.compile(k)] = predefined[k]
 
-if len(sys.argv) <= 2:
-    print("Usage: %s <world path> <minetest data root path>" % sys.argv[0])
+if len(sys.argv) <= 3:
+    print("Usage: %s <world path> <minetest data root path> <color.txt path>" % sys.argv[0])
 else:
     pngpaths = {}
     for root, dirs, files in os.walk(sys.argv[2]):
@@ -44,7 +44,7 @@ else:
                 dirs.remove(dir)
         for file in files:
             pngpaths[file] = os.path.join(root, file)
-    out = open(os.path.join(sys.argv[2], "mtsatellite/colors.txt"), 'w')
+    out = open(sys.argv[3], 'w')
     f = open(os.path.join(sys.argv[1], "amc_nodes.txt"), 'r')
     for line in f:
         ldata = line.split(' ')
