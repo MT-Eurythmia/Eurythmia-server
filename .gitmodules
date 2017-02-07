@@ -39,7 +39,7 @@
 	url = https://github.com/SmallJoker/boost_cart.git
 [submodule "mods/farming"]
 	path = mods/farming
-	url = https://github.com/paly2/farming.git
+	url = https://github.com/Mynetest/farming.git
 [submodule "mods/irc_modpack"]
 	path = mods/irc_modpack
 	url = https://github.com/MinetestForFun/irc_modpack.git
