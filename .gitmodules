@@ -94,6 +94,3 @@
 [submodule "games/minetest_game"]
 	path = games/minetest_game
 	url = https://github.com/Mynetest/minetest_game.git
-[submodule "mods/compassgps"]
-	path = mods/compassgps
-	url = https://github.com/Kilarin/compassgps/
