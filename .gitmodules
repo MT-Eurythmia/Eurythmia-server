@@ -97,3 +97,6 @@
 [submodule "mods/travelnet"]
 	path = mods/travelnet
 	url = git@github.com:Sokomine/travelnet.git
+[submodule "mods/pvpplus"]
+	path = mods/pvpplus
+	url = git@github.com:Mynetest/pvpplus.git
