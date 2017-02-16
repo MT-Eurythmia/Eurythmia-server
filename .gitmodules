@@ -96,7 +96,7 @@
 	url = https://github.com/Mynetest/minetest_game.git
 [submodule "mods/travelnet"]
 	path = mods/travelnet
-	url = git@github.com:Sokomine/travelnet.git
+	url = https://github.com/Sokomine/travelnet.git
 [submodule "mods/pvpplus"]
 	path = mods/pvpplus
-	url = git@github.com:Mynetest/pvpplus.git
+	url = https://github.com/Mynetest/pvpplus.git
