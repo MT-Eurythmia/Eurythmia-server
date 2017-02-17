@@ -12,7 +12,7 @@
 	url = https://github.com/Uberi/Minetest-WorldEdit.git
 [submodule "mods/areas"]
 	path = mods/areas
-	url = https://github.com/ShadowNinja/areas.git
+	url = https://github.com/Mynetest/areas.git
 [submodule "mods/chesttools"]
 	path = mods/chesttools
 	url = https://github.com/Sokomine/chesttools.git
