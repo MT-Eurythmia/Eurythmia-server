@@ -63,6 +63,13 @@ local function get_far_node(pos)
 	return node
 end
 
+local function show_initial_formspec(name)
+	local formspec = "size[5,1.5;]"..
+	         "label[0,0;Merci de choisir votre langue.\nPlease choose your preferred language.]"..
+	         "button[0,1;2,1;fr;Français]button[2,1;2,1;en;English]"
+	minetest.show_formspec(name, "first_hour:language_select", formspec)
+end
+
 --Hack we'll do that sign text replacement when the first player joins
 local is_Loaded = false
 minetest.register_on_joinplayer(function(player)
@@ -92,10 +99,7 @@ minetest.register_on_joinplayer(function(player)
 		return
 	end
 
-	local formspec = "size[5,1.5;]"..
-		         "label[0,0;Merci de choisir votre langue.\nPlease choose your preferred language.]"..
-		         "button[0,1;2,1;fr;Français]button[2,1;2,1;en;English]"
-	minetest.show_formspec(name, "first_hour:language_select", formspec)
+	show_initial_formspec()
 end)
 
 minetest.register_on_chat_message(function(name, message)
@@ -111,6 +115,7 @@ minetest.register_on_chat_message(function(name, message)
 		minetest.log("info", "Player "..name.." entered the right code.")
 		if played_enough[name] ~= nil then
 			minetest.log("info", "Player "..name.." played enough time.")
+
 			local privs = minetest.get_player_privs(name)
 			privs.interact = true
 			minetest.set_player_privs(name, privs)
@@ -151,6 +156,12 @@ local function begin_game(name)
 	minetest.after(3600, function(name, pos) -- After a hour
 		if players[name] ~= nil then
 			minetest.chat_send_player(name, MSG.end_first_hour[players[name]])
+		end
+		if not minetest.get_player_privs(name).interact then -- Still not ?!
+			played_enough[name] = nil
+			if minetest.get_player_by_name(name) then -- If the player is connected
+				show_initial_formspec(name)
+			end
 		end
 		players[name] = nil
 		minetest.log("info", "End of first hour of player "..name)
