@@ -99,7 +99,7 @@ minetest.register_on_joinplayer(function(player)
 		return
 	end
 
-	show_initial_formspec()
+	show_initial_formspec(name)
 end)
 
 minetest.register_on_chat_message(function(name, message)
