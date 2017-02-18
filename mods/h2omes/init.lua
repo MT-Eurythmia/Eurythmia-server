@@ -395,7 +395,7 @@ minetest.register_chatcommand("invite_player", {
 			return false, "Please specify a player name. See /help invite_player."
 		end
 		if not minetest.get_player_by_name(params) then
-			return false, "Player '"..params.."' does not exist."
+			return false, "Player '"..params.."' does not exist or is not currently connected."
 		end
 		h2omes.send_pos_to_player(name, minetest.get_player_by_name(name):get_pos(), params)
 	end,
