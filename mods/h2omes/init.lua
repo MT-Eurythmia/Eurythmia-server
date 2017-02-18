@@ -58,7 +58,7 @@ function h2omes.set_home(name, home_type, pos)
 	if not pos then
 		local player = minetest.get_player_by_name(name)
 		if not player then return end
-		pos = player:getpos()
+		pos = player:get_pos()
 	end
 	if not pos then return false end
 	if minetest.is_protected(pos, name) then
@@ -80,7 +80,7 @@ function h2omes.get_home(name, home_type)
 	h2omes.check(name)
 	local player = minetest.get_player_by_name(name)
 	if not player then return nil end
-	local pos = player:getpos()
+	local pos = player:get_pos()
 	if not pos then return nil end
 	if h2omes.homes[name][home_type] then
 		return h2omes.homes[name][home_type]
@@ -92,7 +92,7 @@ end
 function h2omes.getspawn(name)
 	local player = minetest.get_player_by_name(name)
 	if not player then return nil end
-	local pos = player:getpos()
+	local pos = player:get_pos()
 	if not pos then return nil end
 	local spawn_pos
 	spawn_pos = minetest.setting_get_pos("static_spawnpoint")
@@ -110,7 +110,7 @@ function h2omes.to_spawn(name)
 	local spawn_pos = h2omes.getspawn(name)
 	if spawn_pos then
 		minetest.chat_send_player(name, "Teleporting to spawn...")
-		player:setpos(spawn_pos)
+		player:set_pos(spawn_pos)
 		minetest.sound_play("teleport", {to_player=name, gain = 1.0})
 		minetest.log("action","Player ".. name .." respawned.")
 		return true
@@ -129,10 +129,10 @@ function h2omes.to_home(name, home_type)
 	if not h2omes.check_privs(name) then
 		return false
 	end
-	local pos = player:getpos()
+	local pos = player:get_pos()
 	if not pos then return false end
 	if h2omes.homes[name][home_type] then
-		player:setpos(h2omes.homes[name][home_type])
+		player:set_pos(h2omes.homes[name][home_type])
 		minetest.chat_send_player(name, "Teleported to "..home_type.."!")
 		minetest.sound_play("teleport", {to_player=name, gain = 1.0})
 		return true
@@ -148,10 +148,10 @@ function h2omes.to_player(name, to_pos, to_name)
 	if not h2omes.check_privs(name) then
 		return false
 	end
-	local from_pos = player:getpos()
+	local from_pos = player:get_pos()
 	if to_pos then
 		minetest.chat_send_player(name, "Teleporting to player "..to_name)
-		player:setpos(to_pos)
+		player:set_pos(to_pos)
 		minetest.sound_play("teleport", {to_player=name, gain = 1.0})
 		return true
 	else
@@ -192,7 +192,7 @@ function h2omes.show_formspec_home(name)
 	local player = minetest.get_player_by_name(name)
 	if not player then return false end
 	local formspec = {"size[8,9]label[3.15,0;Home Settings]"}
-	local pos = player:getpos()
+	local pos = player:get_pos()
 	--spawn
 	table.insert(formspec, "label[3.45,0.8;TO SPAWN]")
 	local spawn_pos = h2omes.getspawn(name)
@@ -289,7 +289,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			if not tmp_players[name] then return end
 			local to_name = tmp_players[name]["select_player"]
 			if not to_name then return end
-			local pos = player:getpos()
+			local pos = player:get_pos()
 			h2omes.send_pos_to_player(name, pos, to_name)
 			tmp_players[name] = nil
 		elseif fields["refresh"] then
