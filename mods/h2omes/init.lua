@@ -386,6 +386,38 @@ minetest.register_chatcommand("setpit", {
 	end,
 })
 
+minetest.register_chatcommand("invite_player", {
+	description = "Send a teleportation invitation to a player",
+	params = "<name>",
+	privs = {home=true},
+	func = function(name, params)
+		if params == "" then
+			return false, "Please specify a player name. See /help invite_player."
+		end
+		if not minetest.get_player_by_name(params) then
+			return false, "Player '"..params.."' does not exist."
+		end
+		h2omes.send_pos_to_player(name, minetest.get_player_by_name(name):get_pos(), params)
+	end,
+})
+
+minetest.register_chatcommand("to_player", {
+	description = "Accept a teleportation invitation",
+	privs = {home=true},
+	func = function(name, params)
+		if not from_players[name] then
+			return false, "No pending teleportation invitation."
+		end
+		local to_name = from_players[name].name
+		local pos = from_players[name].pos
+		from_players[name] = nil
+		if not to_name or not pos then
+			return false, "Unknown error"
+		end
+		h2omes.to_player(name, pos, to_name)
+	end,
+})
+
 if minetest.get_modpath("unified_inventory") then
 	for i, def in pairs(unified_inventory.buttons) do
 		if def.name == "home_gui_set" then
