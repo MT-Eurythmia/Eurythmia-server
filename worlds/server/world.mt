@@ -119,3 +119,5 @@ load_mod_mobs_monster = true
 load_mod_mobs_npc = true
 load_mod_mob_horse = true
 load_mod_travelnet = true
+load_mod_placeable_books = true
+load_mod_character_creator = true
