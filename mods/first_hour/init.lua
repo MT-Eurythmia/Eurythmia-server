@@ -175,6 +175,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
 
 	local name = player:get_player_name()
+	if players[name] then
+		return
+	end
 
 	if fields["en"] then
 		players[name] = 'english'
