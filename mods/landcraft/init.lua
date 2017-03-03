@@ -65,6 +65,15 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = "default:dirt_with_rainforest_litter 6",
+	recipe = {
+		{"", "default:jungleleaves", ""},
+		{"default:dirt", "default:dirt", "default:dirt"},
+		{"default:dirt", "default:dirt", "default:dirt"},
+	}
+})
+
+minetest.register_craft({
 	output = "bucket:bucket_river_water",
 	type = "cooking",
 	recipe = "bucket:bucket_water"
