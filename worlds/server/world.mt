@@ -121,4 +121,4 @@ load_mod_mob_horse = true
 load_mod_travelnet = true
 load_mod_books = true
 load_mod_character_creator = true
-load_mod_books = false
+load_mod_serveressentials = true

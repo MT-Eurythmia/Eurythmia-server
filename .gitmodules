@@ -106,3 +106,6 @@
 [submodule "mods/books"]
 	path = mods/books
 	url = https://github.com/taikedz/everamzah-books
+[submodule "mods/serveressentials"]
+	path = mods/serveressentials
+	url = git@github.com:GunshipPenguin/serveressentials.git
