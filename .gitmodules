@@ -103,6 +103,6 @@
 [submodule "mods/character_creator"]
 	path = mods/character_creator
 	url = https://github.com/minetest-mods/character_creator.git
-[submodule "mods/placeable_books"]
-	path = mods/placeable_books
-	url = https://github.com/taikedz/everamzah-books.git
+[submodule "mods/books"]
+	path = mods/books
+	url = https://github.com/taikedz/everamzah-books
