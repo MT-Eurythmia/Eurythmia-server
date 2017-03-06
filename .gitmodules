@@ -105,7 +105,7 @@
 	url = https://github.com/minetest-mods/character_creator.git
 [submodule "mods/books"]
 	path = mods/books
-	url = https://github.com/taikedz/everamzah-books
+	url = https://github.com/taikedz/everamzah-books.git
 [submodule "mods/serveressentials"]
 	path = mods/serveressentials
-	url = git@github.com:GunshipPenguin/serveressentials.git
+	url = http://github.com/GunshipPenguin/serveressentials.git
