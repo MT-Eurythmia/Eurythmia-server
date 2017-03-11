@@ -175,6 +175,11 @@ function h2omes.send_pos_to_player(name, pos, to_name)
 	if not h2omes.check_privs(name) then
 		return false
 	end
+	if not minetest.check_player_privs(to_name, {interact = true}) then
+		minetest.chat_send_player(name, "You cannot send your position to a player before they have the interact privilege.")
+		return false
+	end
+
 	if h2omes.update_pos(to_name, pos, name) then
 		minetest.chat_send_player(name, "Your position has been sent to "..to_name)
 		return true
