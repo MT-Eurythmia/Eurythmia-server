@@ -109,3 +109,6 @@
 [submodule "mods/serveressentials"]
 	path = mods/serveressentials
 	url = http://github.com/GunshipPenguin/serveressentials.git
+[submodule "mods/easyvend"]
+	path = mods/easyvend
+	url = http://repo.or.cz/minetest_easyvend.git
