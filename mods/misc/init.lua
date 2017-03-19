@@ -321,3 +321,8 @@ markers.MAX_SIZE = 64 * 64
 Rotate protection violators
 ]]
 dofile(minetest.get_modpath("misc").."/violation.lua")
+
+--[[
+Deactivate serveressentials Welcome message (first_hour already sends one)
+]]
+SHOW_FIRST_TIME_JOIN_MSG = false
