@@ -326,3 +326,8 @@ dofile(minetest.get_modpath("misc").."/violation.lua")
 Deactivate serveressentials Welcome message (first_hour already sends one)
 ]]
 SHOW_FIRST_TIME_JOIN_MSG = false
+
+--[[
+Decapitalize chat messages
+]]
+dofile(minetest.get_modpath("misc").."/decapitalizer.lua")
