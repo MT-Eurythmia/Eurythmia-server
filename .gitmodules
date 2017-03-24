@@ -87,7 +87,7 @@
 	url = https://github.com/Mynetest/throwing.git
 [submodule "mods/mobs"]
 	path = mods/mobs
-	url = https://github.com/Mynetest/mobs_redo.git
+	url = https://github.com/tenplus1/mobs_redo.git
 [submodule "mods/mob_horse"]
 	path = mods/mob_horse
 	url = https://github.com/tenplus1/mob_horse.git
