@@ -13,6 +13,11 @@ function chars(str)
 end
 
 minetest.register_on_chat_message(function(name, message)
+	-- Message has to be longer than 1/DECAPITALZE_RATIO chars
+	if message:len() <= 1/DECAPITALIZE_RATIO then
+		return false
+	end
+
 	-- Count capital letters
 	local cap_count = 0
 	for _, char in chars(message) do
@@ -26,7 +31,7 @@ minetest.register_on_chat_message(function(name, message)
 	end
 
 	-- Decapitalize
-	local new_msg = string.char(message:byte(1)) -- The first character can be a capital letter
+	local new_msg = "<" .. name .. "> " .. string.char(message:byte(1)) -- The first character can be a capital letter
 	local i = 2
 	while i <= message:len() do
 		local char = message:sub(i, i)
