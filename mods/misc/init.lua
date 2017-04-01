@@ -331,3 +331,13 @@ SHOW_FIRST_TIME_JOIN_MSG = false
 Decapitalize chat messages
 ]]
 dofile(minetest.get_modpath("misc").."/decapitalizer.lua")
+
+--[[
+Hopper: add shared chest
+]]
+if minetest.get_modpath("hopper") and minetest.get_modpath("chesttools") then
+	hopper:add_container({
+		{"bottom", "chesttools:shared_chest", "main"},
+		{"side", "chesttools:shared_chest", "main"},
+	})
+end

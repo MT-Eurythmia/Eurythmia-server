@@ -380,3 +380,12 @@ minetest.register_craft( {
 	        { "default:steel_ingot", "default:mese_crystal", "default:steel_ingot" }
 	},
 })
+
+
+if minetest.get_modpath("hopper") then
+	hopper:add_container({
+		{"top", "autocrafter:autocrafter", "dst"},
+		{"bottom", "autocrafter:autocrafter", "src"},
+		{"side", "autocrafter:autocrafter", "src"},
+	})
+end

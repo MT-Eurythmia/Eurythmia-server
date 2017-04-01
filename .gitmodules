@@ -63,7 +63,7 @@
 	url = https://github.com/minetest-technic/unified_inventory
 [submodule "mods/hopper"]
 	path = mods/hopper
-	url = https://github.com/Mynetest/hopper.git
+	url = https://github.com/minetest-mods/hopper.git
 [submodule "mods/xdecor"]
 	path = mods/xdecor
 	url = https://github.com/mynetest/xdecor.git
