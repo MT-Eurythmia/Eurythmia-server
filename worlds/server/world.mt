@@ -123,4 +123,5 @@ load_mod_books = true
 load_mod_character_creator = true
 load_mod_serveressentials = true
 load_mod_easyvend = true
+load_mod_nyancat = true
 load_mod_doublejump = true
