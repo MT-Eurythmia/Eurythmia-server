@@ -52,9 +52,6 @@
 [submodule "mods/moreores"]
 	path = mods/moreores
 	url = https://github.com/minetest-mods/moreores
-[submodule "mods/sprint"]
-	path = mods/sprint
-	url = https://github.com/GunshipPenguin/sprint
 [submodule "mods/vector_extras"]
 	path = mods/vector_extras
 	url = https://github.com/HybridDog/vector_extras
