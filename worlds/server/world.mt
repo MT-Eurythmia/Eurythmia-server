@@ -67,7 +67,6 @@ load_mod_3d_armor = true
 load_mod_3d_armor_stand = true
 load_mod_moreores = true
 load_mod_shields = true
-load_mod_u_skins = true
 load_mod_unified_inventory = true
 load_mod_wieldview = true
 load_mod_signs_lib = true
