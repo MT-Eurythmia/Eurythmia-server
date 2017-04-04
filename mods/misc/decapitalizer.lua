@@ -1,4 +1,4 @@
-local DECAPITALIZE_RATIO = 1/3
+local DECAPITALIZE_RATIO = 2/3
 
 function chars(str)
 	local function it(str, i)
