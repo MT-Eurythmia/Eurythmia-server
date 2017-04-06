@@ -21,7 +21,7 @@ minetest.register_on_chat_message(function(name, message)
 	-- Count capital letters
 	local cap_count = 0
 	for _, char in chars(message) do
-		if char >= "A" and char <= "Z" then -- If char is a capital letter
+		if char >= "A" and char <= "Z" or char == "!" then -- If char is a capital letter
 			cap_count = cap_count + 1
 		end
 	end
