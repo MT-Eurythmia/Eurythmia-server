@@ -34,9 +34,6 @@
 [submodule "mods/signs_lib"]
 	path = mods/signs_lib
 	url = https://github.com/minetest-mods/signs_lib.git
-[submodule "mods/boost_cart"]
-	path = mods/boost_cart
-	url = https://github.com/SmallJoker/boost_cart.git
 [submodule "mods/farming"]
 	path = mods/farming
 	url = https://github.com/Mynetest/farming.git
