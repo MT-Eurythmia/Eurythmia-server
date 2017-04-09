@@ -341,3 +341,10 @@ if minetest.get_modpath("hopper") and minetest.get_modpath("chesttools") then
 		{"side", "chesttools:shared_chest", "main"},
 	})
 end
+
+--[[
+Babelfish: don't display compliance
+]]
+if minetest.get_modpath("babelfish") then
+	babel.compliance = nil
+end
