@@ -106,3 +106,12 @@
 [submodule "mods/easyvend"]
 	path = mods/easyvend
 	url = http://repo.or.cz/minetest_easyvend.git
+[submodule "mods/hudbars"]
+	path = mods/hudbars
+	url = http://repo.or.cz/minetest_hudbars.git
+[submodule "mods/hbhunger"]
+	path = mods/hbhunger
+	url = http://repo.or.cz/minetest_hbhunger.git
+[submodule "mods/hbarmor"]
+	path = mods/hbarmor
+	url = http://repo.or.cz/minetest_hbarmor.git
