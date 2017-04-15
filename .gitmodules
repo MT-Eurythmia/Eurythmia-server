@@ -115,3 +115,6 @@
 [submodule "mods/hbarmor"]
 	path = mods/hbarmor
 	url = http://repo.or.cz/minetest_hbarmor.git
+[submodule "mods/pbj_pup"]
+	path = mods/pbj_pup
+	url = https://github.com/tenplus1/pbj_pup.git
