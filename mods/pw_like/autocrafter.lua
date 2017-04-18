@@ -255,7 +255,7 @@ local function upgrade_autocrafter(pos, meta)
 	end
 end
 
-minetest.register_node("autocrafter:autocrafter", {
+minetest.register_node("pw_like:autocrafter", {
 	description = "Autocrafter",
 	drawtype = "normal",
 	tiles = {"pipeworks_autocrafter.png"},
@@ -372,8 +372,10 @@ minetest.register_node("autocrafter:autocrafter", {
 	on_timer = run_autocrafter
 })
 
+minetest.register_alias("autocrafter:autocrafter", "pw_like:autocrafter")
+
 minetest.register_craft( {
-	output = "autocrafter:autocrafter 2",
+	output = "pw_like:autocrafter 2",
 	recipe = {
 	        { "default:steel_ingot", "default:mese_crystal", "default:steel_ingot" },
 	        { "", "xdecor:workbench", "" },
@@ -384,8 +386,8 @@ minetest.register_craft( {
 
 if minetest.get_modpath("hopper") then
 	hopper:add_container({
-		{"top", "autocrafter:autocrafter", "dst"},
-		{"bottom", "autocrafter:autocrafter", "src"},
-		{"side", "autocrafter:autocrafter", "src"},
+		{"top", "pw_like:autocrafter", "dst"},
+		{"bottom", "pw_like:autocrafter", "src"},
+		{"side", "pw_like:autocrafter", "src"},
 	})
 end
