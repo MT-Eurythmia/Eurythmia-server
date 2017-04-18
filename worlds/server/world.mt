@@ -122,4 +122,3 @@ load_mod_character_creator = true
 load_mod_serveressentials = true
 load_mod_easyvend = true
 load_mod_pbj_pup = true
-load_mod_doublejump = true
