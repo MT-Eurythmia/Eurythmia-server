@@ -40,6 +40,7 @@ load_mod_mesecons_torch = true
 load_mod_mesecons_walllever = true
 load_mod_mesecons_fpga = true
 load_mod_mobs = true
+load_mod_moremesecons_utils = true
 load_mod_moremesecons_adjustable_blinkyplant = true
 load_mod_moremesecons_adjustable_player_detector = true
 load_mod_moremesecons_commandblock = true
