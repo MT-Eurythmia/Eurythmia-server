@@ -101,7 +101,7 @@ end
 local function add_travelnet_at_pos(pos)
 	local meta = minetest.get_meta(pos)
 
-	if meta:get_int("mtsatellite_ID") and meta:get_int("mtsatellite_ID") ~= 0 then
+	if meta:get_int("mtsatellite_ID") and travelnet.features[meta:get_int("mtsatellite_ID")] then
 		return
 	end
 
@@ -144,7 +144,7 @@ end
 
 minetest.register_lbm({
 	label = "Add Travelnet boxes to MTSatellite features",
-	name = "mtsatellite:add_travelnet_2",
+	name = "mtsatellite:add_travelnet_3",
 	nodenames = {"travelnet:travelnet"},
 	run_at_every_load = false,
 	action = add_travelnet_at_pos
