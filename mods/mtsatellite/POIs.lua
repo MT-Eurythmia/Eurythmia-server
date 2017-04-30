@@ -109,7 +109,7 @@ local function add_travelnet_at_pos(pos)
 	local station_name    = meta:get_string("station_name");
 	local station_network = meta:get_string("station_network");
 
-	if owner_name and station_name and station_network then
+	if owner_name ~= "" and station_name ~= "" and station_network ~= "" then
 		add_travelnet(pos.x, pos.z, owner_name, station_network, station_name)
 		-- Custom metadata
 		meta:set_int("mtsatellite_ID", #travelnet.features)
@@ -132,11 +132,10 @@ do
 			if not oldmetadata then
 				return
 			end
-			local ID = oldmetadata:get_int("mtsatellite_ID")
-			if not ID or ID == 0 then
+			if not oldmetadata.mtsatellite_ID or oldmetadata.mtsatellite_ID == 0 then
 				return
 			end
-			table.remove(travelnet.features, ID)
+			table.remove(travelnet.features, oldmetadata.mtsatellite_ID)
 			write()
 		end
 	})
