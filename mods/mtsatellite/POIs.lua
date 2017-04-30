@@ -98,6 +98,24 @@ end
 
 
 -- Travelnet
+local function add_travelnet_at_pos(pos)
+	local meta = minetest.get_meta(pos)
+
+	if meta:get_int("mtsatellite_ID") and meta:get_int("mtsatellite_ID") ~= 0 then
+		return
+	end
+
+	local owner_name      = meta:get_string("owner");
+	local station_name    = meta:get_string("station_name");
+	local station_network = meta:get_string("station_network");
+
+	if owner_name and station_name and station_network then
+		add_travelnet(pos.x, pos.z, owner_name, station_network, station_name)
+		-- Custom metadata
+		meta:set_int("mtsatellite_ID", #travelnet.features)
+		write()
+	end
+end
 do
 	local def = minetest.registered_nodes["travelnet:travelnet"]
 	local old_on_receive_fields = def.on_receive_fields
@@ -106,18 +124,7 @@ do
 		on_receive_fields = function(pos, ...)
 			old_on_receive_fields(pos, ...)
 
-			local meta = minetest.get_meta(pos)
-
-			local owner_name      = meta:get_string("owner");
-			local station_name    = meta:get_string("station_name");
-			local station_network = meta:get_string("station_network");
-
-			if owner_name and station_name and station_network then
-				add_travelnet(pos.x, pos.z, owner_name, station_network, station_name)
-				-- Custom metadata
-				meta:set_int("mtsatellite_ID", #travelnet.features)
-				write()
-			end
+			add_travelnet_at_pos(pos)
 		end,
 		after_dig_node = function(pos, oldnode, oldmetadata, digger)
 			old_after_dig_node(pos, oldnode, oldmetadata, digger)
@@ -137,21 +144,10 @@ end
 
 minetest.register_lbm({
 	label = "Add Travelnet boxes to MTSatellite features",
-	name = "mtsatellite:add_travelnet",
+	name = "mtsatellite:add_travelnet_2",
 	nodenames = {"travelnet:travelnet"},
 	run_at_every_load = false,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
-
-		local owner_name      = meta:get_string("owner");
-		local station_name    = meta:get_string("station_name");
-		local station_network = meta:get_string("station_network");
-
-		if owner_name and station_name and station_network then
-			add_travelnet(pos.x, pos.z, owner_name, station_network, station_name)
-			write()
-		end
-	end
+	action = add_travelnet_at_pos
 })
 
 -- Buildings
