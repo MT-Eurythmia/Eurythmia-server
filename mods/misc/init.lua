@@ -348,3 +348,21 @@ Babelfish: don't display compliance
 if minetest.get_modpath("babelfish") then
 	babel.compliance = nil
 end
+
+--[[
+Moreores: unregister tin and make in an alias to the minetest_game tin
+Also, avoid generating moreores tin
+]]
+if minetest.get_modpath("moreores") then
+	minetest.register_alias_force("moreores:tin_ingot", "default:tin_ingot")
+	minetest.register_alias_force("moreores:tin_block", "default:tinblock")
+	minetest.register_alias_force("moreores:tin_lump", "default:tin_lump")
+	minetest.register_alias_force("moreores:mineral_tin", "default:stone_with_tin")
+
+	for k, v in pairs(minetest.registered_ores) do
+		if v.ore == "moreores:mineral_tin" then
+			minetest.registered_ores[k] = nil
+			break
+		end
+	end
+end
