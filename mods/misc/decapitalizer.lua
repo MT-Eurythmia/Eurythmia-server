@@ -52,6 +52,7 @@ minetest.register_on_chat_message(function(name, message)
 
 	minetest.chat_send_player(name, "You message has been decapitalized. / Votre message a été décapitalisé.")
 	minetest.chat_send_all(new_msg)
+	minetest.log("action", "CHAT: " .. new_msg .. " (decapitalized from: " .. message .. ")")
 
 	return true
 end)
