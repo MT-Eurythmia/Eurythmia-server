@@ -94,9 +94,6 @@
 [submodule "mods/pvpplus"]
 	path = mods/pvpplus
 	url = https://github.com/Mynetest/pvpplus.git
-[submodule "mods/character_creator"]
-	path = mods/character_creator
-	url = https://github.com/minetest-mods/character_creator.git
 [submodule "mods/books"]
 	path = mods/books
 	url = https://github.com/taikedz/everamzah-books.git
@@ -118,3 +115,6 @@
 [submodule "mods/pbj_pup"]
 	path = mods/pbj_pup
 	url = https://github.com/tenplus1/pbj_pup.git
+[submodule "mods/u_skins"]
+	path = mods/u_skins
+	url = https://github.com/Mynetest/minetest-u_skinsdb.git
