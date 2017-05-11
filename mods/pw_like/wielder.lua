@@ -204,7 +204,10 @@ register("nodebreaker", "Node Breaker", function(inv, virtplayer, pointed_thing)
 	end
 
 	local on_dig = (minetest.registered_nodes[under_node.name] or {on_dig=minetest.node_dig}).on_dig
-	on_dig(pointed_thing.under, under_node, virtplayer)
+	local status, err = pcall(on_dig, pointed_thing.under, under_node, virtplayer)
+	if not status then
+		minetest.log("warning", "[pw_like] Node Breaker: error while digging a node: " .. tostring(err))
+	end
 end, { top = true, bottom = true, side2 = true, side1 = true, front = true }, true)
 
 minetest.register_craft({
@@ -218,7 +221,12 @@ minetest.register_craft({
 
 register("deployer", "Deployer", function(inv, virtplayer, pointed_thing)
 	local wieldstack = virtplayer:get_wielded_item()
-	virtplayer:set_wielded_item((minetest.registered_items[wieldstack:get_name()] or {on_place=minetest.item_place}).on_place(wieldstack, virtplayer, pointed_thing) or wieldstack)
+	local status, ret = pcall((minetest.registered_items[wieldstack:get_name()] or {on_place=minetest.item_place}).on_place, wieldstack, virtplayer, pointed_thing)
+	if not status then
+		minetest.log("warning", "[pw_like] Deployer: error while placing a node: " .. tostring(ret))
+		return
+	end
+	virtplayer:set_wielded_item(ret or wieldstack)
 end, { front = true })
 
 minetest.register_craft({
