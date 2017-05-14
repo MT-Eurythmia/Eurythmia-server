@@ -19,7 +19,7 @@ local foot = "    </ul>\n"..
              "\n"
 
 function xban.write_hos(db)
-	local file, err = io.open(HTML_FILE, "wt")
+	local file, err = ie.io.open(HTML_FILE, "wt")
 	if not file then
 		minetest.log("warning", "Unable to open the Hall Of Shame HTML file: " .. err)
 		return
