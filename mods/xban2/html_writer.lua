@@ -1,3 +1,9 @@
+local ie = ...
+if not ie then
+        minetest.log("error", "[xban2 HTML writer] Needs an insecure environment.")
+        return
+end
+
 local HTML_FILE = "/var/www/mynetest/hos/index.html"
 
 local head = "<!DOCTYPE html>\n"..

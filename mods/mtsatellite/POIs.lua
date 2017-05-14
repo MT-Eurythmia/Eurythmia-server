@@ -1,6 +1,8 @@
 -- Don't worry, you're not supposed to understand the content of this file :)
 -- This mod is not made to be used as a player.
 
+local ie = ...
+
 local POIs_js_path = "/home/minetest/mtsatellite/web/js/POIs.js"
 local buildings_json_path = "/home/minetest/mtsatellite/web/js/POIs_buildings.json"
 local travel_json_path = "/home/minetest/mtsatellite/web/js/POIs_travel.json"
@@ -8,7 +10,7 @@ local travel_json_path = "/home/minetest/mtsatellite/web/js/POIs_travel.json"
 
 local function cannot_open_json(path)
 	-- Create it
-	local f = io.open(path, "w")
+	local f = ie.io.open(path, "w")
 	if not f then
 		minetest.log("error", "Couln't open JSON file: " .. path)
 		return nil
@@ -17,10 +19,10 @@ local function cannot_open_json(path)
 	f:write(json)
 	f:close()
 
-	return io.open(path, "r")
+	return ie.io.open(path, "r")
 end
 
-local buildings_file = io.open(buildings_json_path, "r")
+local buildings_file = ie.io.open(buildings_json_path, "r")
 if not buildings_file then
 	buildings_file = cannot_open_json(buildings_json_path)
 	if not buildings_file then
@@ -31,7 +33,7 @@ local buildings = minetest.parse_json(buildings_file:read("*all"))
 buildings_file:close()
 
 
-local travel_file = io.open(travel_json_path, "r")
+local travel_file = ie.io.open(travel_json_path, "r")
 if not travel_file then
 	travel_file = cannot_open_json(travel_json_path)
 	if not travel_file then
@@ -42,7 +44,7 @@ local travelnet = minetest.parse_json(travel_file:read("*all"))
 travel_file:close()
 
 local function write_js(json_buildings, json_travel)
-	local js_file = io.open(POIs_js_path, "w")
+	local js_file = ie.io.open(POIs_js_path, "w")
 	if not js_file then
 		minetest.log("error", "Couln't open JavaScript file: " .. POIs_js_path)
 		return
@@ -53,7 +55,7 @@ local function write_js(json_buildings, json_travel)
 end
 
 local function write_json(json, path)
-	local file = io.open(path, "w")
+	local file = ie.io.open(path, "w")
 	file:write(json)
 	file:close()
 end

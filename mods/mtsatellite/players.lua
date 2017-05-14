@@ -1,3 +1,5 @@
+local ie = ...
+
 local time_interval = 10.0
 local fifo_path = "/tmp/mt_players_fifo"
 
@@ -21,7 +23,7 @@ end
 
 function time_interval_func()
     local players = players_data()
-    local fifo = io.open(fifo_path, 'w')
+    local fifo = ie.io.open(fifo_path, 'w')
     if (fifo ~= nil) then
         fifo:write(players)
         fifo:close()

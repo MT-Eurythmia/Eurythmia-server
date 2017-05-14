@@ -2,7 +2,7 @@
 xban = { MP = minetest.get_modpath(minetest.get_current_modname()) }
 
 dofile(xban.MP.."/serialize.lua")
-dofile(xban.MP.."/html_writer.lua")
+loadfile(xban.MP.."/html_writer.lua")(minetest.request_insecure_environment())
 
 local db = { }
 db.whitelist = { }
