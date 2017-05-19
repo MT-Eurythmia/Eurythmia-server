@@ -87,6 +87,7 @@ load_mod_hbarmor = true
 load_mod_automappercolors = true
 load_mod_first_hour = true
 load_mod_lavasuit = true
+lod_mod_gravitysuit = true
 load_mod_pvpplus = true
 load_mod_jumping = true
 load_mod_nyantools = true
