@@ -60,7 +60,7 @@
 	url = https://github.com/mynetest/xdecor.git
 [submodule "mods/babelfish"]
 	path = mods/babelfish
-	url = https://github.com/taikedz/minetest-babelfish.git
+	url = https://gitlab.taikedz.net/minetest/mods/babelfish.git
 [submodule "mods/mobs_animal"]
 	path = mods/mobs_animal
 	url = https://github.com/Mynetest/mobs_animal.git
