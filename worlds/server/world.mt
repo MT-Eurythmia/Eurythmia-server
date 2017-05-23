@@ -134,4 +134,5 @@ load_mod_nyancat = false
 load_mod_textures = false
 load_mod_track_players = false
 load_mod_character_creator = false
+load_mod_news = true
 player_backend = files
