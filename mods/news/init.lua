@@ -31,7 +31,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname ~= "" then
 		return
 	end
-	if fields["news_editor"] then
+	if fields["news_submit"] then
 		if minetest.check_player_privs(player, "news_editor") then
 			minetest.chat_send_player(player:get_player_name(), "News submitted")
 			storage:set_string("txt", fields["news_text"])
