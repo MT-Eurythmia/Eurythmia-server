@@ -35,6 +35,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		if minetest.check_player_privs(player, "news_editor") then
 			minetest.chat_send_player(player:get_player_name(), "News submitted")
 			storage:set_string("txt", fields["news_text"])
+			minetest.log("action", "Player " .. player:get_player_name() .. " edited the news.")
 		else
 			minetest.chat_send_player(player:get_player_name(), "You can't edit the news. Missing privilege: news_editor")
 		end
