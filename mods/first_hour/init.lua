@@ -1,11 +1,14 @@
 local players = {}
 local played_enough = {}
 
-local PLAY_ENOUGH_MINUTES = 2
+local PLAY_ENOUGH_MINUTES = 1
 
 --Production values
-local FRENCH_SIGN = {x=-21, y=30001, z=-1}
-local ENGLISH_SIGN = {x=-21, y=30001, z=1}
+local FRENCH_SIGN = {x=7, y=30015, z=65}
+local ENGLISH_SIGN = {x=15, y=30015, z=68}
+local INITIAL_SPAWNPOINT = {x=4, y=30015, z=71}
+local SECOND_SPAWNPOINT = {french = {x=18, y=30015, z=65}, english = {x=4, y=30015, z=67}}
+local START_GAME_SPAWNPOINT = {xw=0, y=18, z=0}
 
 --Development values
 --local FRENCH_SIGN = {x=144, y=30003, z=105}
@@ -13,10 +16,14 @@ local ENGLISH_SIGN = {x=-21, y=30001, z=1}
 
 local THECODE = '431C' --will be randomly chosen when first player joins
 
-MSG = {
+local MSG = {
 	welcome = {
-		['french'] = "Bienvenue sur le serveur Mynetest !\nVous êtes invincible et ne pouvez pas frapper les autres joueurs pendant une heure.\nVous pourrez commencer à jouer dans "..PLAY_ENOUGH_MINUTES.." minutes.\nSi vous lisez les panneaux !",
-		['english'] = "Welcome to the Mynetest server !\nYou are invincible and you cannot hit other players during a hour.\nYou will be able to play in "..PLAY_ENOUGH_MINUTES.." minutes.\nIf you read the signs!"
+		['french'] = "Bienvenue sur le serveur Mynetest !\nVous êtes invincible et ne pouvez pas frapper les autres joueurs pendant une heure.\nVous ne pouvez pas encore jouer, c'est normal.",
+		['english'] = "Welcome to the Mynetest server !\nYou are invincible and you cannot hit other players during a hour.\nYou cannot play yet, this is normal."
+	},
+	read_the_signs = {
+		['french'] = "Maintenant, lisez tous les panneaux !",
+		['english'] = "Now, read the signs!"
 	},
 	end_first_hour = {
 		['french'] = "Ce n'est plus votre première heure... Vous n'êtes plus invicible et vous pouvez frapper les autres joueurs à présent.",
@@ -28,12 +35,12 @@ MSG = {
 		['both'] = "You can already play! Vous pouvez deja jouer !"
 	},
 	interact = {
-		['french'] = "Vous pouvez maintenant commencer à jouer, vous avez obtenu le privilège interact! Merci d'avoir lu les panneaux, vous pouvez revenir a cet endroit au moyen de /spawn :-)",
-		['english'] = "Let's play, you got the interact privilege! Thanks for having read the signs, you can always come here using /spawn"
+		['french'] = "Vous pouvez maintenant commencer à jouer, vous avez obtenu le privilège interact ! Merci d'avoir lu les panneaux, vous pouvez relire les règles en tapant /spawn :-)",
+		['english'] = "Let's play, you got the interact privilege! Thanks for having read the signs, you can always re-read the rules by typing /spawn :-)"
 	},
 	code_too_early = {
-		['french'] = "Vous n'avez pas encore joué "..PLAY_ENOUGH_MINUTES.." minutes ici. Patientez un peu et réessayez! Si vous n'avez pas lu tous les panneaux, veuillez le faire merci.",
-		['english'] = "You haven't been here "..PLAY_ENOUGH_MINUTES.." minutes yet. Wait a few moment and then retry it! If you didn't read all the signs, please do it"
+		['french'] = "Vous n'avez pas encore joué "..PLAY_ENOUGH_MINUTES.." "..(PLAY_ENOUGH_MINUTES < 2 and "minute" or "minutes").." ici. Patientez un peu et réessayez ! Si vous n'avez pas lu tous les panneaux, veuillez le faire merci.",
+		['english'] = "You haven't been here "..PLAY_ENOUGH_MINUTES.." "..(PLAY_ENOUGH_MINUTES < 2 and "minute" or "minutes").." yet. Wait a few moment and then retry it! If you didn't read all the signs, please do it"
 	},
 	new_player = {
 		['french'] = ", nouveau joueur francophone a rejoint le jeu!",
@@ -101,6 +108,7 @@ minetest.register_on_joinplayer(function(player)
 		return
 	end
 
+	player:setpos(INITIAL_SPAWNPOINT)
 	show_initial_formspec(name)
 end)
 
@@ -143,6 +151,8 @@ end)
 local function begin_game(name)
 	minetest.log("action", "First hour of player "..name.." begins")
 
+	minetest.get_player_by_name(name):setpos(SECOND_SPAWNPOINT[players[name]])
+
 	local text = MSG.welcome[players[name]]
 	minetest.chat_send_player(name, text)
 
@@ -162,6 +172,7 @@ local function begin_game(name)
 		if not minetest.get_player_privs(name).interact then -- Still not ?!
 			played_enough[name] = nil
 			if minetest.get_player_by_name(name) then -- If the player is connected
+				player:setpos(INITIAL_SPAWNPOINT)
 				show_initial_formspec(name)
 			end
 		end
@@ -171,27 +182,38 @@ local function begin_game(name)
 
 end
 
+local function print_read_the_signs_form(name)
+	local text = MSG.read_the_signs[players[name]]
+	minetest.chat_send_player(name, text)
+
+	local formspec = "size[8,2.5;]"..
+	           "label[0,0;"..text.."]"..
+	           "button_exit[3,2;2,1;exit;Ok]"
+	minetest.show_formspec(name, "first_hour:read_the_signs", formspec)
+end
+
 minetest.register_on_player_receive_fields(function(player, formname, fields)
-	if formname ~= "first_hour:language_select" then
-		return
-	end
-
 	local name = player:get_player_name()
-	if players[name] then
-		return
-	end
 
-	if fields["en"] then
-		players[name] = 'english'
-		begin_game(name)
-	elseif fields["fr"] then
-		players[name] = 'french'
-		begin_game(name)
-	else
-		local formspec = "size[5,1.5;]"..
-	                         "label[0,0;Merci de choisir votre langue.\nPlease choose your preferred language.]"..
-	                         "button[0,1;2,1;fr;Français]button[2,1;2,1;en;English]"
-		minetest.show_formspec(name, "first_hour:language_select", formspec)
+	if formname == "first_hour:language_select" then
+		if players[name] then
+			return
+		end
+
+		if fields["en"] then
+			players[name] = 'english'
+			begin_game(name)
+		elseif fields["fr"] then
+			players[name] = 'french'
+			begin_game(name)
+		else
+			local formspec = "size[5,1.5;]"..
+		                         "label[0,0;Merci de choisir votre langue.\nPlease choose your preferred language.]"..
+		                         "button[0,1;2,1;fr;Français]button[2,1;2,1;en;English]"
+			minetest.show_formspec(name, "first_hour:language_select", formspec)
+		end
+	elseif formname == "first_hour:welcome" then
+		print_read_the_signs_form(name)
 	end
 end)
 
