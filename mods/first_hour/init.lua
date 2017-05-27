@@ -44,13 +44,15 @@ MSG = {
 --our code is always 4 chars, 3 numbers + 1 letter
 local function getRandomCode()
 	--first chars are numbers
-  local array = {}
-  for i = 1, 3 do
-    array[i] = string.char(math.random(48, 57))
-  end
+	local array = {}
+	for i = 1, 3 do
+		array[i] = string.char(math.random(49, 57)) -- Do not include 48 (0), too close to O
+	end
 	--last char is an alphabet capital letter
-	array[4] = string.char(math.random(65, 90))
-  return table.concat(array)
+	repeat
+		array[4] = string.char(math.random(65, 90))
+	until array[4] ~= 79 -- Avoid generating 79 (O), too close to 0
+	return table.concat(array)
 end
 
 local function get_far_node(pos)
@@ -103,7 +105,7 @@ minetest.register_on_joinplayer(function(player)
 end)
 
 minetest.register_on_chat_message(function(name, message)
-	if message == THECODE then
+	if string.upper(message) == THECODE then
 		if minetest.get_player_privs(name).interact then
 			if players[name] ~= nil then
 				minetest.chat_send_player(name, MSG.code_with_interact[players[name]])
