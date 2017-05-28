@@ -118,3 +118,6 @@
 [submodule "mods/irc"]
 	path = mods/irc
 	url = https://github.com/minetest-mods/irc.git
+[submodule "mods/stained_glass"]
+	path = mods/stained_glass
+	url = https://github.com/ForbiddenJ/stained_glass.git

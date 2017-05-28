@@ -135,4 +135,5 @@ load_mod_textures = false
 load_mod_track_players = false
 load_mod_character_creator = false
 load_mod_news = true
+load_mod_stained_glass = true
 player_backend = files
