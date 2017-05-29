@@ -34,7 +34,13 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if fields["news_submit"] then
 		if minetest.check_player_privs(player, "news_editor") then
 			minetest.chat_send_player(player:get_player_name(), "News submitted")
-			storage:set_string("txt", fields["news_text"])
+			-- Escape square brackets. This is an engine bug.
+			local txt = fields["news_text"]
+			if txt then
+				txt = string.gsub(txt, "%[", "\\[")
+				txt = string.gsub(txt, "%]", "\\]")
+				storage:set_string("txt", txt)
+			end
 			minetest.log("action", "Player " .. player:get_player_name() .. " edited the news.")
 		else
 			minetest.chat_send_player(player:get_player_name(), "You can't edit the news. Missing privilege: news_editor")
