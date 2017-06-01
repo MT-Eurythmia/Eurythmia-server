@@ -18,8 +18,8 @@ local THECODE = '431C' --will be randomly chosen when first player joins
 
 local MSG = {
 	welcome = {
-		['french'] = "Bienvenue sur le serveur Mynetest !\nVous êtes invincible et ne pouvez pas frapper les autres joueurs pendant une heure.\nVous ne pouvez pas encore jouer, c'est normal.",
-		['english'] = "Welcome to the Mynetest server !\nYou are invincible and you cannot hit other players during a hour.\nYou cannot play yet, this is normal."
+		['french'] = "Bienvenue sur le serveur Eurythmia !\nVous êtes invincible et ne pouvez pas frapper les autres joueurs pendant une heure.\nVous ne pouvez pas encore jouer, c'est normal.",
+		['english'] = "Welcome to the Eurythmia server!\nYou are invincible and you cannot hit other players during a hour.\nYou cannot play yet, this is normal."
 	},
 	read_the_signs = {
 		['french'] = "Maintenant, lisez tous les panneaux !",
@@ -32,7 +32,7 @@ local MSG = {
 	code_with_interact = {
 		['french'] = "Vous pouvez deja jouer. Et n'envoyer pas le code aux autres joueurs merci.",
 		['english'] = "You can already play. And thanks not to send the code to other players.",
-		['both'] = "You can already play! Vous pouvez deja jouer !"
+		['both'] = "You can already play! Vous pouvez déjà jouer !"
 	},
 	interact = {
 		['french'] = "Vous pouvez maintenant commencer à jouer, vous avez obtenu le privilège interact ! Merci d'avoir lu les panneaux, vous pouvez relire les règles en tapant /spawn :-)",
