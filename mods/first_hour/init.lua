@@ -126,7 +126,7 @@ minetest.register_on_chat_message(function(name, message)
 		if played_enough[name] ~= nil then
 			minetest.log("info", "Player "..name.." played enough time.")
 
-			minetest.set_player_privs(name, {interact = true, home = true})
+			minetest.set_player_privs(name, {interact = true, home = true, shout = true})
 			minetest.log("info", "Player "..name.." got the interact privilege.")
 			local player = minetest.get_player_by_name(name)
 			if not player then -- If the player has disconnected
