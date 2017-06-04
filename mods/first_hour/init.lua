@@ -170,7 +170,7 @@ local function begin_game(name)
 		if not minetest.get_player_privs(name).interact then -- Still not ?!
 			played_enough[name] = nil
 			if minetest.get_player_by_name(name) then -- If the player is connected
-				player:setpos(INITIAL_SPAWNPOINT)
+				minetest.get_player_by_name(name):setpos(INITIAL_SPAWNPOINT)
 				show_initial_formspec(name)
 			end
 		end
