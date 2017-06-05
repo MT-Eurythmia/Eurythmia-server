@@ -121,3 +121,6 @@
 [submodule "mods/stained_glass"]
 	path = mods/stained_glass
 	url = https://github.com/ForbiddenJ/stained_glass.git
+[submodule "mods/fail"]
+	path = mods/fail
+	url = https://github.com/LeMagnesium/fail.git
