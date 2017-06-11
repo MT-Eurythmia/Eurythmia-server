@@ -325,7 +325,16 @@ dofile(minetest.get_modpath("misc").."/violation.lua")
 --[[
 Deactivate serveressentials Welcome message (first_hour already sends one)
 ]]
-SHOW_FIRST_TIME_JOIN_MSG = false
+if SHOW_FIRST_TIME_JOIN_MSG then
+	SHOW_FIRST_TIME_JOIN_MSG = false
+end
+
+--[[
+Serveressentials: disable afkkick
+]]
+if AFK_CHECK then
+	AFK_CHECK = false
+end
 
 --[[
 Decapitalize chat messages
