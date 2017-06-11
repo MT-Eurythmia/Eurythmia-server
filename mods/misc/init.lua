@@ -313,9 +313,11 @@ if minetest.get_modpath("carts") or minetest.get_modpath("boost_cart") then
 end
 
 --[[
-Markers: increase MAX_SIZE to 64*64
+Markers: increase MAX_SIZE to 128x128
 ]]
-markers.MAX_SIZE = 64 * 64
+if markers then
+	markers.MAX_SIZE = 128 * 128
+end
 
 --[[
 Rotate protection violators
