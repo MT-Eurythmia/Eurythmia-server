@@ -113,12 +113,12 @@ end)
 function setSprinting(playerName, sprinting) --Sets the state of a player (0=stopped/moving, 1=sprinting)
 	local player = minetest.get_player_by_name(playerName)
 	if players[playerName] then
-		players[playerName]["sprinting"] = sprinting
-		if sprinting == true then
-			player:set_physics_override({speed=SPRINT_SPEED})
-		elseif sprinting == false then
-			player:set_physics_override({speed=1.0})
+		if sprinting and not players[playerName].sprinting then
+			player:set_physics_override({speed=SPRINT_SPEED*player:get_physics_override().speed})
+		elseif not sprinting and players[playerName].sprinting then
+			player:set_physics_override({speed=player:get_physics_override().speed/SPRINT_SPEED})
 		end
+		players[playerName]["sprinting"] = sprinting
 		return true
 	end
 	return false
