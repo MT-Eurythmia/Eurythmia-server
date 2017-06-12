@@ -60,6 +60,7 @@ load_mod_moremesecons_timegate = true
 load_mod_moremesecons_wireless = true
 load_mod_moremesecons_luablock = true
 load_mod_moremesecons_induction_transmitter = true
+load_mod_moremesecons_mesechest = true
 load_mod_vector_extras = true
 load_mod_worldedit = true
 load_mod_worldedit_commands = true
