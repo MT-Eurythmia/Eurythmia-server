@@ -124,3 +124,6 @@
 [submodule "mods/fail"]
 	path = mods/fail
 	url = https://github.com/LeMagnesium/fail.git
+[submodule "mods/vivarium"]
+	path = mods/vivarium
+	url = https://github.com/taikedz/vivarium.git
