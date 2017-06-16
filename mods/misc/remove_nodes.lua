@@ -26,7 +26,7 @@ minetest.register_chatcommand("remove_nodes", {
           end
           table.insert(pos_list, pos)
         end
-		
+
         local manip = minetest.get_voxel_manip()
         local e1, e2 = manip:read_from_map(pos_max_1, pos_max_2)
         local area = VoxelArea:new{MinEdge=e1, MaxEdge=e2}
@@ -37,14 +37,10 @@ minetest.register_chatcommand("remove_nodes", {
         for _, pos in ipairs(pos_list) do
             data[area:indexp(pos)] = c_air
         end
-        
+
         manip:set_data(data)
 		manip:write_to_map()
-        
+
         return true, "Removed nodes."
     end
 })
---[[ 
-Add remove_nodes chatcommand for mega-giga's skywars. 
-]] 
-dofile(minetest.get_modpath("misc") .. "/remove_nodes.lua")

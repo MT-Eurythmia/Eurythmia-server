@@ -359,3 +359,8 @@ Babelfish: don't display compliance
 if minetest.get_modpath("babelfish") then
 	babel.compliance = nil
 end
+
+--[[
+Add remove_nodes chatcommand for mega-giga's skywars. 
+]]
+dofile(minetest.get_modpath("misc") .. "/remove_nodes.lua")
