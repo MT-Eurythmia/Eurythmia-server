@@ -104,7 +104,7 @@ end
 function h2omes.to_spawn(name)
 	local player = minetest.get_player_by_name(name)
 	if not player then return false end
-	if not h2omes.check_privs(name) then
+	if not minetest.check_player_privs(name, "spawn") then
 		return false
 	end
 	local spawn_pos = h2omes.getspawn(name)
@@ -334,9 +334,11 @@ end)
 
 
 minetest.register_privilege("home", "Can use /sethome, /home, /setpit and /pit")
+minetest.register_privilege("spawn", "Can use /spawn")
 
 minetest.register_chatcommand("spawn", {
 	description = "Teleport a player to the defined spawnpoint",
+	privs = {spawn=true},
 	func = function(name)
 		local spawn_pos = h2omes.getspawn(name)
 		if spawn_pos then
