@@ -149,4 +149,5 @@ load_mod_newpetting = false
 load_mod_overrides = false
 load_mod_petting = false
 load_mod_spawn_extensions = false
+load_mod_brush = true
 player_backend = files

@@ -127,3 +127,6 @@
 [submodule "mods/vivarium"]
 	path = mods/vivarium
 	url = https://github.com/taikedz/vivarium.git
+[submodule "mods/brush"]
+	path = mods/brush
+	url = https://github.com/MT-Eurythmia/magic-brush.git
