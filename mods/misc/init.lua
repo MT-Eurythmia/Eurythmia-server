@@ -376,3 +376,14 @@ minetest.register_on_joinplayer(function(player)
 		minetest.set_player_privs(name, privs)
 	end
 end)
+
+--[[
+Admin pencil is not in creative inventory
+]]
+if minetest.get_modpath("books") then
+	local old_groups = minetest.registered_items["books:admin_pencil"].groups
+	old_groups.not_in_creative_inventory = 1
+	minetest.override_item("books:admin_pencil", {
+		groups = old_groups
+	})
+end
