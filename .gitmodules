@@ -130,3 +130,6 @@
 [submodule "mods/brush"]
 	path = mods/brush
 	url = https://github.com/MT-Eurythmia/magic-brush.git
+[submodule "mods/xban2"]
+	path = mods/xban2
+	url = https://github.com/minetest-mods/xban2.git
