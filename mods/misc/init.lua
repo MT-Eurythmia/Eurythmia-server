@@ -366,13 +366,14 @@ Add remove_nodes chatcommand for mega-giga's skywars.
 dofile(minetest.get_modpath("misc") .. "/remove_nodes.lua")
 
 --[[
-Grant spawn to players who have interact
+Grant spawn and pvp to players who have interact
 ]]
 minetest.register_on_joinplayer(function(player)
 	local name = player:get_player_name()
 	local privs = minetest.get_player_privs(name)
 	if privs.interact then
 		privs.spawn = true
+		privs.pvp = true
 		minetest.set_player_privs(name, privs)
 	end
 end)
