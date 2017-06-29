@@ -381,6 +381,11 @@ end)
 --[[
 Admin pencil is not in creative inventory
 ]]
-if minetest.get_modpath("books") then
-	minetest.registered_items["books:admin_pencil"].groups.not_in_creative_inventory = 1
+if minetest.get_modpath("books") and minetest.settings:get_bool("books.editor") then
+	local old_books_admin_pencil = table.copy(minetest.registered_items["books:admin_pencil"])
+	if not old_books_admin_pencil.groups then
+		old_books_admin_pencil.groups = {}
+	end
+	old_books_admin_pencil.groups.not_in_creative_inventory = 1
+	minetest.registered_items["books:admin_pencil"] = old_books_admin_pencil
 end
