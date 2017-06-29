@@ -389,3 +389,39 @@ if minetest.get_modpath("books") and minetest.settings:get_bool("books.editor") 
 	old_books_admin_pencil.groups.not_in_creative_inventory = 1
 	minetest.registered_items["books:admin_pencil"] = old_books_admin_pencil
 end
+
+--[[
+Make more NPCs spawning
+]]
+if minetest.get_modpath("mobs_npc") then
+	mobs:spawn({
+		name = "mobs_npc:npc",
+		nodes = {"default:dirt_with_grass"},
+		min_light = 0,
+		chance = 7000,
+		active_object_count = 1,
+		min_height = 0,
+	})
+	mobs:spawn({
+		name = "mobs_npc:igor",
+		nodes = {"default:dirt_with_grass"},
+		min_light = 0,
+		chance = 7000,
+		active_object_count = 1,
+		min_height = 0,
+	})
+	mobs:spawn({
+		name = "mobs_npc:trader",
+		nodes = {"default:dirt_with_grass"},
+		min_light = 0,
+		chance = 10000,
+		active_object_count = 1,
+		min_height = 0,
+	})
+
+	-- Set trader names
+	mobs.human.names = {
+		"AkitoNaaki93", "PlasticNeeSan", "mysteryboss", "Winner", "miniloup", "paul",
+		"annie11", "kumma", "WolfTueur", "johan"
+	}
+end

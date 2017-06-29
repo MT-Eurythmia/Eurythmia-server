@@ -69,7 +69,7 @@
 	url = https://github.com/MT-Eurythmia/mobs_monster.git
 [submodule "mods/mobs_npc"]
 	path = mods/mobs_npc
-	url = https://github.com/MT-Eurythmia/mobs_npc.git
+	url = https://github.com/tenplus1/mobs_npc.git
 [submodule "mods/3d_armor"]
 	path = mods/3d_armor
 	url = https://github.com/MT-Eurythmia/minetest-3d_armor.git
@@ -78,7 +78,7 @@
 	url = https://github.com/MT-Eurythmia/throwing.git
 [submodule "mods/mobs"]
 	path = mods/mobs
-	url = https://github.com/tenplus1/mobs_redo.git
+	url = https://github.com/MT-Eurythmia/mobs_redo.git
 [submodule "mods/mob_horse"]
 	path = mods/mob_horse
 	url = https://github.com/tenplus1/mob_horse.git
