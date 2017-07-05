@@ -382,7 +382,7 @@ end)
 Clear admin pencil craft
 ]]
 if minetest.get_modpath("books") and minetest.settings:get_bool("books.editor") then
-	minetest.clear_craft("books:admin_pencil")
+	minetest.clear_craft({output="books:admin_pencil"})
 end
 
 --[[
