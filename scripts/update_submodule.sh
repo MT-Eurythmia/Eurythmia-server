@@ -24,7 +24,7 @@ if [[ -n `git remote -v | grep upstream` ]]; then
 
 	# The timeout will avoid staying blocked if git is misconfigured (e.g. if git-push asks for a password)
 	timeout 20 git push origin master
-	if [[ $? == '124' ]]; then
+	if [[ $? == 124 ]]; then
 		exit 2
 	fi
 fi
@@ -35,6 +35,6 @@ git commit -m 'Update subodule ['$1']'
 
 # The timeout will avoid staying blocked if git is misconfigured (e.g. if git-push asks for a password)
 timeout 20 git push origin master
-if [[ $? == '124' ]]; then
+if [[ $? == 124 ]]; then
 	exit 3
 fi

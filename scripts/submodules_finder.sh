@@ -7,7 +7,7 @@ BASE_DIR=`pwd`
 get_submodule() {
 	for d in "$@"; do
 		cd $d
-		FETCH_URL=`git remote -v | awk '{print $2}' | head -n 1`
+		FETCH_URL=`git remote -v | grep origin | head -n 1 | awk '{print $2}'`
 
 		# Forked?
 		FORKED_FROM_LINE=`curl -s ${FETCH_URL:0:-4} | grep '      <span class="text">forked from '`

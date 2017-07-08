@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Stop the server if is not
-/etc/init.d/minetestserver stop
+killall minetestserver
 
 # Map backup
 if [ `date +%d` = '01' ]; then
@@ -19,4 +19,4 @@ fi
 /home/minetest/scripts/update.sh
 
 # Restart the server
-/etc/init.d/minetestserver start
+nohup /home/minetest/scripts/run.sh &> /dev/null &

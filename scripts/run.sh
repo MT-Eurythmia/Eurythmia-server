@@ -15,17 +15,21 @@ cpulimit -c 1 -l 1 -b -- $GOPATH/bin/mtwebmapper -colors=$SATPATH/colors.txt -we
 
 sleep 1
 
-### Running the server	
+### Running the server
 while [ true ]; do
 	/home/minetest/minetest/bin/minetestserver
-	if [ $? = 0 ]; then # Normal quit : Maybe the admin pressed Ctrl+C. Wait before restarting.
+	RET=$?
+	if [[ $RET == 0 ]]; then # Normal quit : Maybe the admin pressed Ctrl+C. Wait before restarting.
 		exit
 	else
 		echo "Crash! Restarting the server immediatly..."
 		sleep 1 # Sleep a second to avoid a total crashing loop
 	fi
-	
+
+	if [[ $1 == 'once' ]]; then
+		exit $RET
+	fi
+
 	# Run again mtredisalize (it stops automatically)
 	$GOPATH/bin/mtredisalize -host=localhost -interleaved=true -change-url=http://localhost:8808/update -change-duration=60s /home/minetest/.minetest/worlds/server/map.db >> $LOGFILE 2>&1 &
-	sleep 1
 done
