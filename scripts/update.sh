@@ -3,6 +3,8 @@
 BASE_DIR=/home/minetest/eurythmia-server/
 MINETEST_DIR=/home/minetest/minetest/
 RUN_SCRIPT_PATH=/home/minetest/scripts/run.sh
+UPDATE_SUBMODULE_SCRIPT_PATH=/home/minetest/scripts/update_submodule.sh
+SUBMODULES_FILE=/home/minetest/to_update_submodules.txt
 LOCK_FILE=/home/minetest/autoupdate_lock
 
 error() {
@@ -45,6 +47,12 @@ set_submodule_url() {
 	done
 }
 set_submodule_url `git config --file .gitmodules --get-regexp path | awk '{ print $2 }'`
+
+# Update the submodules marked by the eurybot
+while read submodule; do
+	$UPDATE_SUBMODULE_SCRIPT_PATH $submodule
+done <$SUBMODULES_FILE
+echo '' > $SUBMODULES_FILE
 
 # Synchronize directories
 rsync --delete -a /home/minetest/eurythmia-server/mods/ /home/minetest/.minetest/mods/

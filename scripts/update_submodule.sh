@@ -4,7 +4,8 @@
 
 BASE_DIR='/home/minetest/eurythmia-server/'
 
-cd $BASE_DIR$1
+cd $BASE_DIR
+cd $1
 
 git fetch origin master && git checkout master && git reset --hard FETCH_HEAD && git clean -df
 
