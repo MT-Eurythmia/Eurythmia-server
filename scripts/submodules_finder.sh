@@ -2,12 +2,12 @@
 
 SUBMODULES=""
 
-BASE_DIR='/home/minetest/eurythmia-server/'
+BASE_DIR='/home/upsilon/.minetest/Eurythmia-server/'
 
 get_submodule() {
 	for d in "$@"; do
 		cd $d
-		FETCH_URL=`git remote -v | grep origin | head -n 1 | awk '{print $2}'`
+		FETCH_URL=`git remote -v | grep origin | grep fetch | awk '{print $2}'`
 
 		# Forked?
 		FORKED_FROM_LINE=`curl -s ${FETCH_URL:0:-4} | grep '      <span class="text">forked from '`
