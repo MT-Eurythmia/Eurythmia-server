@@ -2,7 +2,7 @@
 
 # Usage: update_submodules.sh <submodule path>
 
-BASE_DIR=`pwd`
+BASE_DIR='/home/minetest/eurythmia-server/'
 
 cd $BASE_DIR$1
 

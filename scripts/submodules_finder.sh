@@ -2,7 +2,7 @@
 
 SUBMODULES=""
 
-BASE_DIR=`pwd`
+BASE_DIR='/home/minetest/eurythmia-server/'
 
 get_submodule() {
 	for d in "$@"; do
