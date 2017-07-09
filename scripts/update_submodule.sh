@@ -9,7 +9,7 @@ cd $1
 
 git fetch origin master && git checkout master && git reset --hard FETCH_HEAD && git clean -df
 
-if [[ -n `git remote -v | grep upstream` ]]; then
+if [[ -n `git remote -v | grep upstream` ]] && [[ $2 == 'upstream' ]]; then
 	git fetch upstream master && git checkout master
 	git cherry-pick master..upstream/master
 	if [[ -a $BASE_DIR'.git/modules/'$1'CHERRY_PICK_HEAD' ]]; then
@@ -19,6 +19,13 @@ if [[ -n `git remote -v | grep upstream` ]]; then
 		git checkout master
 		git checkout -- *
 		git reset --hard HEAD
+
+		/usr/sbin/sendmail root@langg.net << END
+From: Eurythmia auto-update <minetest@langg.net>
+To: root@langg.net
+Subject: *** Error updating submodule $0 ***
+There was still a CHERRY_PICK_HEAD after running cherry-pick for updating submodule $0.
+END
 
 		exit 1
 	fi

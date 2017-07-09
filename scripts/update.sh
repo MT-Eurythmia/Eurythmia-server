@@ -50,7 +50,11 @@ set_submodule_url `git config --file .gitmodules --get-regexp path | awk '{ prin
 
 # Update the submodules marked by the eurybot
 while read submodule; do
-	$UPDATE_SUBMODULE_SCRIPT_PATH $submodule
+	if [[ ${submodule: -1} == '!' ]]; then
+		$UPDATE_SUBMODULE_SCRIPT_PATH ${submodule:0:-1} upstream
+	else
+		$UPDATE_SUBMODULE_SCRIPT_PATH $submodule
+	fi
 done <$SUBMODULES_FILE
 echo '' > $SUBMODULES_FILE
 
