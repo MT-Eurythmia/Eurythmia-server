@@ -13,7 +13,7 @@ else
 fi
 
 # Logrotate
-/usr/sbin/logrotate /home/minetest/scripts/logrotate_conf
+/usr/sbin/logrotate -s ~/logrotate_status /home/minetest/scripts/logrotate_conf
 
 # Update files from the git repo
 /home/minetest/scripts/update.sh
