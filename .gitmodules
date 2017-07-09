@@ -133,3 +133,6 @@
 [submodule "mods/xban2"]
 	path = mods/xban2
 	url = https://github.com/minetest-mods/xban2.git
+[submodule "mods/throwing_arrows"]
+	path = mods/throwing_arrows
+	url = https://github.com/MT-Eurythmia/throwing_arrows.git
