@@ -39,7 +39,7 @@ set_submodule_url() {
 		cd $d
 		URL=`git remote -v | grep origin | head -n 1 | awk '{print $2}'`
 		if [[ -n `echo $URL | grep 'https://'` ]]; then
-			git remote set-url origin 'git@github.com:'${HTTPS_URL: 19}
+			git remote set-url origin 'git@github.com:'${URL: 19}
 		fi
 		cd $BASE_DIR
 	done
