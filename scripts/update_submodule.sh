@@ -31,7 +31,7 @@ fi
 
 cd $BASE_DIR
 git add $1
-git commit -m 'Update subodule ['$1']'
+git commit -m 'Update submodule ['$1']'
 
 # The timeout will avoid staying blocked if git is misconfigured (e.g. if git-push asks for a password)
 timeout 20 git push origin master
