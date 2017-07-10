@@ -77,6 +77,7 @@ load_mod_wieldview = true
 load_mod_signs_lib = true
 load_mod_irc = true
 load_mod_throwing = true
+load_mod_throwing_arrows = true
 load_mod_farming = true
 load_mod_mtsatellite = true
 load_mod_xdecor = true
