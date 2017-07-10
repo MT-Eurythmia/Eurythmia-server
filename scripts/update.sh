@@ -32,8 +32,8 @@ git checkout master
 git fetch origin master
 git reset --hard FETCH_HEAD
 git clean -df
-git submodule sync
-git submodule update --init
+git submodule sync --recursive
+git submodule update --init --recursive
 
 # Set submodule URLs to SSH
 set_submodule_url() {
