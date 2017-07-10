@@ -393,7 +393,7 @@ if minetest.get_modpath("mobs_npc") then
 		name = "mobs_npc:npc",
 		nodes = {"default:dirt_with_grass"},
 		min_light = 0,
-		chance = 7000,
+		chance = 3500,
 		active_object_count = 1,
 		min_height = 0,
 	})
@@ -401,7 +401,7 @@ if minetest.get_modpath("mobs_npc") then
 		name = "mobs_npc:igor",
 		nodes = {"default:dirt_with_grass"},
 		min_light = 0,
-		chance = 7000,
+		chance = 10500,
 		active_object_count = 1,
 		min_height = 0,
 	})
