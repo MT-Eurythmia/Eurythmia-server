@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo -e '=> **** Running script update.sh ****\n'
+
 BASE_DIR=/home/minetest/eurythmia-server/
 MINETEST_DIR=/home/minetest/minetest/
 RUN_SCRIPT_PATH=/home/minetest/scripts/run.sh
@@ -8,11 +10,14 @@ SUBMODULES_FILE=/home/minetest/to_update_submodules.txt
 LOCK_FILE=/home/minetest/autoupdate_lock
 
 error() {
+	echo "==> Error ($0): $1"
 	/usr/sbin/sendmail root@langg.net << END
 From: Eurythmia auto-update <minetest@langg.net>
 To: root@langg.net
 Subject: *** $0 ***
 $1
+
+See /home/minetest/backup_sh_log.txt for more informations.
 END
 }
 
@@ -25,10 +30,12 @@ fi
 cd $BASE_DIR
 
 # Backup...
+echo '==> Backuping Eurythmia-server repo to backup branch'
 git branch --delete backup
 git checkout -b backup
 git checkout master
 
+echo '==> Fetching origin'
 git fetch origin master
 git reset --hard FETCH_HEAD
 git clean -df
@@ -46,27 +53,34 @@ set_submodule_url() {
 		cd $BASE_DIR
 	done
 }
+echo '==> Setting submodules URLs from HTTPS to SSH'
 set_submodule_url `git config --file .gitmodules --get-regexp path | awk '{ print $2 }'`
 
 # Update the submodules marked by the eurybot
+echo '==> Updating submodules marked by the eurybot...'
 while read submodule; do
 	if [[ ${submodule: -1} == '!' ]]; then
+		echo "===> Updating submodule ${submodule:0:-1} from upstream"
 		$UPDATE_SUBMODULE_SCRIPT_PATH ${submodule:0:-1} upstream
 	else
+		echo "===> Updating submodule $submodule from origin"
 		$UPDATE_SUBMODULE_SCRIPT_PATH $submodule
 	fi
 done <$SUBMODULES_FILE
 echo '' > $SUBMODULES_FILE
 
 # Synchronize directories
+echo '==> Synchronizing ~/eurythmia-server and ~/.minetest directories'
 rsync --delete -a /home/minetest/eurythmia-server/mods/ /home/minetest/.minetest/mods/
 rsync --delete -a /home/minetest/eurythmia-server/games/ /home/minetest/.minetest/games/
 rsync -lptgo /home/minetest/eurythmia-server/minetest.conf /home/minetest/.minetest/
 rsync -lptgo /home/minetest/eurythmia-server/worlds/server/world.mt /home/minetest/.minetest/worlds/server/
 
 # Backup minetestserver
+echo '==> Backuping minetestserver executable to ~/minetestserver_backup'
 mv $MINETEST_DIR'bin/minetestserver' '~/minetestserver_backup'
 # Update it
+echo '==> Updating minetestserver'
 cd $MINETEST_DIR
 git branch -d backup
 git checkout -b backup
@@ -83,17 +97,20 @@ if [[ $? == 0 ]]; then
 			error 'Impossible to update the minetestserver: cherry-pick conflict' 'The `CHERRY_PICK_HEAD` still existed after running git-cherry-pick to update the minetestserver from upstream.'
 		else
 			git push origin master
+			echo '===> Recompiling...'
 			make -j`nproc`
 		fi
 	else
+		echo '===> Recompiling (no upstream, origin changes only)...'
 		make -j`nproc` # Make again though, there may be updates from origin
-		error 'Impossible to update the minetestserver: no remote upstream' 'The upstream remote does not exist. The minetestserver has still been updated from origin.'
+		error 'Impossible to update the minetestserver: no upstream remote' 'The upstream remote does not exist. The minetestserver has still been updated from origin.'
 	fi
 else
 	error 'Impossible to update the minetestserver: non-fast-forward' 'Impossible to update the minetestserver form remote origin: non-fast-forward'
 fi
 
 # Test if everything's correctly booting
+echo '==> Testing if the minetestserver is able to boot correctly'
 timeout --preserve-status 20 $RUN_SCRIPT_PATH once
 if [[ $? != 0 ]]; then
 	# Re-apply everything as before
@@ -116,3 +133,5 @@ Using backup branches and created update lock.'
 
 	exit 2
 fi
+
+echo -e '=> **** update.sh: exiting normally ****\n'
