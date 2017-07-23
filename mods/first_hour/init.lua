@@ -58,7 +58,7 @@ local function getRandomCode()
 	--last char is an alphabet capital letter
 	repeat
 		array[4] = string.char(math.random(65, 90))
-	until array[4] ~= "O" -- Avoid generating O, too close to 0
+	until array[4] ~= "O" and array[4] ~= "I" -- Avoid generating O, too close to 0, and I, too close to l
 	return table.concat(array)
 end
 
