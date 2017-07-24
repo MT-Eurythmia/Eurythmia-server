@@ -15,7 +15,7 @@ git fetch origin master && git checkout master && git reset --hard FETCH_HEAD &&
 if [[ -n `git remote -v | grep upstream` ]] && [[ $2 == 'upstream' ]]; then
 	echo '==> Fetching from upstream...'
 	git fetch upstream master && git checkout master
-	git cherry-pick master..upstream/master
+	git cherry-pick --allow-empty master..upstream/master
 	if [[ -a $BASE_DIR'.git/modules/'$1'CHERRY_PICK_HEAD' ]]; then
 		# Oops, looks like there was a conflict
 		git cherry-pick --abort

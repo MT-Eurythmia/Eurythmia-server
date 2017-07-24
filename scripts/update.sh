@@ -10,12 +10,12 @@ SUBMODULES_FILE=/home/minetest/to_update_submodules.txt
 LOCK_FILE=/home/minetest/autoupdate_lock
 
 error() {
-	echo "==> Error ($0): $1"
+	echo "==> Error ($1): $2"
 	/usr/sbin/sendmail root@langg.net << END
 From: Eurythmia auto-update <minetest@langg.net>
 To: root@langg.net
-Subject: *** $0 ***
-$1
+Subject: *** $1 ***
+$2
 
 See /home/minetest/backup_sh_log.txt for more informations.
 END
@@ -67,7 +67,7 @@ while read submodule; do
 		$UPDATE_SUBMODULE_SCRIPT_PATH $submodule
 	fi
 done <$SUBMODULES_FILE
-echo '' > $SUBMODULES_FILE
+echo -n '' > $SUBMODULES_FILE
 
 # Synchronize directories
 echo '==> Synchronizing ~/eurythmia-server and ~/.minetest directories'
@@ -90,7 +90,7 @@ if [[ $? == 0 ]]; then
 	if [[ -n `git remote -v | grep upstream` ]]; then
 		git fetch upstream master
 		git checkout master
-		git cherry-pick master..upstream/master
+		git cherry-pick --allow-empty master..upstream/master
 		if [[ -a $BASE_DIR'.git/CHERRY_PICK_HEAD' ]]; then
 			# Oops, looks like there was a conflict
 			git cherry-pick --abort
@@ -112,7 +112,8 @@ fi
 # Test if everything's correctly booting
 echo '==> Testing if the minetestserver is able to boot correctly'
 timeout --preserve-status 20 $RUN_SCRIPT_PATH once
-if [[ $? != 0 ]]; then
+TIMEOUT_STATUS=$?
+if [[ $TIMEOUT_STATUS != 143 ]]; then
 	# Re-apply everything as before
 	git checkout backup
 	mv '~/minetestserver_backup' $MINETEST_DIR'bin/minetestserver'
@@ -127,9 +128,10 @@ if [[ $? != 0 ]]; then
 	echo 'This file has been created to prevent the automatic update to run again since it failed. Do not remove it unless you fixed the problem.' >> $LOCK_FILE
 
 	# Send an e-mail
-	error 'Server is no longer able to boot ater update' 'The nightly update caused the server being no longer able to boot.
+	error 'Server is no longer able to boot ater update' "The nightly update caused the server being no longer able to boot.
 Everything has been re-applied as before.
-Using backup branches and created update lock.'
+Using backup branches and created update lock.
+The timeout status was $TIMEOUT_STATUS."
 
 	exit 2
 fi
