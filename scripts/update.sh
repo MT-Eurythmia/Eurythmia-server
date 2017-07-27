@@ -83,20 +83,21 @@ mv $MINETEST_DIR'bin/minetestserver' '~/minetestserver_backup'
 echo '==> Updating minetestserver'
 cd $MINETEST_DIR
 git branch -d backup
+git checkout stable-0.4
 git checkout -b backup
-git checkout master
-git pull --ff-only origin master
+git checkout stable-0.4
+git pull --ff-only origin stable-0.4
 if [[ $? == 0 ]]; then
 	if [[ -n `git remote -v | grep upstream` ]]; then
-		git fetch upstream master
-		git checkout master
-		git cherry-pick --allow-empty master..upstream/master
+		git fetch upstream stable-0.4
+		git checkout stable-0.4
+		git cherry-pick --allow-empty stable-0.4..upstream/stable-0.4
 		if [[ -a $BASE_DIR'.git/CHERRY_PICK_HEAD' ]]; then
 			# Oops, looks like there was a conflict
 			git cherry-pick --abort
 			error 'Impossible to update the minetestserver: cherry-pick conflict' 'The `CHERRY_PICK_HEAD` still existed after running git-cherry-pick to update the minetestserver from upstream.'
 		else
-			git push origin master
+			git push origin stable-0.4
 			echo '===> Recompiling...'
 			make -j`nproc`
 		fi
