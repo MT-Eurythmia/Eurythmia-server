@@ -420,3 +420,16 @@ if minetest.get_modpath("mobs_npc") then
 		"annie11", "kumma", "WolfTueur", "johan"
 	}
 end
+
+--[[
+/announce chatcommand
+]]
+minetest.register_privilege("announce", "Can use /announce")
+minetest.register_chatcommand("announce", {
+	params = "msg",
+	privs = {announce = true},
+	description = "Makes a well-visible announcement",
+	func = function(name, param)
+		minetest.chat_send_all(minetest.colorize("#ff0000", "**** ANNOUNCEMENT by "..name.." **** "..param))
+	end
+})
