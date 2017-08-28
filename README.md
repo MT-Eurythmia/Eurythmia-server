@@ -2,7 +2,7 @@
 
 # Serveur Eurythmia
 
-Ici se trouve le dépôt GitHub du serveur minetest Mynetest (mods+subgame).
+Ici se trouve le dépôt GitHub du serveur minetest Eurythmia (mods+subgame).
 
 Notre site: http://eurythmia.langg.net/
 
@@ -17,4 +17,4 @@ Serveur: `irc.daconcepts.com`
 
 Port: `6697` (ssl)
 
-Canal: `#mynetest`
+Canal: `#Eurythmia`
