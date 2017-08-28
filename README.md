@@ -1,6 +1,6 @@
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/MT-Eurythmia/Lobby?javascript?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-# Mynetest server
+# Serveur Eurythmia
 
 Ici se trouve le dépôt GitHub du serveur minetest Mynetest (mods+subgame).
 
