@@ -40,9 +40,6 @@
 [submodule "mods/jumping"]
 	path = mods/jumping
 	url = https://github.com/Jeija/minetest-mod-jumping/
-[submodule "mods/markers"]
-	path = mods/markers
-	url = https://github.com/Sokomine/markers
 [submodule "mods/moreores"]
 	path = mods/moreores
 	url = https://github.com/minetest-mods/moreores
@@ -148,3 +145,6 @@
 [submodule "mods/plantlife"]
 	path = mods/plantlife
 	url = https://github.com/minetest-mods/plantlife_modpack.git
+[submodule "mods/protector"]
+	path = mods/protector
+	url = https://github.com/Zeg9/minetest-protect.git
