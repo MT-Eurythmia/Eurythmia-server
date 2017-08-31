@@ -55,9 +55,6 @@
 [submodule "mods/hopper"]
 	path = mods/hopper
 	url = https://github.com/minetest-mods/hopper.git
-[submodule "mods/xdecor"]
-	path = mods/xdecor
-	url = https://github.com/MT-Eurythmia/xdecor.git
 [submodule "mods/babelfish"]
 	path = mods/babelfish
 	url = https://gitlab.taikedz.net/minetest/mods/babelfish.git
@@ -136,3 +133,6 @@
 [submodule "mods/throwing_arrows"]
 	path = mods/throwing_arrows
 	url = https://github.com/MT-Eurythmia/throwing_arrows.git
+[submodule "mods/homedecor"]
+	path = mods/homedecor
+	url = https://github.com/minetest-mods/homedecor_modpack.git
