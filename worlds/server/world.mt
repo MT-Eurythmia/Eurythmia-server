@@ -161,5 +161,6 @@ load_mod_inbox = true
 load_mod_itemframes = true
 load_mod_lavalamp = true
 load_mod_lrfurn = true
-load_mod_plasmascreen
+load_mod_plasmascreen = true
+load_mod_ethereal = true
 player_backend = files

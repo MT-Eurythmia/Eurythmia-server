@@ -136,3 +136,6 @@
 [submodule "mods/homedecor"]
 	path = mods/homedecor
 	url = https://github.com/minetest-mods/homedecor_modpack.git
+[submodule "mods/ethereal"]
+	path = mods/ethereal
+	url = https://github.com/tenplus1/ethereal.git
