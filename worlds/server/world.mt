@@ -182,4 +182,4 @@ load_mod_trunks = true
 load_mod_vines = true
 load_mod_woodsoils = true
 load_mod_youngtrees = trues
-player_backend = files
+player_backend = sqlite3
