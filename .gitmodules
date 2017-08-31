@@ -139,3 +139,12 @@
 [submodule "mods/ethereal"]
 	path = mods/ethereal
 	url = https://github.com/tenplus1/ethereal.git
+[submodule "mods/moretrees"]
+	path = mods/moretrees
+	url = https://github.com/minetest-mods/moretrees.git
+[submodule "mods/biome_lib"]
+	path = mods/biome_lib
+	url = https://github.com/minetest-mods/biome_lib.git
+[submodule "mods/plantlife"]
+	path = mods/plantlife
+	url = https://github.com/minetest-mods/plantlife_modpack.git
