@@ -151,4 +151,5 @@ load_mod_overrides = false
 load_mod_petting = false
 load_mod_spawn_extensions = false
 load_mod_brush = true
+load_mod_evolution_export = true
 player_backend = files
