@@ -13,10 +13,18 @@ minetest.register_chatcommand("to_export", {
 		if mod_storage:get_string(param) ~= "" then
 			return false, "An area with the same name is already marked. Please give a different name of remove that area."
 		end
-		local pos1, pos2 = worldedit.pos1[name], worldedit.pos2[name]
-		if not pos1 or not pos2 then
-			return false, "No region selected"
+
+		local pos1, pos2
+		do
+			local we_pos1, we_pos2 = worldedit.pos1[name], worldedit.pos2[name]
+			if not we_pos1 or not we_pos2 then
+				return false, "No region selected"
+			end
+
+			pos1 = {x = math.min(we_pos1.x, we_pos2.x), y = math.min(we_pos1.y, we_pos2.y), z = math.min(we_pos1.z, we_pos2.z)}
+			pos2 = {x = math.max(we_pos1.x, we_pos2.x), y = math.max(we_pos1.y, we_pos2.y), z = math.max(we_pos1.z, we_pos2.z)}
 		end
+
 		mod_storage:set_string(param, minetest.serialize({pos1, pos2}))
 		return true, "Area from pos " .. minetest.pos_to_string(pos1) .. " to " .. minetest.pos_to_string(pos2) .. " successfully added as '" .. param .. "'."
 	end
