@@ -433,3 +433,10 @@ minetest.register_chatcommand("announce", {
 		minetest.chat_send_all(minetest.colorize("#ff0000", "**** ANNOUNCEMENT by "..name.." **** "..param))
 	end
 })
+
+--[[
+The staff of melting is useless and generates a duplication bug
+]]
+if minetest.get_modpath("staffmagic") then
+	minetest.unregister_item("staffmagic:staff_melt")
+end

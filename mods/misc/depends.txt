@@ -18,3 +18,4 @@ hopper?
 babelfish?
 books?
 mobs_npc?
+staffmagic?
