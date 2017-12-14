@@ -8,7 +8,9 @@ local from_players = {}
 
 
 function h2omes.check(name)
-	if h2omes.homes[name] == nil then
+	if minetest.player_exists(name) then
+		h2omes.load_homes(name)
+	else
 		h2omes.homes[name] = {}
 	end
 end
@@ -35,7 +37,7 @@ end
 
 --function load_homes
 function h2omes.load_homes(name)
-	h2omes.check(name)
+	h2omes.homes[name] = {}
 	local file = h2omes.path..name
 	local input, err = io.open(file, "r")
 	if input then
@@ -75,13 +77,10 @@ function h2omes.set_home(name, home_type, pos)
 end
 
 
---function get_homes
+--function get_home
 function h2omes.get_home(name, home_type)
 	h2omes.check(name)
-	local player = minetest.get_player_by_name(name)
-	if not player then return nil end
-	local pos = player:get_pos()
-	if not pos then return nil end
+	if not minetest.player_exists(name) then return nil end
 	if h2omes.homes[name][home_type] then
 		return h2omes.homes[name][home_type]
 	end
@@ -121,20 +120,21 @@ function h2omes.to_spawn(name)
 end
 
 
---function to_homes
-function h2omes.to_home(name, home_type)
-	h2omes.check(name)
-	local player = minetest.get_player_by_name(name)
-	if not player then return false end
-	if not h2omes.check_privs(name) then
+--function to_home
+function h2omes.to_home(name_from, name_to, home_type)
+	h2omes.check(name_to)
+	local player_from = minetest.get_player_by_name(name_from)
+	local player_to = minetest.get_player_by_name(name_to)
+	if not minetest.player_exists(name_to) then return false end
+	if not h2omes.check_privs(name_from) then
 		return false
 	end
-	local pos = player:get_pos()
+	local pos = player_from:get_pos()
 	if not pos then return false end
-	if h2omes.homes[name][home_type] then
-		player:set_pos(h2omes.homes[name][home_type])
-		minetest.chat_send_player(name, "Teleported to "..home_type.."!")
-		minetest.sound_play("teleport", {to_player=name, gain = 1.0})
+	if h2omes.homes[name_to][home_type] then
+		player_from:set_pos(h2omes.homes[name_to][home_type])
+		minetest.chat_send_player(name_from, "Teleported to "..home_type.." of "..name_to.."!")
+		minetest.sound_play("teleport", {to_player=name_from, gain = 1.0})
 		return true
 	end
 	return false
@@ -317,13 +317,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 end)
 
 
-minetest.register_on_joinplayer(function(player)
-	local name = player:get_player_name()
-	if not name or name == "" then return end
-	h2omes.load_homes(name)
-end)
-
-
 minetest.register_on_leaveplayer(function(player)
 	local name = player:get_player_name()
 	if not name or name == "" then return end
@@ -353,12 +346,16 @@ minetest.register_chatcommand("spawn", {
 minetest.register_chatcommand("home", {
 	description = "Teleport you to your home point",
 	privs = {home=true},
-	func = function (name, params)
-		if not h2omes.get_home(name, "home") then
-			minetest.chat_send_player(name, "Set a home using /sethome")
+	func = function (name_from, params)
+		local name_to = name_from
+		if params ~= "" and h2omes.get_home(params, "home") and minetest.check_player_privs(name_from, "teleport") then
+			name_to = params
+		end
+		if not h2omes.get_home(name_to, "home") then
+			minetest.chat_send_player(name_from, "Player needs to set a home using /sethome")
 			return false
 		end
-		h2omes.to_home(name, "home")
+		h2omes.to_home(name_from, name_to, "home")
 	end,
 })
 
@@ -375,12 +372,16 @@ minetest.register_chatcommand("sethome", {
 minetest.register_chatcommand("pit", {
 	description = "Teleport you to your pit point",
 	privs = {home=true},
-	func = function (name, params)
-		if not h2omes.get_home(name, "pit") then
-			minetest.chat_send_player(name, "Set a pit using /setpit")
+	func = function (name_from, params)
+		local name_to = name_from
+		if params ~= "" and h2omes.get_home(params, "pit") and minetest.check_player_privs(name_from, "teleport") then
+			name_to = params
+		end
+		if not h2omes.get_home(name_to, "pit") then
+			minetest.chat_send_player(name_from, "Player needs to set a pit using /setpit")
 			return false
 		end
-		h2omes.to_home(name, "pit")
+		h2omes.to_home(name_from, name_to, "pit")
 	end,
 })
 
