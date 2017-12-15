@@ -278,9 +278,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		elseif fields["set_pit"] then
 			h2omes.set_home(name, "pit")
 		elseif fields["to_home"] then
-			h2omes.to_home(name, "home")
+			h2omes.to_home(name, name, "home")
 		elseif fields["to_pit"] then
-			h2omes.to_home(name, "pit")
+			h2omes.to_home(name, name, "pit")
 		elseif fields["to_spawn"] then
 			return h2omes.to_spawn(name)
 		elseif fields["to_player"] then
@@ -440,7 +440,7 @@ if minetest.get_modpath("unified_inventory") then
 			def.image = "ui_gohome_icon.png"
 			def.tooltip = unified_inventory.gettext("Go Home")
 			def.action = function(player)
-				h2omes.to_home(player:get_player_name(), "home")
+				h2omes.to_home(player:get_player_name(), player:get_player_name(), "home")
 			end
 		end
 	end
