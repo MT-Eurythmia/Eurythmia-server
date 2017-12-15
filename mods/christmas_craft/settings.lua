@@ -66,6 +66,11 @@ minetest.override_item("default:leaves", leavesoverride)
 -- Replace jungleleaves
 minetest.override_item("default:jungleleaves", leavesoverride)
 
+-- Replace aspen, pine and acacia leaves as well
+minetest.override_item("default:aspen_leaves", leavesoverride)
+minetest.override_item("default:pine_needles", leavesoverride)
+minetest.override_item("default:acacia_leaves", leavesoverride)
+
 -- Replace grass
 for i=1,5 do
 	minetest.override_item("default:grass_" .. i, {tiles = {"christmas_grass_"..i..".png"}})
