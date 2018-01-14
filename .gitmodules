@@ -115,9 +115,6 @@
 [submodule "mods/u_skins"]
 	path = mods/u_skins
 	url = https://github.com/MT-Eurythmia/minetest-u_skinsdb.git
-[submodule "mods/irc"]
-	path = mods/irc
-	url = https://github.com/minetest-mods/irc.git
 [submodule "mods/stained_glass"]
 	path = mods/stained_glass
 	url = https://github.com/ForbiddenJ/stained_glass.git
