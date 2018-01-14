@@ -133,3 +133,6 @@
 [submodule "mods/throwing_arrows"]
 	path = mods/throwing_arrows
 	url = https://github.com/MT-Eurythmia/throwing_arrows.git
+[submodule "mods/irc/irc"]
+	path = mods/irc/irc
+	url = https://github.com/ShadowNinja/LuaIRC.git
