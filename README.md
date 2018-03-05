@@ -11,10 +11,10 @@ Le serveur Minetest:
 Adresse: `paly2.ddns.net`
 Port: `30000`
 
-Le salon Irc:
+Le salon Irc [accès web ici](https://webchat.freenode.net/):
 
-Serveur: `irc.daconcepts.com`
+Serveur: `chat.freenode.net`
 
 Port: `6697` (ssl)
 
-Canal: `#Eurythmia`
+Canal: `#eurythmia`
