@@ -60,7 +60,7 @@
 	url = https://github.com/MT-Eurythmia/xdecor.git
 [submodule "mods/babelfish"]
 	path = mods/babelfish
-	url = https://gitlab.taikedz.net/minetest/mods/babelfish.git
+	url = https://github.com/taikedz-mt/babelfish.git
 [submodule "mods/mobs_animal"]
 	path = mods/mobs_animal
 	url = https://github.com/MT-Eurythmia/mobs_animal.git
